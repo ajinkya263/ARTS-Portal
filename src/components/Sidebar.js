@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Drum,
   PencilRuler,
+  CalendarPlus,
 } from "lucide-react";
 import SignOutButton from "@/components/SignOutButton";
 
@@ -69,6 +70,13 @@ export default function Sidebar({ modules = [], profile, isAdmin = false }) {
             icon={<Drum size={18} />}
             label="Metronome"
             active={pathname === "/practice"}
+            onClick={() => setOpen(false)}
+          />
+          <NavItem
+            href="/book"
+            icon={<CalendarPlus size={18} />}
+            label="Book a Lesson"
+            active={pathname === "/book"}
             onClick={() => setOpen(false)}
           />
 
