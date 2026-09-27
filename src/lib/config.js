@@ -21,3 +21,16 @@ export const SUPABASE_ANON_KEY =
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://ajinkyaranademusic.com";
+
+// ── Lesson booking ──────────────────────────────────────────────────────────
+// The persistent Google Meet link students join for lessons. Get one at
+// meet.google.com → "New meeting" → "Create a meeting for later" → copy the link
+// (it's reusable). Replace the placeholder below (or set NEXT_PUBLIC_MEET_URL).
+export const MEET_URL =
+  process.env.NEXT_PUBLIC_MEET_URL || "https://meet.google.com/xxx-xxxx-xxx";
+
+// The teacher who gets invited to each booked lesson.
+export const TEACHER_NAME =
+  process.env.NEXT_PUBLIC_TEACHER_NAME || "Ajinkya Ranade";
+export const TEACHER_EMAIL =
+  process.env.NEXT_PUBLIC_TEACHER_EMAIL || "ar.resonancestudios@gmail.com";
