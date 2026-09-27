@@ -27,7 +27,7 @@ export const SITE_URL =
 // meet.google.com → "New meeting" → "Create a meeting for later" → copy the link
 // (it's reusable). Replace the placeholder below (or set NEXT_PUBLIC_MEET_URL).
 export const MEET_URL =
-  process.env.NEXT_PUBLIC_MEET_URL || "https://meet.google.com/xxx-xxxx-xxx";
+  process.env.NEXT_PUBLIC_MEET_URL || "https://meet.google.com/iek-xiaz-gsx";
 
 // The teacher who gets invited to each booked lesson.
 export const TEACHER_NAME =
