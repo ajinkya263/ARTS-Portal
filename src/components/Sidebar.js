@@ -13,6 +13,7 @@ import {
   Drum,
   PencilRuler,
   CalendarPlus,
+  CalendarClock,
 } from "lucide-react";
 import SignOutButton from "@/components/SignOutButton";
 
@@ -74,8 +75,8 @@ export default function Sidebar({ modules = [], profile, isAdmin = false }) {
           />
           <NavItem
             href="/book"
-            icon={<CalendarPlus size={18} />}
-            label="Book a Lesson"
+            icon={<CalendarClock size={18} />}
+            label="My Lessons"
             active={pathname === "/book"}
             onClick={() => setOpen(false)}
           />
@@ -131,6 +132,13 @@ export default function Sidebar({ modules = [], profile, isAdmin = false }) {
                 icon={<PencilRuler size={18} />}
                 label="Content Editor"
                 active={pathname === "/admin/content"}
+                onClick={() => setOpen(false)}
+              />
+              <NavItem
+                href="/admin/schedule"
+                icon={<CalendarPlus size={18} />}
+                label="Schedule Lessons"
+                active={pathname === "/admin/schedule"}
                 onClick={() => setOpen(false)}
               />
             </>
