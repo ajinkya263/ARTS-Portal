@@ -67,7 +67,7 @@ export default function Sidebar({ modules = [], profile, isAdmin = false }) {
           <NavItem
             href="/practice"
             icon={<Drum size={18} />}
-            label="Practice Studio"
+            label="Metronome"
             active={pathname === "/practice"}
             onClick={() => setOpen(false)}
           />
