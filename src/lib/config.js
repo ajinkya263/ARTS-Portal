@@ -34,3 +34,9 @@ export const TEACHER_NAME =
   process.env.NEXT_PUBLIC_TEACHER_NAME || "Ajinkya Ranade";
 export const TEACHER_EMAIL =
   process.env.NEXT_PUBLIC_TEACHER_EMAIL || "ar.resonancestudios@gmail.com";
+
+// ── Brand ────────────────────────────────────────────────────────────────────
+export const BRAND_SHORT = "ARTS";
+export const BRAND_FULL = "Ajinkya Ranade Tabla School";
+// Ajinkya's personal website, linked on the sign-in page.
+export const PERSONAL_SITE = "https://ajinkyaranade.com";

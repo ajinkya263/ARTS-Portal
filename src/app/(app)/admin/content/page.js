@@ -4,7 +4,7 @@ import { ArrowLeft, LayoutList } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import ContentEditor from "@/components/admin/ContentEditor";
 
-export const metadata = { title: "Content Editor — Resonance Studios" };
+export const metadata = { title: "Content Editor — ARTS" };
 
 export default async function ContentPage() {
   const supabase = createClient();

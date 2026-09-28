@@ -5,7 +5,7 @@
 
 import { MEET_URL, SITE_URL, TEACHER_NAME } from "@/lib/config";
 
-const FROM = "Resonance Studios <noreply@ajinkyaranademusic.com>";
+const FROM = "Ajinkya Ranade Tabla School <noreply@ajinkyaranademusic.com>";
 
 export async function sendEmail({ to, subject, html }) {
   const key = process.env.RESEND_API_KEY;
@@ -42,8 +42,8 @@ function shell(inner) {
   return `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#FBF5EA;padding:32px">
     <div style="max-width:520px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;border:1px solid #F3E7D0">
       <div style="background:#2B1B5A;padding:20px 28px;color:#FBF5EA">
-        <span style="font-size:20px;font-weight:700">Resonance Studios</span>
-        <span style="color:#F9BF3A;font-size:13px;display:block">Tabla · Learning Portal</span>
+        <span style="font-size:20px;font-weight:700">ARTS</span>
+        <span style="color:#F9BF3A;font-size:13px;display:block">Ajinkya Ranade Tabla School</span>
       </div>
       <div style="padding:28px;color:#2B1B5A">${inner}</div>
     </div>

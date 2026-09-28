@@ -5,7 +5,7 @@ import LessonViewer from "@/components/LessonViewer";
 
 export async function generateMetadata({ params }) {
   const { lesson } = await getLessonIfUnlocked(params.id);
-  return { title: lesson ? `${lesson.title} — Resonance Studios` : "Lesson" };
+  return { title: lesson ? `${lesson.title} — ARTS` : "Lesson" };
 }
 
 export default async function LessonPage({ params }) {

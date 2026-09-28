@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 import { MEET_URL } from "@/lib/config";
 import { CalendarClock, Video } from "lucide-react";
 
-export const metadata = { title: "My Lessons — Resonance Studios" };
+export const metadata = { title: "My Lessons — ARTS" };
 
 export default async function MyLessonsPage() {
   const supabase = createClient();
