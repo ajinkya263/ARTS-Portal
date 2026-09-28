@@ -1,4 +1,5 @@
 import AuthForm from "@/components/AuthForm";
+import TablaArt from "@/components/TablaArt";
 import { PERSONAL_SITE } from "@/lib/config";
 
 export const metadata = { title: "Sign in — ARTS" };
@@ -42,12 +43,13 @@ export default function LoginPage() {
         </div>
 
         <p className="text-sm text-indigo-300">
-          © {new Date().getFullYear()} ARTS · Tabla Vidya
+          © {new Date().getFullYear()} ARTS · Zaxis Ventures LLC
         </p>
 
-        {/* decorative rotating arc + glow */}
+        {/* decorative rotating arc + glow + tabla */}
         <div className="pointer-events-none absolute -right-24 top-1/2 h-96 w-96 -translate-y-1/2 animate-spin-slow rounded-full border-[24px] border-saffron-400/10" />
         <div className="pointer-events-none absolute -bottom-20 -left-16 h-80 w-80 animate-float rounded-full bg-saffron-400/10 blur-3xl" />
+        <TablaArt className="pointer-events-none absolute bottom-16 right-10 h-40 w-60 animate-float text-saffron-300/15" />
       </section>
 
       {/* Right: auth form */}

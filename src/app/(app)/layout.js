@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer";
 import { getModulesForCurrentUser } from "@/lib/access";
 
 /**
@@ -15,7 +16,10 @@ export default async function AppLayout({ children }) {
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
       <Sidebar modules={modules} profile={profile} isAdmin={isAdmin} />
-      <main className="flex-1 px-5 py-8 md:px-10 md:py-12">{children}</main>
+      <main className="flex flex-1 flex-col px-5 py-8 md:px-10 md:py-12">
+        <div className="flex-1">{children}</div>
+        <Footer />
+      </main>
     </div>
   );
 }
