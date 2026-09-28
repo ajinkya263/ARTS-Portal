@@ -19,9 +19,9 @@ const body = Mukta({
 });
 
 export const metadata = {
-  title: "Resonance Studios — Tabla Learning Portal",
+  title: "ARTS — Ajinkya Ranade Tabla School",
   description:
-    "Structured Indian classical Tabla lessons from Resonance Studios.",
+    "Structured Indian classical tabla lessons from the Ajinkya Ranade Tabla School (ARTS).",
 };
 
 export default function RootLayout({ children }) {

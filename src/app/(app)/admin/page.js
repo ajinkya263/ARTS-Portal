@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { daysSinceEnrollment } from "@/lib/access";
 import AdminUsersPanel from "@/components/admin/AdminUsersPanel";
 
-export const metadata = { title: "Admin Console — Resonance Studios" };
+export const metadata = { title: "Admin Console — ARTS" };
 
 export default async function AdminPage() {
   const supabase = createClient();

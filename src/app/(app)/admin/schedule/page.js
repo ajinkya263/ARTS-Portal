@@ -4,7 +4,7 @@ import { ArrowLeft, CalendarClock } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import AdminSchedule from "@/components/admin/AdminSchedule";
 
-export const metadata = { title: "Schedule — Resonance Studios" };
+export const metadata = { title: "Schedule — ARTS" };
 
 export default async function SchedulePage() {
   const supabase = createClient();

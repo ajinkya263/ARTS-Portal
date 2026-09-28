@@ -5,7 +5,7 @@ import ModuleCard from "@/components/ModuleCard";
 import Reveal from "@/components/Reveal";
 import { Sparkles, Music4, PlayCircle } from "lucide-react";
 
-export const metadata = { title: "Dashboard — Resonance Studios" };
+export const metadata = { title: "Dashboard — ARTS" };
 
 export default async function DashboardPage() {
   const { profile, isAdmin, daysEnrolled, modules } =

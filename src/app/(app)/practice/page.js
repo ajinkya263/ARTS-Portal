@@ -1,7 +1,7 @@
 import Metronome from "@/components/practice/Metronome";
 import Reveal from "@/components/Reveal";
 
-export const metadata = { title: "Metronome — Resonance Studios" };
+export const metadata = { title: "Metronome — ARTS" };
 
 export default function PracticePage() {
   return (

@@ -69,7 +69,7 @@ export default function ResetPasswordPage() {
           </span>
           <div>
             <h1 className="font-display text-2xl text-indigo-900">Set a new password</h1>
-            <p className="text-sm text-indigo-500">Resonance Studios</p>
+            <p className="text-sm text-indigo-500">ARTS</p>
           </div>
         </div>
 

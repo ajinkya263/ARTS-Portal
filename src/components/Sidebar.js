@@ -168,10 +168,10 @@ function Brand() {
       </span>
       <span>
         <span className="block font-display text-lg leading-tight text-cream-50">
-          Resonance Studios
+          ARTS
         </span>
         <span className="block text-xs tracking-wide text-saffron-300">
-          Tabla · Learning Portal
+          Ajinkya Ranade Tabla School
         </span>
       </span>
     </Link>

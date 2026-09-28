@@ -13,7 +13,7 @@ export default function AppointmentCard({ appt, studentEmail }) {
 
   const start = new Date(appt.starts_at);
   const end = new Date(start.getTime() + appt.duration_min * 60000);
-  const title = "Tabla Lesson — Resonance Studios";
+  const title = "Tabla Lesson — ARTS";
   const details = `Your ${appt.duration_min}-minute tabla lesson with ${TEACHER_NAME}.${
     appt.note ? `\n\nFocus: ${appt.note}` : ""
   }\n\nJoin the Google Meet: ${MEET_URL}`;
@@ -33,7 +33,7 @@ export default function AppointmentCard({ appt, studentEmail }) {
     const ics = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
-      "PRODID:-//Resonance Studios//Lesson//EN",
+      "PRODID:-//ARTS//Lesson//EN",
       "CALSCALE:GREGORIAN",
       "METHOD:PUBLISH",
       "BEGIN:VEVENT",
