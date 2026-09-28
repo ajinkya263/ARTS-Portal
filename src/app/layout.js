@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Rozha_One, Mukta } from "next/font/google";
 import MandalaBackground from "@/components/MandalaBackground";
+import ScrollProgress from "@/components/ScrollProgress";
 
 /* Display serif with a distinct Indian character — used for headings. */
 const display = Rozha_One({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="relative min-h-screen">
+        <ScrollProgress />
         {/* Fixed decorative mandala/floral layer behind everything */}
         <MandalaBackground />
         {/* All page content sits above the background */}

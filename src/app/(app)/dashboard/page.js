@@ -3,6 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getModulesForCurrentUser, getProgressForCurrentUser } from "@/lib/access";
 import ModuleCard from "@/components/ModuleCard";
 import Reveal from "@/components/Reveal";
+import AnimatedNumber from "@/components/AnimatedNumber";
+import TablaArt from "@/components/TablaArt";
 import { Sparkles, Music4, PlayCircle } from "lucide-react";
 
 export const metadata = { title: "Dashboard — ARTS" };
@@ -68,7 +70,7 @@ export default async function DashboardPage() {
 
           {!isAdmin && (
             <div className="mt-6 flex flex-wrap items-center gap-6">
-              <Stat label="Day streak" value={`${streak}🔥`} />
+              <Stat label="Day streak" value={streak} suffix="🔥" />
               <Stat label="Lessons done" value={completedIds.size} />
               <Stat label="Modules unlocked" value={unlockedCount} />
               <Stat label="Days enrolled" value={daysEnrolled} />
@@ -82,11 +84,8 @@ export default async function DashboardPage() {
           )}
         </div>
 
-        {/* decorative note glyph */}
-        <Music4
-          className="absolute -right-6 -top-6 hidden h-40 w-40 animate-float text-saffron-400/15 md:block"
-          strokeWidth={1}
-        />
+        {/* decorative tabla graphic */}
+        <TablaArt className="absolute -bottom-6 -right-4 hidden h-40 w-56 animate-float text-saffron-500/20 md:block" />
       </section>
 
       {/* ── Module grid ──────────────────────────────────────────────── */}
@@ -123,10 +122,12 @@ export default async function DashboardPage() {
   );
 }
 
-function Stat({ label, value }) {
+function Stat({ label, value, suffix = "" }) {
   return (
     <div>
-      <p className="font-display text-3xl text-indigo-800">{value}</p>
+      <p className="font-display text-3xl text-indigo-800">
+        <AnimatedNumber value={value} suffix={suffix} />
+      </p>
       <p className="text-xs uppercase tracking-wide text-indigo-400">{label}</p>
     </div>
   );
