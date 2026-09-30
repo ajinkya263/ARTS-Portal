@@ -15,7 +15,7 @@ export default async function MyLessonsPage() {
   const cutoff = new Date(Date.now() - 3600000).toISOString(); // include one just-started
   const { data: appts = [] } = await supabase
     .from("appointments")
-    .select("id, starts_at, duration_min, note")
+    .select("id, starts_at, duration_min, note, mode, location")
     .eq("student_id", user?.id)
     .gte("starts_at", cutoff)
     .order("starts_at", { ascending: true });
@@ -30,8 +30,9 @@ export default async function MyLessonsPage() {
         </p>
         <h1 className="font-display text-3xl text-indigo-900 md:text-4xl">My Lessons</h1>
         <p className="mt-2 text-indigo-500">
-          Your scheduled lessons with your teacher. Add them to your calendar and
-          join on the same Google Meet link.
+          Your scheduled lessons — online and in person. Add each to your
+          calendar; online lessons open in Google Meet, in-person show the
+          location with directions.
         </p>
         <div className="gold-rule mt-3" />
       </div>

@@ -1,22 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarPlus, Download, Video, Copy, Check, Clock } from "lucide-react";
+import {
+  CalendarPlus,
+  Download,
+  Video,
+  Copy,
+  Check,
+  Clock,
+  MapPin,
+  Navigation,
+} from "lucide-react";
 import { MEET_URL, TEACHER_NAME, TEACHER_EMAIL } from "@/lib/config";
 
 const toICSDate = (d) =>
   d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
-/** One scheduled lesson (read-only for the student) with calendar-add + join. */
+/** One scheduled lesson (read-only for the student) — online or in-person. */
 export default function AppointmentCard({ appt, studentEmail }) {
   const [copied, setCopied] = useState(false);
 
+  const inPerson = appt.mode === "in_person";
   const start = new Date(appt.starts_at);
   const end = new Date(start.getTime() + appt.duration_min * 60000);
-  const title = "Tabla Lesson — ARTS";
-  const details = `Your ${appt.duration_min}-minute tabla lesson with ${TEACHER_NAME}.${
-    appt.note ? `\n\nFocus: ${appt.note}` : ""
-  }\n\nJoin the Google Meet: ${MEET_URL}`;
+  const place = inPerson ? appt.location || "In person" : MEET_URL;
+  const title = inPerson
+    ? "Tabla Class (in person) — ARTS"
+    : "Tabla Lesson — ARTS";
+  const details = inPerson
+    ? `Your ${appt.duration_min}-minute in-person tabla class with ${TEACHER_NAME}.${
+        appt.note ? `\n\nFocus: ${appt.note}` : ""
+      }${appt.location ? `\n\nLocation: ${appt.location}` : ""}`
+    : `Your ${appt.duration_min}-minute tabla lesson with ${TEACHER_NAME}.${
+        appt.note ? `\n\nFocus: ${appt.note}` : ""
+      }\n\nJoin the Google Meet: ${MEET_URL}`;
+
+  const mapsUrl =
+    inPerson && appt.location
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          appt.location
+        )}`
+      : null;
 
   const gcalUrl = (() => {
     const u = new URL("https://calendar.google.com/calendar/render");
@@ -24,7 +48,7 @@ export default function AppointmentCard({ appt, studentEmail }) {
     u.searchParams.set("text", title);
     u.searchParams.set("dates", `${toICSDate(start)}/${toICSDate(end)}`);
     u.searchParams.set("details", details);
-    u.searchParams.set("location", MEET_URL);
+    u.searchParams.set("location", place);
     return u.toString();
   })();
 
@@ -43,7 +67,7 @@ export default function AppointmentCard({ appt, studentEmail }) {
       `DTEND:${toICSDate(end)}`,
       `SUMMARY:${title}`,
       `DESCRIPTION:${details.replace(/\n/g, "\\n")}`,
-      `LOCATION:${MEET_URL}`,
+      `LOCATION:${place}`,
       `ORGANIZER;CN=${TEACHER_NAME}:mailto:${TEACHER_EMAIL}`,
       studentEmail ? `ATTENDEE;CN=${studentEmail}:mailto:${studentEmail}` : "",
       "BEGIN:VALARM",
@@ -60,7 +84,7 @@ export default function AppointmentCard({ appt, studentEmail }) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "tabla-lesson.ics";
+    a.download = inPerson ? "tabla-class.ics" : "tabla-lesson.ics";
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -98,10 +122,24 @@ export default function AppointmentCard({ appt, studentEmail }) {
             {appt.duration_min} min
           </p>
         </div>
-        <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-600">
-          One-on-one
+        <span
+          className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium ${
+            inPerson
+              ? "bg-saffron-100 text-saffron-600"
+              : "bg-indigo-50 text-indigo-600"
+          }`}
+        >
+          {inPerson ? <MapPin size={12} /> : <Video size={12} />}
+          {inPerson ? "In person" : "Online"}
         </span>
       </div>
+
+      {inPerson && appt.location && (
+        <p className="mt-3 inline-flex items-start gap-2 rounded-xl bg-cream-100 px-4 py-2.5 text-sm text-indigo-700">
+          <MapPin size={15} className="mt-0.5 shrink-0 text-saffron-500" />
+          {appt.location}
+        </p>
+      )}
 
       {appt.note && (
         <p className="mt-3 rounded-xl bg-cream-100 px-4 py-2.5 text-sm text-indigo-700">
@@ -110,22 +148,32 @@ export default function AppointmentCard({ appt, studentEmail }) {
       )}
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <a href={MEET_URL} target="_blank" rel="noreferrer" className="btn-primary">
-          <Video size={16} /> Join lesson
-        </a>
+        {inPerson ? (
+          mapsUrl && (
+            <a href={mapsUrl} target="_blank" rel="noreferrer" className="btn-primary">
+              <Navigation size={16} /> Get directions
+            </a>
+          )
+        ) : (
+          <a href={MEET_URL} target="_blank" rel="noreferrer" className="btn-primary">
+            <Video size={16} /> Join lesson
+          </a>
+        )}
         <a href={gcalUrl} target="_blank" rel="noreferrer" className="btn-outline">
           <CalendarPlus size={16} /> Add to Google Calendar
         </a>
         <button onClick={downloadICS} className="btn-outline">
           <Download size={16} /> .ics
         </button>
-        <button
-          onClick={copyMeet}
-          className="ml-auto inline-flex items-center gap-1.5 text-sm text-indigo-500 transition hover:text-indigo-800"
-        >
-          {copied ? <Check size={15} className="text-green-600" /> : <Copy size={15} />}
-          Copy link
-        </button>
+        {!inPerson && (
+          <button
+            onClick={copyMeet}
+            className="ml-auto inline-flex items-center gap-1.5 text-sm text-indigo-500 transition hover:text-indigo-800"
+          >
+            {copied ? <Check size={15} className="text-green-600" /> : <Copy size={15} />}
+            Copy link
+          </button>
+        )}
       </div>
     </article>
   );

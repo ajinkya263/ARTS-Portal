@@ -31,7 +31,7 @@ export default async function SchedulePage() {
     supabase
       .from("appointments")
       .select(
-        "id, starts_at, duration_min, note, student:student_id ( full_name, email )"
+        "id, starts_at, duration_min, note, mode, location, student:student_id ( full_name, email )"
       )
       .gte("starts_at", cutoff)
       .order("starts_at", { ascending: true }),

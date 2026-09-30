@@ -50,23 +50,50 @@ function shell(inner) {
   </div>`;
 }
 
-export function lessonScheduledEmail({ studentName, startsAt, durationMin, note }) {
+export function lessonScheduledEmail({
+  studentName,
+  startsAt,
+  durationMin,
+  note,
+  mode,
+  location,
+}) {
   const when = fmtWhen(startsAt);
   const hi = studentName ? `Namaste ${studentName},` : "Namaste,";
+  const inPerson = mode === "in_person";
+  const btn =
+    "display:inline-block;background:#2B1B5A;color:#FBF5EA;text-decoration:none;padding:11px 20px;border-radius:10px;font-weight:600";
+  const mapsUrl = location
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
+    : null;
+
   return {
-    subject: "Your tabla lesson is scheduled 🎵",
+    subject: inPerson
+      ? "Your in-person tabla class is scheduled 🥁"
+      : "Your tabla lesson is scheduled 🎵",
     html: shell(`
       <p style="font-size:16px">${hi}</p>
-      <p>${TEACHER_NAME} has scheduled a one-on-one tabla lesson for you:</p>
+      <p>${TEACHER_NAME} has scheduled ${
+        inPerson ? "an <b>in-person</b> tabla class" : "an online tabla lesson"
+      } for you:</p>
       <div style="background:#FBF5EA;border-radius:12px;padding:16px 18px;margin:16px 0">
         <div style="font-size:18px;font-weight:600">${when}</div>
         <div style="color:#4B31A0;margin-top:4px">${durationMin} minutes${
           note ? ` · Focus: ${note}` : ""
         }</div>
+        ${
+          inPerson && location
+            ? `<div style="color:#2B1B5A;margin-top:8px">📍 ${location}</div>`
+            : ""
+        }
       </div>
-      <p>
-        <a href="${MEET_URL}" style="display:inline-block;background:#2B1B5A;color:#FBF5EA;text-decoration:none;padding:11px 20px;border-radius:10px;font-weight:600">Join on Google Meet</a>
-      </p>
+      ${
+        inPerson
+          ? mapsUrl
+            ? `<p><a href="${mapsUrl}" style="${btn}">Get directions</a></p>`
+            : ""
+          : `<p><a href="${MEET_URL}" style="${btn}">Join on Google Meet</a></p>`
+      }
       <p style="color:#684DBF;font-size:14px">See it any time (and add it to your calendar) in
         <a href="${SITE_URL}/book" style="color:#D98B00">My Lessons</a>.</p>
     `),
