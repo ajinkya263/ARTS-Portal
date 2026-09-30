@@ -28,15 +28,25 @@ function revalidateSchedule() {
 }
 
 /** Schedule a 1:1 lesson for a student. */
-export async function createAppointment({ studentId, startsAt, durationMin, note }) {
+export async function createAppointment({
+  studentId,
+  startsAt,
+  durationMin,
+  note,
+  mode,
+  location,
+}) {
   const supabase = createClient();
   const admin = await requireAdmin(supabase);
 
+  const inPerson = mode === "in_person";
   const { error } = await supabase.from("appointments").insert({
     student_id: studentId,
     starts_at: startsAt,
     duration_min: Number(durationMin),
     note: note || null,
+    mode: inPerson ? "in_person" : "online",
+    location: inPerson ? location || null : null,
     created_by: admin.id,
   });
   if (error) return { ok: false, error: error.message };
@@ -54,6 +64,8 @@ export async function createAppointment({ studentId, startsAt, durationMin, note
         startsAt,
         durationMin,
         note,
+        mode: inPerson ? "in_person" : "online",
+        location,
       });
       await sendEmail({ to: student.email, ...mail });
     }

@@ -9,6 +9,8 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
+  Video,
+  MapPin,
 } from "lucide-react";
 import {
   createAppointment,
@@ -33,6 +35,8 @@ export default function AdminSchedule({ users, appointments }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [durationMin, setDurationMin] = useState(30);
+  const [mode, setMode] = useState("online");
+  const [location, setLocation] = useState("");
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -67,6 +71,10 @@ export default function AdminSchedule({ users, appointments }) {
       setError("Please choose a date and time in the future.");
       return;
     }
+    if (mode === "in_person" && !location.trim()) {
+      setError("Please enter the location for an in-person class.");
+      return;
+    }
 
     const startsAt = when.toISOString();
 
@@ -76,13 +84,19 @@ export default function AdminSchedule({ users, appointments }) {
         startsAt,
         durationMin,
         note,
+        mode,
+        location: mode === "in_person" ? location.trim() : null,
       });
       if (res?.ok) {
-        setSuccess("Lesson scheduled.");
+        setSuccess(
+          mode === "in_person" ? "In-person class scheduled." : "Online lesson scheduled."
+        );
         setStudentId("");
         setDate("");
         setTime("");
         setDurationMin(30);
+        setMode("online");
+        setLocation("");
         setNote("");
       } else {
         setError(res?.error || "Could not schedule the lesson.");
@@ -132,6 +146,52 @@ export default function AdminSchedule({ users, appointments }) {
               ))}
             </select>
           </div>
+
+          {/* Type: online / in person */}
+          <div className="sm:col-span-2">
+            <span className={labelCls}>Type</span>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setMode("online")}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
+                  mode === "online"
+                    ? "bg-indigo-700 text-cream-50"
+                    : "bg-cream-100 text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
+                }`}
+              >
+                <Video size={14} /> Online
+              </button>
+              <button
+                type="button"
+                onClick={() => setMode("in_person")}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
+                  mode === "in_person"
+                    ? "bg-indigo-700 text-cream-50"
+                    : "bg-cream-100 text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
+                }`}
+              >
+                <MapPin size={14} /> In person
+              </button>
+            </div>
+          </div>
+
+          {/* Location (in-person only) */}
+          {mode === "in_person" && (
+            <div className="sm:col-span-2">
+              <label htmlFor="location" className={labelCls}>
+                Location / address
+              </label>
+              <input
+                id="location"
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="e.g. 123 Raga St, San Jose, CA"
+                className={inputCls}
+              />
+            </div>
+          )}
 
           {/* Date */}
           <div>
@@ -265,7 +325,29 @@ export default function AdminSchedule({ users, appointments }) {
                         <span className="inline-flex items-center gap-1 rounded-full bg-cream-100 px-2 py-0.5 text-xs">
                           {a.duration_min} min
                         </span>
+                        <span
+                          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs ${
+                            a.mode === "in_person"
+                              ? "bg-saffron-100 text-saffron-600"
+                              : "bg-indigo-50 text-indigo-600"
+                          }`}
+                        >
+                          {a.mode === "in_person" ? (
+                            <>
+                              <MapPin size={11} /> In person
+                            </>
+                          ) : (
+                            <>
+                              <Video size={11} /> Online
+                            </>
+                          )}
+                        </span>
                       </div>
+                      {a.mode === "in_person" && a.location && (
+                        <p className="mt-1 inline-flex items-center gap-1 truncate text-sm text-indigo-500">
+                          <MapPin size={12} /> {a.location}
+                        </p>
+                      )}
                       {a.note && (
                         <p className="mt-1 truncate text-sm text-indigo-400">
                           {a.note}
