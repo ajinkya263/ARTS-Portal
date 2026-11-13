@@ -14,10 +14,18 @@ import {
 } from "lucide-react";
 import {
   createAppointment,
+  createWeeklyAppointments,
   deleteAppointment,
 } from "@/app/(app)/admin/schedule/actions";
 
 const DURATIONS = [15, 30, 45, 60];
+// Weekly recurrence options (number of weeks). 1 = a single lesson.
+const REPEATS = [
+  { weeks: 1, label: "Once" },
+  { weeks: 4, label: "4 weeks" },
+  { weeks: 8, label: "8 weeks" },
+  { weeks: 12, label: "12 weeks" },
+];
 
 const inputCls =
   "w-full rounded-xl border border-cream-200 bg-white px-3 py-2 text-indigo-800 placeholder:text-indigo-300 focus:border-saffron-400 focus:outline-none focus:ring-2 focus:ring-saffron-400";
@@ -27,14 +35,15 @@ const labelCls =
 /**
  * Admin lesson scheduler.
  * Props:
- *   users        — [{ id, full_name, email }]
- *   appointments — [{ id, starts_at, duration_min, note, student: { full_name, email } }]
+ *   users       , [{ id, full_name, email }]
+ *   appointments, [{ id, starts_at, duration_min, note, student: { full_name, email } }]
  */
 export default function AdminSchedule({ users, appointments }) {
   const [studentId, setStudentId] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [durationMin, setDurationMin] = useState(30);
+  const [weeks, setWeeks] = useState(1);
   const [mode, setMode] = useState("online");
   const [location, setLocation] = useState("");
   const [note, setNote] = useState("");
@@ -76,25 +85,50 @@ export default function AdminSchedule({ users, appointments }) {
       return;
     }
 
-    const startsAt = when.toISOString();
+    const loc = mode === "in_person" ? location.trim() : null;
+
+    // Build the weekly occurrences in the admin's local timezone so each week
+    // keeps the same wall-clock lesson time (DST-aware).
+    const startsAtList = [];
+    for (let k = 0; k < weeks; k++) {
+      const d = new Date(when);
+      d.setDate(d.getDate() + k * 7);
+      startsAtList.push(d.toISOString());
+    }
 
     startTransition(async () => {
-      const res = await createAppointment({
-        studentId,
-        startsAt,
-        durationMin,
-        note,
-        mode,
-        location: mode === "in_person" ? location.trim() : null,
-      });
+      const res =
+        weeks > 1
+          ? await createWeeklyAppointments({
+              studentId,
+              startsAtList,
+              durationMin,
+              note,
+              mode,
+              location: loc,
+            })
+          : await createAppointment({
+              studentId,
+              startsAt: startsAtList[0],
+              durationMin,
+              note,
+              mode,
+              location: loc,
+            });
       if (res?.ok) {
+        const n = res.count || 1;
         setSuccess(
-          mode === "in_person" ? "In-person class scheduled." : "Online lesson scheduled."
+          n > 1
+            ? `${n} weekly lessons scheduled.`
+            : mode === "in_person"
+            ? "In-person class scheduled."
+            : "Online lesson scheduled."
         );
         setStudentId("");
         setDate("");
         setTime("");
         setDurationMin(30);
+        setWeeks(1);
         setMode("online");
         setLocation("");
         setNote("");
@@ -246,6 +280,35 @@ export default function AdminSchedule({ users, appointments }) {
             </div>
           </div>
 
+          {/* Repeat weekly */}
+          <div className="sm:col-span-2">
+            <span className={labelCls}>Repeat weekly</span>
+            <div className="flex flex-wrap gap-2">
+              {REPEATS.map((r) => {
+                const selected = weeks === r.weeks;
+                return (
+                  <button
+                    key={r.weeks}
+                    type="button"
+                    onClick={() => setWeeks(r.weeks)}
+                    className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
+                      selected
+                        ? "bg-indigo-700 text-cream-50"
+                        : "bg-cream-100 text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
+                    }`}
+                  >
+                    <CalendarDays size={13} /> {r.label}
+                  </button>
+                );
+              })}
+            </div>
+            {weeks > 1 && (
+              <p className="mt-1.5 text-xs text-indigo-400">
+                Books {weeks} lessons, one per week at the same day &amp; time.
+              </p>
+            )}
+          </div>
+
           {/* Note */}
           <div className="sm:col-span-2">
             <label htmlFor="note" className={labelCls}>
@@ -281,7 +344,7 @@ export default function AdminSchedule({ users, appointments }) {
             ) : (
               <CalendarPlus size={16} />
             )}
-            Schedule lesson
+            {weeks > 1 ? `Schedule ${weeks} weekly lessons` : "Schedule lesson"}
           </button>
         </div>
       </form>
@@ -305,7 +368,7 @@ export default function AdminSchedule({ users, appointments }) {
           <div className="space-y-3">
             {appointments.map((a) => {
               const isDeleting = deletingId === a.id && deletePending;
-              const name = a.student?.full_name || a.student?.email || "—";
+              const name = a.student?.full_name || a.student?.email || ", ";
               return (
                 <article
                   key={a.id}

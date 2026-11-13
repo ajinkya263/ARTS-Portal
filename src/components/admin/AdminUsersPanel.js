@@ -6,7 +6,6 @@ import {
   Lock,
   Check,
   Clock,
-  Sparkles,
   Loader2,
   ShieldCheck,
   User as UserIcon,
@@ -16,9 +15,9 @@ import { grantOverride, revokeOverride, setUserRole } from "@/app/(app)/admin/ac
 /**
  * Admin console body.
  * Props:
- *   users       — [{ id, full_name, email, role, auth_provider, enrollment_date, daysEnrolled }]
- *   modules     — [{ id, title, unlock_delay_days, order_index }]
- *   overrideKeys — ["<userId>::<moduleId>", ...]
+ *   users      , [{ id, full_name, email, role, auth_provider, enrollment_date, daysEnrolled }]
+ *   modules    , [{ id, title, unlock_delay_days, order_index }]
+ *   overrideKeys, ["<userId>::<moduleId>", ...]
  */
 export default function AdminUsersPanel({ users, modules, overrideKeys }) {
   const [query, setQuery] = useState("");
@@ -91,7 +90,7 @@ export default function AdminUsersPanel({ users, modules, overrideKeys }) {
                 </span>
                 <div>
                   <p className="font-medium text-indigo-900">
-                    {u.full_name || "—"}
+                    {u.full_name || ", "}
                   </p>
                   <p className="text-sm text-indigo-500">{u.email}</p>
                 </div>
@@ -117,7 +116,7 @@ export default function AdminUsersPanel({ users, modules, overrideKeys }) {
                   const k = key(u.id, m.id);
                   const isBusy = busyKey === k && pending;
 
-                  // Already open by time — nothing to grant.
+                  // Already open by time, nothing to grant.
                   if (unlockedByTime) {
                     return (
                       <span
@@ -143,14 +142,14 @@ export default function AdminUsersPanel({ users, modules, overrideKeys }) {
                       }`}
                       title={
                         granted
-                          ? "Early access granted — click to revoke"
-                          : `Locked until day ${m.unlock_delay_days} — click to grant early`
+                          ? "Early access granted, click to revoke"
+                          : `Locked until day ${m.unlock_delay_days}, click to grant early`
                       }
                     >
                       {isBusy ? (
                         <Loader2 size={13} className="animate-spin" />
                       ) : granted ? (
-                        <Sparkles size={13} />
+                        <Check size={13} />
                       ) : (
                         <Lock size={13} />
                       )}

@@ -14,6 +14,7 @@ import {
   PencilRuler,
   CalendarPlus,
   CalendarClock,
+  NotebookPen,
 } from "lucide-react";
 import SignOutButton from "@/components/SignOutButton";
 
@@ -22,9 +23,9 @@ import SignOutButton from "@/components/SignOutButton";
  * with a countdown so students can see what's coming.
  *
  * Props:
- *   modules  — array from getModulesForCurrentUser() (each has .unlocked, .unlocksInDays)
- *   profile  — { full_name, email }
- *   isAdmin  — boolean
+ *   modules , array from getModulesForCurrentUser() (each has .unlocked, .unlocksInDays)
+ *   profile , { full_name, email }
+ *   isAdmin , boolean
  */
 export default function Sidebar({ modules = [], profile, isAdmin = false }) {
   const [open, setOpen] = useState(false);
@@ -139,6 +140,13 @@ export default function Sidebar({ modules = [], profile, isAdmin = false }) {
                 icon={<CalendarPlus size={18} />}
                 label="Schedule Lessons"
                 active={pathname === "/admin/schedule"}
+                onClick={() => setOpen(false)}
+              />
+              <NavItem
+                href="/admin/notes"
+                icon={<NotebookPen size={18} />}
+                label="Student Notes"
+                active={pathname === "/admin/notes"}
                 onClick={() => setOpen(false)}
               />
             </>

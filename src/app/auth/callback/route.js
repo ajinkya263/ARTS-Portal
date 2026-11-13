@@ -19,6 +19,6 @@ export async function GET(request) {
     }
   }
 
-  // Something went wrong — back to login with a flag.
+  // Something went wrong, back to login with a flag.
   return NextResponse.redirect(`${origin}/login?error=auth`);
 }

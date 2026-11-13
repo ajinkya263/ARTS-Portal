@@ -2,8 +2,9 @@ import "./globals.css";
 import { Rozha_One, Mukta } from "next/font/google";
 import MandalaBackground from "@/components/MandalaBackground";
 import ScrollProgress from "@/components/ScrollProgress";
+import TablaAssistant from "@/components/TablaAssistant";
 
-/* Display serif with a distinct Indian character — used for headings. */
+/* Display serif with a distinct Indian character, used for headings. */
 const display = Rozha_One({
   subsets: ["latin", "devanagari"],
   weight: "400",
@@ -20,7 +21,7 @@ const body = Mukta({
 });
 
 export const metadata = {
-  title: "ARTS — Ajinkya Ranade Tabla School",
+  title: "ARTS, Ajinkya Ranade Tabla School",
   description:
     "Structured Indian classical tabla lessons from the Ajinkya Ranade Tabla School (ARTS).",
 };
@@ -34,6 +35,8 @@ export default function RootLayout({ children }) {
         <MandalaBackground />
         {/* All page content sits above the background */}
         <div className="relative z-10">{children}</div>
+        {/* Local, zero-token tabla assistant, available site-wide */}
+        <TablaAssistant />
       </body>
     </html>
   );

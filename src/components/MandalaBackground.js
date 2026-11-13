@@ -1,7 +1,7 @@
 /**
  * Fixed, non-interactive decorative layer for the whole app.
  * A repeating floral lattice + two large corner mandalas, all very low opacity
- * so text stays highly readable. Pure SVG — no images to load.
+ * so text stays highly readable. Pure SVG, no images to load.
  *
  * Drop this once in the root layout, behind everything (z-0, pointer-events-none).
  */
@@ -33,7 +33,7 @@ export default function MandalaBackground() {
             patternUnits="userSpaceOnUse"
             patternTransform="rotate(45)"
           >
-            <g fill="none" stroke="#2B1B5A" strokeWidth="1" opacity="0.05">
+            <g fill="none" stroke="#3b2c1e" strokeWidth="1" opacity="0.05">
               {/* four-petal flower */}
               <path d="M70 40 C82 52 82 68 70 80 C58 68 58 52 70 40 Z" />
               <path d="M40 70 C52 58 68 58 80 70 C68 82 52 82 40 70 Z" />
@@ -44,9 +44,9 @@ export default function MandalaBackground() {
         <rect width="100%" height="100%" fill="url(#floral-lattice)" />
       </svg>
 
-      {/* Top-right mandala — slowly rotating */}
+      {/* Top-right mandala, slowly rotating */}
       <Mandala className="absolute -right-24 -top-24 h-[26rem] w-[26rem] animate-spin-slow text-saffron-400/20" />
-      {/* Bottom-left mandala — counter-rotating */}
+      {/* Bottom-left mandala, counter-rotating */}
       <Mandala className="absolute -bottom-32 -left-24 h-[30rem] w-[30rem] animate-spin-slow-reverse text-indigo-400/10" />
     </div>
   );

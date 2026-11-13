@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 import { MEET_URL } from "@/lib/config";
 import { CalendarClock, Video } from "lucide-react";
 
-export const metadata = { title: "My Lessons — ARTS" };
+export const metadata = { title: "My Lessons, ARTS" };
 
 export default async function MyLessonsPage() {
   const supabase = createClient();
@@ -30,7 +30,7 @@ export default async function MyLessonsPage() {
         </p>
         <h1 className="font-display text-3xl text-indigo-900 md:text-4xl">My Lessons</h1>
         <p className="mt-2 text-indigo-500">
-          Your scheduled lessons — online and in person. Add each to your
+          Your scheduled lessons, online and in person. Add each to your
           calendar; online lessons open in Google Meet, in-person show the
           location with directions.
         </p>
@@ -44,7 +44,7 @@ export default async function MyLessonsPage() {
           </span>
           <p className="font-medium text-indigo-700">No lessons scheduled yet</p>
           <p className="max-w-sm text-sm text-indigo-500">
-            Your teacher will schedule your lessons — they’ll appear here with a
+            Your teacher will schedule your lessons, they’ll appear here with a
             calendar-add option and your meeting link.
           </p>
           <a href={MEET_URL} target="_blank" rel="noreferrer" className="btn-outline mt-2">

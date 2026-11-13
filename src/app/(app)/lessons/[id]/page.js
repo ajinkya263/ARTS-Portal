@@ -5,7 +5,7 @@ import LessonViewer from "@/components/LessonViewer";
 
 export async function generateMetadata({ params }) {
   const { lesson } = await getLessonIfUnlocked(params.id);
-  return { title: lesson ? `${lesson.title} — ARTS` : "Lesson" };
+  return { title: lesson ? `${lesson.title}, ARTS` : "Lesson" };
 }
 
 export default async function LessonPage({ params }) {
@@ -31,7 +31,7 @@ function LessonBlocked({ reason }) {
   const copy = {
     locked: {
       title: "This lesson is still locked",
-      body: "Keep practicing — it will unlock as you progress through the course, or when your teacher grants early access.",
+      body: "Keep practicing, it will unlock as you progress through the course, or when your teacher grants early access.",
     },
     not_found: {
       title: "Lesson not found",

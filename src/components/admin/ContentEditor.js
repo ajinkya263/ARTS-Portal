@@ -25,15 +25,15 @@ import {
 /** The five stored media_type enum values. */
 const MEDIA_TYPES = ["video", "audio", "pdf", "image", "text"];
 
-/** Shared input styling — cream border, saffron focus ring, indigo text. */
+/** Shared input styling, cream border, saffron focus ring, indigo text. */
 const inputCls =
   "w-full rounded-xl border border-cream-200 bg-white px-3 py-2 text-sm text-indigo-800 placeholder:text-indigo-300 transition focus:border-saffron-400 focus:outline-none focus:ring-2 focus:ring-saffron-400/40";
 
 /**
  * Admin content editor.
  * Props:
- *   modules — [{ id, title, description, unlock_delay_days, order_index }]
- *   lessons — [{ id, module_id, title, media_type, media_url, text_content, video_url, order_index }]
+ *   modules, [{ id, title, description, unlock_delay_days, order_index }]
+ *   lessons, [{ id, module_id, title, media_type, media_url, text_content, video_url, order_index }]
  */
 export default function ContentEditor({ modules, lessons }) {
   const [pending, startTransition] = useTransition();
@@ -76,7 +76,7 @@ export default function ContentEditor({ modules, lessons }) {
       <div className="space-y-6">
         {modules.length === 0 && (
           <p className="surface p-8 text-center text-indigo-400">
-            No modules yet — click “Add module” to create your first one.
+            No modules yet, click “Add module” to create your first one.
           </p>
         )}
 
@@ -348,7 +348,7 @@ function LessonCard({ lesson }) {
               placeholder="https://…  or  interactive:anatomy"
             />
           </Field>
-          <Field label="Companion video URL" hint="Optional — shown alongside the lesson.">
+          <Field label="Companion video URL" hint="Optional, shown alongside the lesson.">
             <input
               value={form.video_url}
               onChange={(e) => set("video_url", e.target.value)}
@@ -361,7 +361,7 @@ function LessonCard({ lesson }) {
         {/* Body */}
         <Field
           label="Text content"
-          hint="Written content — also used as the caption/notes for media lessons."
+          hint="Written content, also used as the caption/notes for media lessons."
         >
           <textarea
             value={form.text_content}
@@ -445,8 +445,7 @@ function HelpPanel() {
       </p>
       <ul className="space-y-2.5 text-sm text-indigo-600">
         <li>
-          <span className="font-medium text-indigo-800">Interactive lessons</span> —
-          set <Code>media_type</Code> to <Code>text</Code> and <Code>media_url</Code>{" "}
+          <span className="font-medium text-indigo-800">Interactive lessons</span>,           set <Code>media_type</Code> to <Code>text</Code> and <Code>media_url</Code>{" "}
           to one of:
           <span className="mt-1.5 flex flex-wrap gap-1.5">
             <Code>interactive:anatomy</Code>
@@ -459,7 +458,7 @@ function HelpPanel() {
           </span>
         </li>
         <li>
-          <span className="font-medium text-indigo-800">Companion video</span> — set{" "}
+          <span className="font-medium text-indigo-800">Companion video</span>, set{" "}
           <Code>video_url</Code> on any lesson to show a video alongside its content
           (a YouTube watch URL is fine).
         </li>

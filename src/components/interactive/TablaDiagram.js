@@ -5,8 +5,8 @@
  * with concentric strike zones. Used by the bol pages and the anatomy lesson.
  *
  * Props:
- *   highlights  — array of { drum: 'dayan'|'bayan', zone: 'kinar'|'maidan'|'syahi' }
- *   showLabels  — draw anatomy labels (Syahi/Maidan/Kinar/Gajra + drum names)
+ *   highlights , array of { drum: 'dayan'|'bayan', zone: 'kinar'|'maidan'|'syahi' }
+ *   showLabels , draw anatomy labels (Syahi/Maidan/Kinar/Gajra + drum names)
  *   className
  */
 export default function TablaDiagram({ highlights = [], showLabels = false, className = "" }) {
@@ -18,7 +18,7 @@ export default function TablaDiagram({ highlights = [], showLabels = false, clas
       role="img"
       aria-label="Tabla strike-zone diagram"
     >
-      {/* Bayan — bass drum (larger, left) */}
+      {/* Bayan, bass drum (larger, left) */}
       <Drum
         cx={104}
         cy={120}
@@ -28,7 +28,7 @@ export default function TablaDiagram({ highlights = [], showLabels = false, clas
         showLabels={showLabels}
         labelSide="left"
       />
-      {/* Dayan — treble drum (smaller, right) */}
+      {/* Dayan, treble drum (smaller, right) */}
       <Drum
         cx={274}
         cy={128}
@@ -53,14 +53,14 @@ function Drum({ cx, cy, r, name, highlights, showLabels, labelSide }) {
   return (
     <g>
       {/* gajra (woven dark rim) */}
-      <circle cx={cx} cy={cy} r={r} fill="#1E1240" />
+      <circle cx={cx} cy={cy} r={r} fill="#2b2016" />
       {/* playing skin */}
       <circle cx={cx} cy={cy} r={rSkin} fill="#F3E7D0" />
       {/* maidan/kinar delineation */}
-      <circle cx={cx} cy={cy} r={rMaidan} fill="none" stroke="#D9D2EF" strokeWidth="1.5" />
+      <circle cx={cx} cy={cy} r={rMaidan} fill="none" stroke="#e2d8cc" strokeWidth="1.5" />
       {/* syahi (black weighted center) */}
-      <circle cx={cx} cy={cy} r={rSyahi} fill="#241249" />
-      <circle cx={cx} cy={cy} r={rSyahi * 0.6} fill="#150a2e" />
+      <circle cx={cx} cy={cy} r={rSyahi} fill="#241a12" />
+      <circle cx={cx} cy={cy} r={rSyahi * 0.6} fill="#140d07" />
 
       {/* Highlights */}
       {highlights.map((h, i) => {
@@ -73,7 +73,7 @@ function Drum({ cx, cy, r, name, highlights, showLabels, labelSide }) {
               cy={cy}
               r={rSyahi + 3}
               fill="none"
-              stroke="#F4A300"
+              stroke="#bd9a4f"
               strokeWidth="4"
             />
           );
@@ -86,7 +86,7 @@ function Drum({ cx, cy, r, name, highlights, showLabels, labelSide }) {
             cy={cy}
             r={zoneRadius[h.zone]}
             fill="none"
-            stroke="#F4A300"
+            stroke="#bd9a4f"
             strokeOpacity="0.85"
             strokeWidth={zoneStroke[h.zone]}
           />
@@ -128,7 +128,7 @@ function Labels({ cx, cy, r, rSyahi, rMaidan, side }) {
             <polyline
               points={`${it.from[0]},${it.from[1]} ${xEdge},${it.y} ${tx},${it.y}`}
               fill="none"
-              stroke="#8E79CF"
+              stroke="#a8927a"
               strokeWidth="1"
             />
             <text

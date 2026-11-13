@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { Lock, Clock, ChevronRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { Lock, Clock, ChevronRight, CheckCircle2 } from "lucide-react";
 import MediaTypeIcon, { mediaTypeLabel, lessonKind } from "@/components/MediaTypeIcon";
 
 /**
  * A single module card for the dashboard grid.
  *
  * Props:
- *   module       — annotated module (unlocked, unlocksInDays, unlockedByOverride)
- *   lessons      — array of lessons for this module (empty for locked modules)
- *   completedIds — Set of completed lesson ids for the current user
- *   doneCount    — number of completed lessons in this module
+ *   module      , annotated module (unlocked, unlocksInDays, unlockedByOverride)
+ *   lessons     , array of lessons for this module (empty for locked modules)
+ *   completedIds, Set of completed lesson ids for the current user
+ *   doneCount   , number of completed lessons in this module
  */
 export default function ModuleCard({
   module,
@@ -58,8 +58,7 @@ export default function ModuleCard({
           </span>
         ) : (
           module.unlockedByOverride && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-saffron-100 px-2.5 py-1 text-[11px] font-semibold text-saffron-600">
-              <Sparkles size={12} /> Early access
+            <span className="inline-flex items-center gap-1 rounded-full bg-saffron-100 px-2.5 py-1 text-[11px] font-semibold text-saffron-600"> Early access
             </span>
           )
         )}
@@ -70,7 +69,7 @@ export default function ModuleCard({
       {lessons.length > 0 && (
         <div className="mt-4">
           <div className="mb-1 flex items-center justify-between text-[11px] text-indigo-400">
-            <span>{allDone ? "Completed 🎉" : "Progress"}</span>
+            <span>{allDone ? "Completed" : "Progress"}</span>
             <span>
               {doneCount}/{lessons.length}
             </span>

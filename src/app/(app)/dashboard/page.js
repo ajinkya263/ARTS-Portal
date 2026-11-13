@@ -5,9 +5,9 @@ import ModuleCard from "@/components/ModuleCard";
 import Reveal from "@/components/Reveal";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import TablaArt from "@/components/TablaArt";
-import { Sparkles, Music4, PlayCircle } from "lucide-react";
+import { Music4, PlayCircle } from "lucide-react";
 
-export const metadata = { title: "Dashboard — ARTS" };
+export const metadata = { title: "Dashboard, ARTS" };
 
 export default async function DashboardPage() {
   const { profile, isAdmin, daysEnrolled, modules } =
@@ -54,23 +54,22 @@ export default async function DashboardPage() {
       <section className="surface relative mb-10 overflow-hidden p-8 md:p-10">
         <div className="relative z-10 max-w-2xl">
           <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-saffron-100 px-3 py-1 text-xs font-semibold text-saffron-600">
-            <Sparkles size={13} />
-            {isAdmin ? "Admin view — all content unlocked" : "Your practice path"}
+            {isAdmin ? "Admin view, all content unlocked" : "Your practice path"}
           </p>
           <h1 className="font-display text-3xl text-indigo-900 md:text-4xl">
-            Namaste, <span className="text-gradient">{firstName}</span> 🙏
+            Namaste, <span className="text-gradient">{firstName}</span>
           </h1>
           <p className="mt-3 text-indigo-500">
             {isAdmin
               ? "You’re viewing every module and lesson in the studio."
               : `You have ${unlockedCount} module${
                   unlockedCount === 1 ? "" : "s"
-                } unlocked. Keep practicing — more opens as you progress.`}
+                } unlocked. Keep practicing, more opens as you progress.`}
           </p>
 
           {!isAdmin && (
             <div className="mt-6 flex flex-wrap items-center gap-6">
-              <Stat label="Day streak" value={streak} suffix="🔥" />
+              <Stat label="Day streak" value={streak} suffix="" />
               <Stat label="Lessons done" value={completedIds.size} />
               <Stat label="Modules unlocked" value={unlockedCount} />
               <Stat label="Days enrolled" value={daysEnrolled} />

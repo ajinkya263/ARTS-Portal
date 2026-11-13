@@ -8,7 +8,7 @@ import TablaDiagram from "@/components/interactive/TablaDiagram";
  * media_url = `interactive:anatomy`.
  */
 const PARTS = [
-  { zone: "syahi", name: "Syahi", desc: "The black, weighted circle in the center — where most of the sound is focused." },
+  { zone: "syahi", name: "Syahi", desc: "The black, weighted circle in the center, where most of the sound is focused." },
   { zone: "maidan", name: "Maidan", desc: "The open, lighter-coloured skin between the syahi and the edge." },
   { zone: "kinar", name: "Kinar", desc: "The outer rim of the drum head." },
   { zone: null, name: "Gajra", desc: "The woven outer rim that binds the skin to the drum." },

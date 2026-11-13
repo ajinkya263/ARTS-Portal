@@ -2,12 +2,12 @@ import AuthForm from "@/components/AuthForm";
 import TablaArt from "@/components/TablaArt";
 import { PERSONAL_SITE } from "@/lib/config";
 
-export const metadata = { title: "Sign in — ARTS" };
+export const metadata = { title: "Sign in, ARTS" };
 
 export default function LoginPage() {
   return (
     <main className="relative grid min-h-screen lg:grid-cols-2">
-      {/* Personal site link — top of the page, before sign-in */}
+      {/* Personal site link, top of the page, before sign-in */}
       <a
         href={PERSONAL_SITE}
         target="_blank"
@@ -37,8 +37,8 @@ export default function LoginPage() {
             <span className="text-saffron-300">bol</span>.
           </h1>
           <p className="mt-4 text-indigo-200">
-            A structured path through Indian classical Tabla — unlocking one
-            lesson at a time, at the pace of a true guru–shishya tradition.
+            A structured path through Indian classical Tabla, unlocking one
+            lesson at a time, at the pace of a true guru-shishya tradition.
           </p>
         </div>
 

@@ -223,7 +223,7 @@ function Field({ icon, value, onChange, ...props }) {
 
 /* ── Email validation helpers ──────────────────────────────────────────────── */
 
-// Requires local@domain.tld — no spaces, a dot, and a 2+ char TLD.
+// Requires local@domain.tld, no spaces, a dot, and a 2+ char TLD.
 function isValidEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
 }

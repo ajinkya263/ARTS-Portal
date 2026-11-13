@@ -15,7 +15,7 @@ export default function TablaArt({ className = "" }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      {/* Bayan — bass drum (left, larger, bulbous) */}
+      {/* Bayan, bass drum (left, larger, bulbous) */}
       <g>
         <path d="M24 66 C24 44 78 44 78 66 C82 92 82 108 72 130 C64 148 38 148 30 130 C20 108 20 92 24 66 Z" />
         <ellipse cx="51" cy="64" rx="29" ry="10" />
@@ -24,7 +24,7 @@ export default function TablaArt({ className = "" }) {
         <path d="M27 74 L36 132 M51 68 L51 140 M75 74 L66 132" strokeWidth="1" opacity="0.55" />
       </g>
 
-      {/* Dayan — treble drum (right, smaller, tapered) */}
+      {/* Dayan, treble drum (right, smaller, tapered) */}
       <g>
         <path d="M136 60 C136 42 178 42 178 60 L170 138 C168 158 146 158 144 138 Z" />
         <ellipse cx="157" cy="58" rx="22" ry="8" />

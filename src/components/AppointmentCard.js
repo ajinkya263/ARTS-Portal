@@ -16,7 +16,7 @@ import { MEET_URL, TEACHER_NAME, TEACHER_EMAIL } from "@/lib/config";
 const toICSDate = (d) =>
   d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
-/** One scheduled lesson (read-only for the student) — online or in-person. */
+/** One scheduled lesson (read-only for the student), online or in-person. */
 export default function AppointmentCard({ appt, studentEmail }) {
   const [copied, setCopied] = useState(false);
 
@@ -25,8 +25,8 @@ export default function AppointmentCard({ appt, studentEmail }) {
   const end = new Date(start.getTime() + appt.duration_min * 60000);
   const place = inPerson ? appt.location || "In person" : MEET_URL;
   const title = inPerson
-    ? "Tabla Class (in person) — ARTS"
-    : "Tabla Lesson — ARTS";
+    ? "Tabla Class (in person), ARTS"
+    : "Tabla Lesson, ARTS";
   const details = inPerson
     ? `Your ${appt.duration_min}-minute in-person tabla class with ${TEACHER_NAME}.${
         appt.note ? `\n\nFocus: ${appt.note}` : ""
@@ -105,7 +105,7 @@ export default function AppointmentCard({ appt, studentEmail }) {
   const timeStr = `${start.toLocaleTimeString(undefined, {
     hour: "numeric",
     minute: "2-digit",
-  })} – ${end.toLocaleTimeString(undefined, {
+  })}, ${end.toLocaleTimeString(undefined, {
     hour: "numeric",
     minute: "2-digit",
   })}`;

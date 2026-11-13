@@ -22,9 +22,9 @@ import CompleteButton from "@/components/CompleteButton";
  *   text  → formatted reading/theory
  *
  * Props:
- *   lesson   — { title, media_type, media_url, text_content }
- *   module   — { id, title }
- *   siblings — [{ id, title, media_type }] for prev/next nav within the module
+ *   lesson  , { title, media_type, media_url, text_content }
+ *   module  , { id, title }
+ *   siblings, [{ id, title, media_type }] for prev/next nav within the module
  */
 export default function LessonViewer({ lesson, module, siblings = [], completed = false }) {
   const idx = siblings.findIndex((s) => s.id === lesson.id);
@@ -54,7 +54,7 @@ export default function LessonViewer({ lesson, module, siblings = [], completed 
         <div className="gold-rule mt-3" />
       </div>
 
-      {/* Companion video — attach a URL to lesson.video_url to show a lesson
+      {/* Companion video, attach a URL to lesson.video_url to show a lesson
           video alongside interactive/text content. */}
       {lesson.video_url && (
         <div className="surface mb-6 animate-fade-up p-4 md:p-6">
@@ -220,7 +220,7 @@ function ImageGallery({ url, title }) {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={images[active]}
-        alt={`${title} — ${active + 1}`}
+        alt={`${title}, ${active + 1}`}
         className="max-h-[70vh] w-full rounded-xl border border-cream-200 bg-white object-contain"
       />
 
@@ -254,7 +254,7 @@ function ImageGallery({ url, title }) {
  */
 function RichText({ content }) {
   if (!content) return <Empty label="No written content yet." />;
-  // Split on ``` fences — odd-indexed segments are code blocks.
+  // Split on ``` fences, odd-indexed segments are code blocks.
   const segments = content.split(/```/);
   return (
     <div className="space-y-4 text-[15px] leading-relaxed text-indigo-700">

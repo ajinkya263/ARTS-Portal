@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 
-/** Milliseconds in a day — used to convert enrollment span into days. */
+/** Milliseconds in a day, used to convert enrollment span into days. */
 const DAY_MS = 1000 * 60 * 60 * 24;
 
 /**
@@ -98,7 +98,7 @@ export async function getModulesForCurrentUser() {
 
 /**
  * Guarded fetch of a single lesson. Confirms the parent module is unlocked
- * for the current user before returning content — prevents a student from
+ * for the current user before returning content, prevents a student from
  * deep-linking to a lesson inside a still-locked module.
  * Returns { lesson, module } or { error } .
  */

@@ -16,7 +16,7 @@ const BOLS = {
     sound: "Sharp, ringing and open",
     steps: [
       "Strike the Kinar (the outer rim of the skin) with a stiff index finger.",
-      "Strike and lift immediately — don't let the finger rest.",
+      "Strike and lift immediately, don't let the finger rest.",
       "Listen for a clean, ringing edge tone.",
     ],
     practice: ["Ta", "Ta", "Ta", "Ta"],
@@ -34,7 +34,7 @@ const BOLS = {
   ge: {
     name: "Ge", alt: "Ga", dev: "गे", hand: "Bayan · left hand",
     highlights: [{ drum: "bayan", zone: "maidan" }],
-    sound: "Open, resonant bass — a deep boom",
+    sound: "Open, resonant bass, a deep boom",
     steps: [
       "Rest your wrist on the drum, fingers relaxed.",
       "Strike the skin with your index or middle finger and let it resonate.",
@@ -45,10 +45,10 @@ const BOLS = {
   ka: {
     name: "Ka", alt: "Ke", dev: "के", hand: "Bayan · left hand",
     highlights: [{ drum: "bayan", zone: "syahi" }],
-    sound: "Closed, muted bass — a flat thud",
+    sound: "Closed, muted bass, a flat thud",
     steps: [
       "Strike the skin with a flat palm / fingers.",
-      "Do NOT lift — keep contact to mute the sound.",
+      "Do NOT lift, keep contact to mute the sound.",
       "Use the first part of the palm just after the wrist.",
     ],
     practice: ["Ka", "Ka", "Ka", "Ka"],
@@ -59,7 +59,7 @@ const BOLS = {
     sound: "Closed, muted bass (palm lifted first)",
     steps: [
       "Remove your palm from the drum entirely.",
-      "Then play Ka — strike flat and keep contact to mute.",
+      "Then play Ka, strike flat and keep contact to mute.",
     ],
     practice: ["Kat", "Kat", "Kat", "Kat"],
   },
@@ -69,14 +69,14 @@ const BOLS = {
     sound: "The full, powerful signature bol",
     steps: [
       "Play Ge (left) and Ta (right) at exactly the same instant.",
-      "Aim for one single, combined, powerful sound — not two.",
+      "Aim for one single, combined, powerful sound, not two.",
     ],
     practice: ["Dha", "Dha", "Dha", "Dha"],
   },
   dhin: {
     name: "Dhin", dev: "धिं", hand: "Both hands", combo: "Ge + Tin",
     highlights: [{ drum: "bayan", zone: "maidan" }, { drum: "dayan", zone: "maidan" }],
-    sound: "Resonant and open — Ge joined with Tin",
+    sound: "Resonant and open, Ge joined with Tin",
     steps: [
       "Play Ge (left) and Tin (right) together.",
       "Both should ring as one open, resonant note.",
@@ -86,7 +86,7 @@ const BOLS = {
   tete: {
     name: "TeTe", dev: "तेटे", hand: "Dayan · right hand",
     highlights: [{ drum: "dayan", zone: "syahi" }],
-    sound: "Closed, dry — two fingers on the syahi",
+    sound: "Closed, dry, two fingers on the syahi",
     steps: [
       "Strike the middle of the syahi with your index and middle finger.",
       "Keep it closed for a short, dry sound.",
@@ -96,7 +96,7 @@ const BOLS = {
   tu: {
     name: "Tu", dev: "तू", hand: "Dayan · right hand",
     highlights: [{ drum: "dayan", zone: "syahi" }],
-    sound: "Open — a single finger on the syahi",
+    sound: "Open, a single finger on the syahi",
     steps: ["Strike the middle of the syahi with the index finger for an open ring."],
     practice: ["Tu", "Tu", "Tu", "Tu"],
   },

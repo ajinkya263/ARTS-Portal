@@ -85,17 +85,17 @@
   }
 }
 
-/* Custom scrollbar — subtle, on-brand */
+/* Custom scrollbar, subtle, on-brand */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d9d2ef;
+  background: #e2d8cc;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b4a6df;
+  background: #c9b9a6;
 }
 
 /* Respect users who prefer less motion */

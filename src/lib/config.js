@@ -1,7 +1,7 @@
 /**
  * Public app configuration.
  *
- * These are NEXT_PUBLIC_* values — public by design (they ship in the browser
+ * These are NEXT_PUBLIC_* values, public by design (they ship in the browser
  * bundle; the Supabase anon key is safe to expose, your data is protected by
  * Row Level Security). We read the env var if present, but fall back to a
  * literal so the build NEVER depends on env-var delivery (Vercel dashboard,

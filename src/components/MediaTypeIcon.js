@@ -3,7 +3,7 @@ import { interactiveKey } from "@/components/interactive/keys";
 
 /**
  * Effective "kind" of a lesson. Interactive lessons are stored as media_type
- * 'text' with a media_url of `interactive:<key>` — detect that here so the
+ * 'text' with a media_url of `interactive:<key>`, detect that here so the
  * whole app labels/icons them consistently.
  */
 export function lessonKind(lesson) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, RotateCcw, Trophy, X } from "lucide-react";
 
 /**
@@ -14,13 +14,65 @@ const QUIZZES = {
     intro: "Match each term to its meaning. Tap one on the left, then its pair on the right.",
     pairs: [
       { term: "Taal", def: "A repeating rhythmic cycle of a set number of beats" },
-      { term: "Matra", def: "The fundamental beat — the pulse of the taal" },
+      { term: "Matra", def: "The fundamental beat, the pulse of the taal" },
       { term: "Bol", def: "A spoken syllable for a stroke on the tabla" },
       { term: "Laya", def: "The tempo, or speed, of the rhythm" },
-      { term: "Sam", def: "The first beat of the cycle — the “home base”" },
+      { term: "Sam", def: "The first beat of the cycle, the “home base”" },
       { term: "Khali", def: "The empty, unaccented section (matra 9 in Teentaal)" },
       { term: "Syahi", def: "The black, weighted circle at the centre of the skin" },
       { term: "Kinar", def: "The outer rim of the drum head" },
+    ],
+  },
+  bols: {
+    intro: "Match each bol to how it sounds or is played.",
+    pairs: [
+      { term: "Dha", def: "Ge (bass) + Na (treble) struck together, the key bol" },
+      { term: "Na / Ta", def: "A ringing edge tone on the rim (kinar)" },
+      { term: "Ge", def: "A deep, open, resonant bass on the bayan" },
+      { term: "Ka / Kat", def: "A flat, closed, muted bass" },
+      { term: "Tin", def: "A rounder open ring near the syahi" },
+      { term: "Dhin", def: "Ge (bass) + Tin (treble) together" },
+      { term: "Tirakita", def: "A quick four-stroke rolling filler" },
+      { term: "Tu / Tun", def: "A single finger on the syahi, left to ring" },
+    ],
+  },
+  teentaal: {
+    intro: "Test your Teentaal, match each idea to its meaning.",
+    pairs: [
+      { term: "16", def: "The number of matras in Teentaal" },
+      { term: "Sam", def: "Matra 1, clap, the home beat" },
+      { term: "Khali", def: "Matra 9, marked by a wave of the hand" },
+      { term: "Taali", def: "The claps on matras 5 and 13" },
+      { term: "Vibhag", def: "A section of four matras" },
+      { term: "Theka", def: "Dha Dhin Dhin Dha… the defining pattern" },
+      { term: "Tihai", def: "A phrase played thrice, landing on sam" },
+      { term: "Avartan", def: "One full cycle, sam to sam" },
+    ],
+  },
+  taals: {
+    intro: "Match each taal to its number of beats.",
+    pairs: [
+      { term: "Teentaal", def: "16 matras" },
+      { term: "Dadra", def: "6 matras" },
+      { term: "Bhajani", def: "8 matras" },
+      { term: "Jhaptaal", def: "10 matras" },
+      { term: "Ektaal", def: "12 matras" },
+      { term: "Rupak", def: "7 matras (begins on khali)" },
+      { term: "Keherwa", def: "8-beat light taal" },
+      { term: "Dhamar", def: "14 matras" },
+    ],
+  },
+  anatomy: {
+    intro: "Match each part of the tabla to what it is.",
+    pairs: [
+      { term: "Syahi", def: "The black weighted circle at the centre" },
+      { term: "Maidan", def: "The open ring of bare skin" },
+      { term: "Kinar", def: "The outer rim of the head" },
+      { term: "Gajra", def: "The braided ring around the edge" },
+      { term: "Dayan", def: "The wooden treble (right) drum" },
+      { term: "Bayan", def: "The metal bass (left) drum" },
+      { term: "Gatta", def: "Wooden tuning blocks under the straps" },
+      { term: "Pudi", def: "The drum head (skin) itself" },
     ],
   },
 };
@@ -37,23 +89,31 @@ function shuffle(arr) {
 
 export default function MatchingQuiz({ quiz }) {
   const data = QUIZZES[quiz];
+  const pairs = data?.pairs || [];
+
   const [round, setRound] = useState(0); // bump to reshuffle
   const [matched, setMatched] = useState(() => new Set());
   const [selected, setSelected] = useState(null); // { col, id }
   const [wrong, setWrong] = useState(null); // { col, id }
   const [attempts, setAttempts] = useState(0);
 
-  const pairs = data?.pairs || [];
-  const terms = useMemo(
-    () => shuffle(pairs.map((p, i) => ({ id: i, text: p.term }))),
+  // Initial order is deterministic (SSR-safe: no Math.random during render),   // terms in order, defs reversed so pairs aren't aligned. We shuffle for real
+  // on the client after mount / reshuffle to avoid hydration mismatches.
+  const [cols, setCols] = useState({
+    terms: pairs.map((p, i) => ({ id: i, text: p.term })),
+    defs: [...pairs.map((p, i) => ({ id: i, text: p.def }))].reverse(),
+  });
+
+  useEffect(() => {
+    setCols({
+      terms: shuffle(pairs.map((p, i) => ({ id: i, text: p.term }))),
+      defs: shuffle(pairs.map((p, i) => ({ id: i, text: p.def }))),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [quiz, round]
-  );
-  const defs = useMemo(
-    () => shuffle(pairs.map((p, i) => ({ id: i, text: p.def }))),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [quiz, round]
-  );
+  }, [quiz, round]);
+
+  const terms = cols.terms;
+  const defs = cols.defs;
 
   if (!data) {
     return (
@@ -122,7 +182,7 @@ export default function MatchingQuiz({ quiz }) {
           <span className="grid h-16 w-16 place-items-center rounded-full bg-saffron-400 text-indigo-900">
             <Trophy size={30} />
           </span>
-          <p className="font-display text-2xl text-indigo-900">Shabash! 🎉</p>
+          <p className="font-display text-2xl text-indigo-900">Shabash!</p>
           <p className="text-indigo-500">
             All {total} matched · {accuracy}% accuracy ({attempts} tries)
           </p>
