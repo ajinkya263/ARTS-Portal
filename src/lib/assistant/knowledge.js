@@ -350,6 +350,122 @@ const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\
 const stemWord = (w) => (w.length <= 3 ? w : w.replace(/ing$/, "").replace(/ed$/, "").replace(/ies$/, "y").replace(/es$/, "").replace(/s$/, ""));
 const stemText = (s) => normalize(s).split(" ").map(stemWord).join(" ");
 
+/* ---------------------------------------------------- vocabulary (for typos)
+   Every meaningful single word across all tags, stemmed. Query words that are
+   not in here are corrected to the nearest vocabulary word (edit distance),
+   so "gharna", "teental" or "tihi" still resolve. */
+const VOCAB = (() => {
+  const v = new Set();
+  for (const entry of KNOWLEDGE) {
+    for (const tag of entry.tags) {
+      for (const w of stemText(tag).split(" ")) {
+        if (w.length >= 3 && !STOP.has(w)) v.add(w);
+      }
+    }
+  }
+  return v;
+})();
+
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (Math.abs(m - n) > 2) return 3; // early out, we never accept > 2
+  const row = Array.from({ length: n + 1 }, (_, i) => i);
+  for (let i = 1; i <= m; i++) {
+    let prev = row[0];
+    row[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const tmp = row[j];
+      row[j] = Math.min(
+        row[j] + 1,
+        row[j - 1] + 1,
+        prev + (a[i - 1] === b[j - 1] ? 0 : 1)
+      );
+      prev = tmp;
+    }
+  }
+  return row[n];
+}
+
+/** Snap an unknown word to the closest vocabulary word, if close enough. */
+function fuzzyCorrect(word) {
+  if (word.length < 4 || VOCAB.has(word)) return word;
+  const maxDist = word.length >= 7 ? 2 : 1;
+  let best = word, bestD = maxDist + 1;
+  for (const v of VOCAB) {
+    if (Math.abs(v.length - word.length) > maxDist) continue;
+    const d = levenshtein(word, v);
+    if (d < bestD) { bestD = d; best = v; if (d === 1) break; }
+  }
+  return bestD <= maxDist ? best : word;
+}
+
+const correctText = (stext) => stext.split(" ").map(fuzzyCorrect).join(" ");
+
+/** A human, clickable follow-up label for any knowledge entry. */
+function labelFor(entry) {
+  const id = entry.id || "";
+  if (id.startsWith("def-")) return `What is ${id.slice(4)}?`;
+  if (id.startsWith("who-")) return `Who is ${id.slice(4).replace(/-/g, " ")}?`;
+  if (id.startsWith("gharana-")) return `Tell me about the ${id.slice(8)} gharana`;
+  if (id.startsWith("bol-")) return `How do I play ${id.slice(4)}?`;
+  if (id.startsWith("taal-")) return `What is ${id.slice(5)}?`;
+  const t = entry.tags.find((x) => x.length > 8) || entry.tags[0] || "";
+  return cap(t);
+}
+
+/* ----------------------------------------------------- LEARNING (local-only)
+   Zero-token and offline, so "learning" means: (1) remember, per browser, which
+   answer a visitor marked helpful for a given phrasing, so repeats improve; and
+   (2) log questions it could not answer well into a queue Ajinkya can review and
+   fold into the knowledge base. True cross-visitor learning needs a backend; a
+   future version can POST these to Supabase. */
+const LEARN_KEY = "tabla_assistant_learned_v1";
+const UNANS_KEY = "tabla_assistant_unanswered_v1";
+const entryById = new Map(KNOWLEDGE.map((e) => [e.id, e]));
+
+function readLS(k) { try { return JSON.parse(localStorage.getItem(k)) || {}; } catch { return {}; } }
+function writeLS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+
+export function rememberHelpful(query, id) {
+  if (typeof localStorage === "undefined" || !id) return;
+  const key = normalize(query);
+  if (!key) return;
+  const m = readLS(LEARN_KEY);
+  m[key] = id;
+  writeLS(LEARN_KEY, m);
+}
+
+export function recordUnanswered(query) {
+  if (typeof localStorage === "undefined") return;
+  const key = normalize(query);
+  if (!key) return;
+  const m = readLS(UNANS_KEY);
+  m[key] = (m[key] || 0) + 1;
+  writeLS(UNANS_KEY, m);
+}
+
+/** For a future admin view: the questions people asked that stumped the guide. */
+export function getUnanswered() {
+  if (typeof localStorage === "undefined") return [];
+  const m = readLS(UNANS_KEY);
+  return Object.entries(m).sort((a, b) => b[1] - a[1]).map(([q, n]) => ({ q, n }));
+}
+
+function learnedAnswer(query) {
+  if (typeof localStorage === "undefined") return null;
+  const id = readLS(LEARN_KEY)[normalize(query)];
+  return id ? entryById.get(id) : null;
+}
+
+const asResult = (entry, related) => ({
+  answer: entry.answer,
+  actions: entry.actions,
+  related: related || [],
+  id: entry.id,
+});
+
+const GENERAL_RELATED = ["What is a kaida?", "What are the six gharanas?", "How do I play Dha?"];
+
 export function findAnswer(rawInput) {
   const norm = normalize(rawInput);
   if (!norm) return fallback;
@@ -362,11 +478,15 @@ export function findAnswer(rawInput) {
     return { answer: `Try this.\n\n${pick(DRILLS)}`, actions: [{ label: "Open the metronome", href: "/practice" }] };
   }
 
-  const stext = stemText(rawInput);
+  // 1) Anything a visitor previously taught it for this exact phrasing wins.
+  const learned = learnedAnswer(rawInput);
+  if (learned) return asResult(learned);
+
+  // 2) Score every entry against the typo-corrected question, keep all hits.
+  const stext = correctText(stemText(rawInput));
   const words = new Set(stext.split(" ").filter((w) => w && !STOP.has(w)));
 
-  let best = null;
-  let bestScore = 0;
+  const scored = [];
   for (const entry of KNOWLEDGE) {
     let score = 0;
     for (const tag of entry.tags) {
@@ -378,7 +498,51 @@ export function findAnswer(rawInput) {
       else if (t.length > 4 && stext.includes(t)) score += 1;
     }
     if (entry.hint) for (const h of entry.hint) if (words.has(stemWord(h))) score += 1.5;
-    if (score > bestScore) { bestScore = score; best = entry; }
+    if (score > 0) scored.push({ entry, score });
   }
-  return bestScore >= 2.5 ? best : fallback;
+  scored.sort((a, b) => b.score - a.score);
+
+  const relatedTo = (entry) =>
+    scored.filter((c) => c.entry !== entry && c.score >= 2).slice(0, 3).map((c) => labelFor(c.entry));
+
+  const top = scored[0];
+  const isCompare = /\b(difference|differ|vs|versus|compare|between)\b/.test(stext);
+
+  // 3) Confident single answer. For "difference / vs" questions that clearly
+  //    name two known things, answer about both.
+  if (top && top.score >= 2.5) {
+    if (isCompare && scored[1] && scored[1].score >= 2.5) {
+      const [a, b] = [top.entry, scored[1].entry];
+      return {
+        answer: `${a.answer}\n\n${b.answer}`,
+        actions: a.actions || b.actions,
+        related: relatedTo(a).filter((l) => l !== labelFor(b)),
+        id: a.id,
+      };
+    }
+    return asResult(top.entry, relatedTo(top.entry));
+  }
+
+  // 4) Weak match, but it still recognised known tabla concepts: synthesise an
+  //    answer from them instead of giving up.
+  const concepts = scored.filter((c) => c.score >= 1).slice(0, 2);
+  if (concepts.length) {
+    recordUnanswered(rawInput);
+    return {
+      answer: `Here is what I can tell you about that.\n\n${concepts.map((c) => c.entry.answer).join("\n\n")}\n\nIf that is not quite what you meant, ask me in a different way, or reach Ajinkya directly.`,
+      actions: concepts.flatMap((c) => c.entry.actions || []).slice(0, 2).concat(fallback.actions).slice(0, 2),
+      related: relatedTo(concepts[0].entry),
+      id: concepts[0].entry.id,
+      confidence: "low",
+    };
+  }
+
+  // 5) Nothing landed: stay helpful, offer directions, and log it to learn from.
+  recordUnanswered(rawInput);
+  return {
+    answer: `I am still learning and do not have a solid answer for that yet. Try rephrasing, or pick one of these. For anything specific, Ajinkya is your best guide at ${TEACHER_EMAIL}.`,
+    actions: fallback.actions,
+    related: GENERAL_RELATED,
+    confidence: "none",
+  };
 }

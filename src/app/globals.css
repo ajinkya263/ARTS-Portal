@@ -4,21 +4,25 @@
 
 /* ============================================================================
    THEMES  .  values are RGB channels ("R G B") consumed by the Tailwind tokens.
-   :root / [data-theme="purple"] = default (the original purple colourway).
+   Default (:root) is the DARK (black) theme; white is the light option.
    ========================================================================== */
+
+/* Dark (black) theme with warm gold accent, the DEFAULT (:root).
+   NOTE: must come BEFORE [data-theme="white"] so that selector (equal
+   specificity) overrides :root when the light theme is chosen. */
 :root,
-[data-theme="purple"] {
-  --indigo-50: 239 236 248;  --indigo-100: 217 210 239; --indigo-200: 180 166 223;
-  --indigo-300: 142 121 207; --indigo-400: 104 77 191;  --indigo-500: 75 49 160;
-  --indigo-600: 58 38 128;   --indigo-700: 43 27 90;    --indigo-800: 30 18 64;
-  --indigo-900: 19 11 41;
-  --saffron-50: 254 244 220; --saffron-100: 253 233 185; --saffron-200: 251 212 114;
-  --saffron-300: 249 191 58; --saffron-400: 244 163 0;   --saffron-500: 217 139 0;
-  --saffron-600: 179 113 0;
-  --cream: 251 245 234; --cream-50: 255 253 249; --cream-100: 251 245 234;
-  --cream-200: 243 231 208; --cream-300: 233 214 180;
-  --card: 255 255 255; --panel: 30 18 64; --panel2: 19 11 41; --onaccent: 19 11 41;
-  --scroll-thumb: 217 210 239;
+[data-theme="dark"] {
+  --indigo-50: 38 38 44;     --indigo-100: 190 186 180; --indigo-200: 150 146 140;
+  --indigo-300: 120 116 110; --indigo-400: 140 134 128; --indigo-500: 165 159 152;
+  --indigo-600: 190 184 177; --indigo-700: 214 210 205; --indigo-800: 230 227 222;
+  --indigo-900: 244 242 238;
+  --saffron-50: 44 36 20;    --saffron-100: 60 50 28;    --saffron-200: 92 74 38;
+  --saffron-300: 214 180 110;--saffron-400: 212 165 80;  --saffron-500: 198 150 66;
+  --saffron-600: 224 184 104;
+  --cream: 13 13 16; --cream-50: 240 238 233; --cream-100: 20 20 24;
+  --cream-200: 30 30 35; --cream-300: 44 44 50;
+  --card: 26 26 31; --panel: 34 32 38; --panel2: 18 18 22; --onaccent: 24 22 18;
+  --scroll-thumb: 60 58 64;
 }
 
 /* Professional white theme with friendly slate + teal accents */
@@ -36,23 +40,8 @@
   --scroll-thumb: 203 213 225;
 }
 
-/* Dark (black) theme with warm gold accent */
-[data-theme="dark"] {
-  --indigo-50: 38 38 44;     --indigo-100: 190 186 180; --indigo-200: 150 146 140;
-  --indigo-300: 120 116 110; --indigo-400: 140 134 128; --indigo-500: 165 159 152;
-  --indigo-600: 190 184 177; --indigo-700: 214 210 205; --indigo-800: 230 227 222;
-  --indigo-900: 244 242 238;
-  --saffron-50: 44 36 20;    --saffron-100: 60 50 28;    --saffron-200: 92 74 38;
-  --saffron-300: 214 180 110;--saffron-400: 212 165 80;  --saffron-500: 198 150 66;
-  --saffron-600: 224 184 104;
-  --cream: 13 13 16; --cream-50: 240 238 233; --cream-100: 20 20 24;
-  --cream-200: 30 30 35; --cream-300: 44 44 50;
-  --card: 26 26 31; --panel: 34 32 38; --panel2: 18 18 22; --onaccent: 24 22 18;
-  --scroll-thumb: 60 58 64;
-}
-
-html { color-scheme: light; }
-[data-theme="dark"] { color-scheme: dark; }
+html { color-scheme: dark; }
+[data-theme="white"] { color-scheme: light; }
 body { transition: background-color 0.3s ease, color 0.3s ease; }
 
 @layer base {

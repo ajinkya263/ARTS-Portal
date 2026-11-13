@@ -17,6 +17,7 @@ import {
   NotebookPen,
 } from "lucide-react";
 import SignOutButton from "@/components/SignOutButton";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 /**
  * App navigation. Lists UNLOCKED modules as links; locked ones appear greyed
@@ -153,8 +154,12 @@ export default function Sidebar({ modules = [], profile, isAdmin = false }) {
           )}
         </nav>
 
-        {/* Footer / account */}
+        {/* Theme + account */}
         <div className="border-t border-panel/60 p-4">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-xs text-indigo-300">Theme</span>
+            <ThemeSwitcher />
+          </div>
           <p className="truncate text-sm font-medium text-cream-50">
             {profile?.full_name || "Student"}
           </p>

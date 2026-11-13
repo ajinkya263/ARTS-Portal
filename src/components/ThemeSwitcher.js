@@ -1,24 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 
-// Preview swatch colours are fixed per theme so they read correctly whatever
-// the active theme is.
-const THEMES = [
-  { id: "purple", label: "Purple", dot: "#2B1B5A" },
-  { id: "white", label: "Light", dot: "#ffffff" },
-  { id: "dark", label: "Dark", dot: "#0d0d10" },
+const OPTIONS = [
+  { id: "dark", label: "Dark", Icon: Moon },
+  { id: "white", label: "Light", Icon: Sun },
 ];
 
-export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState("purple");
+/**
+ * Dark / Light theme toggle. Reads + writes localStorage("theme") and sets the
+ * [data-theme] attribute on <html>. Default is dark. Pass a className to place
+ * it (sidebar, page header, etc.).
+ */
+export default function ThemeSwitcher({ className = "" }) {
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
+    const attr = document.documentElement.getAttribute("data-theme");
     const saved =
-      document.documentElement.getAttribute("data-theme") ||
-      (typeof localStorage !== "undefined" && localStorage.getItem("theme")) ||
-      "purple";
-    setTheme(saved);
+      attr === "white" || attr === "dark"
+        ? attr
+        : typeof localStorage !== "undefined" && localStorage.getItem("theme");
+    setTheme(saved === "white" ? "white" : "dark");
   }, []);
 
   function choose(id) {
@@ -33,23 +37,24 @@ export default function ThemeSwitcher() {
     <div
       role="group"
       aria-label="Colour theme"
-      className="fixed bottom-5 left-5 z-[60] flex items-center gap-1.5 rounded-full border border-cream-200 bg-card/90 px-2 py-1.5 shadow-soft backdrop-blur"
+      className={`inline-flex items-center gap-0.5 rounded-full border border-cream-200 bg-card/80 p-0.5 backdrop-blur ${className}`}
     >
-      {THEMES.map((t) => (
+      {OPTIONS.map(({ id, label, Icon }) => (
         <button
-          key={t.id}
+          key={id}
           type="button"
-          onClick={() => choose(t.id)}
-          title={`${t.label} theme`}
-          aria-label={`${t.label} theme`}
-          aria-pressed={theme === t.id}
-          className={`h-6 w-6 rounded-full border border-black/15 transition ${
-            theme === t.id
-              ? "scale-110 ring-2 ring-saffron-400 ring-offset-2 ring-offset-card"
-              : "opacity-70 hover:opacity-100"
+          onClick={() => choose(id)}
+          aria-pressed={theme === id}
+          title={`${label} theme`}
+          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium transition ${
+            theme === id
+              ? "bg-saffron-400 text-onaccent shadow-sm"
+              : "text-indigo-500 hover:text-indigo-800"
           }`}
-          style={{ background: t.dot }}
-        />
+        >
+          <Icon size={13} />
+          <span className="hidden sm:inline">{label}</span>
+        </button>
       ))}
     </div>
   );

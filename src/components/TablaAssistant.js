@@ -1,8 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Drum, X, Send, ArrowUpRight } from "lucide-react";
-import { findAnswer, greeting, suggestions } from "@/lib/assistant/knowledge";
+import { Drum, X, Send, ArrowUpRight, ThumbsUp, ThumbsDown } from "lucide-react";
+import {
+  findAnswer,
+  greeting,
+  suggestions,
+  rememberHelpful,
+  recordUnanswered,
+} from "@/lib/assistant/knowledge";
 
 let seq = 0;
 const nextId = () => ++seq;
@@ -90,8 +96,29 @@ export default function TablaAssistant() {
     window.setTimeout(() => {
       const res = findAnswer(text);
       setThinking(false);
-      setMessages((m) => [...m, { id: nextId(), from: "bot", text: res.answer, actions: res.actions }]);
+      setMessages((m) => [
+        ...m,
+        {
+          id: nextId(),
+          from: "bot",
+          text: res.answer,
+          actions: res.actions,
+          related: res.related,
+          entryId: res.id,
+          forQuery: text,
+          rated: null,
+        },
+      ]);
     }, 360);
+  }, []);
+
+  // Feedback teaches the local guide (and logs misses for Ajinkya to review).
+  const rate = useCallback((msg, value) => {
+    if (value === "up") rememberHelpful(msg.forQuery, msg.entryId);
+    else recordUnanswered(msg.forQuery);
+    setMessages((m) =>
+      m.map((x) => (x.id === msg.id ? { ...x, rated: value } : x))
+    );
   }, []);
 
   const onSubmit = (e) => {
@@ -163,6 +190,50 @@ export default function TablaAssistant() {
                           </a>
                         );
                       })}
+                    </div>
+                  )}
+
+                  {/* Related follow-ups the guide can answer */}
+                  {m.from === "bot" && m.related?.length > 0 && (
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
+                      {m.related.map((r) => (
+                        <button
+                          key={r}
+                          onClick={() => ask(r)}
+                          className="rounded-full border border-indigo-200 bg-card px-2.5 py-1 text-[11px] text-indigo-600 transition hover:border-saffron-400 hover:bg-saffron-50"
+                        >
+                          {r}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Was this helpful? teaches the local guide */}
+                  {m.from === "bot" && m.forQuery && (
+                    <div className="mt-2 flex items-center gap-1.5 text-indigo-300">
+                      {m.rated ? (
+                        <span className="text-[11px] text-indigo-400">
+                          {m.rated === "up" ? "Thanks, noted." : "Thanks, flagged for Ajinkya."}
+                        </span>
+                      ) : (
+                        <>
+                          <span className="text-[11px]">Helpful?</span>
+                          <button
+                            onClick={() => rate(m, "up")}
+                            aria-label="Helpful"
+                            className="rounded p-1 transition hover:bg-saffron-50 hover:text-saffron-500"
+                          >
+                            <ThumbsUp size={13} />
+                          </button>
+                          <button
+                            onClick={() => rate(m, "down")}
+                            aria-label="Not helpful"
+                            className="rounded p-1 transition hover:bg-saffron-50 hover:text-indigo-600"
+                          >
+                            <ThumbsDown size={13} />
+                          </button>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>

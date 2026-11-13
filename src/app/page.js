@@ -12,6 +12,7 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import HomeHero from "@/components/home/HomeHero";
 import HomeQuiz from "@/components/home/HomeQuiz";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Reveal from "@/components/Reveal";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import TablaDiagram from "@/components/interactive/TablaDiagram";
@@ -81,6 +82,9 @@ export default async function Home() {
 
   return (
     <div className="relative">
+      <div className="fixed right-4 top-4 z-[70]">
+        <ThemeSwitcher />
+      </div>
       <HomeHero />
 
       {/* ── Intro: emerges from inside the syahi ───────────────────────── */}
