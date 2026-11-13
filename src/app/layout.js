@@ -3,6 +3,10 @@ import { Rozha_One, Mukta } from "next/font/google";
 import MandalaBackground from "@/components/MandalaBackground";
 import ScrollProgress from "@/components/ScrollProgress";
 import TablaAssistant from "@/components/TablaAssistant";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+
+// Applied before paint so the saved theme never flashes.
+const themeInit = `try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}`;
 
 /* Display serif with a distinct Indian character, used for headings. */
 const display = Rozha_One({
@@ -30,6 +34,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="relative min-h-screen">
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <ScrollProgress />
         {/* Fixed decorative mandala/floral layer behind everything */}
         <MandalaBackground />
@@ -37,6 +42,7 @@ export default function RootLayout({ children }) {
         <div className="relative z-10">{children}</div>
         {/* Local, zero-token tabla assistant, available site-wide */}
         <TablaAssistant />
+        <ThemeSwitcher />
       </body>
     </html>
   );

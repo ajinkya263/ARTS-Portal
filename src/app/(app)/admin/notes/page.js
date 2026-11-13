@@ -60,7 +60,7 @@ export default async function NotesPage({ searchParams }) {
         >
           <ArrowLeft size={15} /> Back to Admin Console
         </Link>
-        <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-700 px-3 py-1 text-xs font-semibold text-cream-50">
+        <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-panel px-3 py-1 text-xs font-semibold text-cream-50">
           <NotebookPen size={13} /> Class Notes
         </p>
         <h1 className="font-display text-3xl text-indigo-900 md:text-4xl">

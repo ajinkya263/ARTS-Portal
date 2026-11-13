@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================================
+   THEMES  .  values are RGB channels ("R G B") consumed by the Tailwind tokens.
+   :root / [data-theme="purple"] = default (the original purple colourway).
+   ========================================================================== */
+:root,
+[data-theme="purple"] {
+  --indigo-50: 239 236 248;  --indigo-100: 217 210 239; --indigo-200: 180 166 223;
+  --indigo-300: 142 121 207; --indigo-400: 104 77 191;  --indigo-500: 75 49 160;
+  --indigo-600: 58 38 128;   --indigo-700: 43 27 90;    --indigo-800: 30 18 64;
+  --indigo-900: 19 11 41;
+  --saffron-50: 254 244 220; --saffron-100: 253 233 185; --saffron-200: 251 212 114;
+  --saffron-300: 249 191 58; --saffron-400: 244 163 0;   --saffron-500: 217 139 0;
+  --saffron-600: 179 113 0;
+  --cream: 251 245 234; --cream-50: 255 253 249; --cream-100: 251 245 234;
+  --cream-200: 243 231 208; --cream-300: 233 214 180;
+  --card: 255 255 255; --panel: 30 18 64; --panel2: 19 11 41; --onaccent: 19 11 41;
+  --scroll-thumb: 217 210 239;
+}
+
+/* Professional white theme with friendly slate + teal accents */
+[data-theme="white"] {
+  --indigo-50: 238 242 255;  --indigo-100: 241 245 249; --indigo-200: 226 232 240;
+  --indigo-300: 203 213 225; --indigo-400: 148 163 184; --indigo-500: 100 116 139;
+  --indigo-600: 71 85 105;   --indigo-700: 51 65 85;    --indigo-800: 30 41 59;
+  --indigo-900: 15 23 42;
+  --saffron-50: 240 253 250; --saffron-100: 204 251 241; --saffron-200: 153 246 228;
+  --saffron-300: 45 212 191; --saffron-400: 13 148 136;  --saffron-500: 15 118 110;
+  --saffron-600: 15 118 110;
+  --cream: 248 250 252; --cream-50: 255 255 255; --cream-100: 248 250 252;
+  --cream-200: 241 245 249; --cream-300: 226 232 240;
+  --card: 255 255 255; --panel: 30 41 59; --panel2: 15 23 42; --onaccent: 255 255 255;
+  --scroll-thumb: 203 213 225;
+}
+
+/* Dark (black) theme with warm gold accent */
+[data-theme="dark"] {
+  --indigo-50: 38 38 44;     --indigo-100: 190 186 180; --indigo-200: 150 146 140;
+  --indigo-300: 120 116 110; --indigo-400: 140 134 128; --indigo-500: 165 159 152;
+  --indigo-600: 190 184 177; --indigo-700: 214 210 205; --indigo-800: 230 227 222;
+  --indigo-900: 244 242 238;
+  --saffron-50: 44 36 20;    --saffron-100: 60 50 28;    --saffron-200: 92 74 38;
+  --saffron-300: 214 180 110;--saffron-400: 212 165 80;  --saffron-500: 198 150 66;
+  --saffron-600: 224 184 104;
+  --cream: 13 13 16; --cream-50: 240 238 233; --cream-100: 20 20 24;
+  --cream-200: 30 30 35; --cream-300: 44 44 50;
+  --card: 26 26 31; --panel: 34 32 38; --panel2: 18 18 22; --onaccent: 24 22 18;
+  --scroll-thumb: 60 58 64;
+}
+
+html { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+body { transition: background-color 0.3s ease, color 0.3s ease; }
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -18,13 +71,13 @@
 @layer components {
   /* Reusable "raga card" surface used across dashboard + lessons */
   .surface {
-    @apply rounded-2xl border border-cream-200 bg-white/80 backdrop-blur-sm shadow-card;
+    @apply rounded-2xl border border-cream-200 bg-card/80 backdrop-blur-sm shadow-card;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-700
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-panel
            px-5 py-2.5 font-medium text-cream-50 transition-all duration-200
-           hover:bg-indigo-600 hover:shadow-soft active:scale-[0.97]
+           hover:bg-panel hover:shadow-soft active:scale-[0.97]
            focus:outline-none focus:ring-2
            focus:ring-saffron-400 focus:ring-offset-2 focus:ring-offset-cream
            disabled:cursor-not-allowed disabled:opacity-60;
@@ -32,7 +85,7 @@
 
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 rounded-xl border
-           border-indigo-200 bg-white px-5 py-2.5 font-medium text-indigo-700
+           border-indigo-200 bg-card px-5 py-2.5 font-medium text-indigo-700
            transition hover:border-saffron-400 hover:text-indigo-900
            focus:outline-none focus:ring-2 focus:ring-saffron-400;
   }
@@ -46,7 +99,7 @@
 @layer components {
   /* Animated saffron→indigo gradient text for headlines */
   .text-gradient {
-    @apply bg-gradient-to-r from-saffron-500 via-indigo-600 to-saffron-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-saffron-500 via-panel to-saffron-500 bg-clip-text text-transparent;
     background-size: 200% auto;
     animation: shimmer 6s linear infinite;
   }
@@ -91,11 +144,11 @@
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #e2d8cc;
+  background: rgb(var(--scroll-thumb));
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c9b9a6;
+  background: rgb(var(--saffron-400));
 }
 
 /* Respect users who prefer less motion */

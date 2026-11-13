@@ -47,7 +47,7 @@ export default async function ContentPage() {
         >
           <ArrowLeft size={15} /> Back to Admin Console
         </Link>
-        <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-700 px-3 py-1 text-xs font-semibold text-cream-50">
+        <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-panel px-3 py-1 text-xs font-semibold text-cream-50">
           <LayoutList size={13} /> Content Editor
         </p>
         <h1 className="font-display text-3xl text-indigo-900 md:text-4xl">

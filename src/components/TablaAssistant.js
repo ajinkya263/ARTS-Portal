@@ -16,7 +16,7 @@ function MessageText({ text }) {
         i % 2 === 1 ? (
           <pre
             key={i}
-            className="my-2 overflow-x-auto whitespace-pre rounded-lg bg-indigo-900/90 px-3 py-2 font-mono text-[12px] leading-relaxed text-cream-50"
+            className="my-2 overflow-x-auto whitespace-pre rounded-lg bg-panel2/90 px-3 py-2 font-mono text-[12px] leading-relaxed text-cream-50"
           >
             {part.replace(/^\n|\n$/g, "")}
           </pre>
@@ -107,7 +107,7 @@ export default function TablaAssistant() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close tabla guide" : "Open tabla guide"}
         aria-expanded={open}
-        className="animate-glow fixed bottom-5 right-5 z-[60] grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-saffron-300 to-saffron-500 text-indigo-900 shadow-soft transition hover:scale-105 active:scale-95"
+        className="animate-glow fixed bottom-5 right-5 z-[60] grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-saffron-300 to-saffron-500 text-onaccent shadow-soft transition hover:scale-105 active:scale-95"
       >
         {open ? <X size={22} /> : <Drum size={24} />}
       </button>
@@ -117,18 +117,18 @@ export default function TablaAssistant() {
         <div
           role="dialog"
           aria-label="Tabla guide"
-          className="animate-fade-up fixed bottom-24 right-5 z-[60] flex h-[min(560px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-indigo-200 bg-cream-50 shadow-soft"
+          className="animate-fade-up fixed bottom-24 right-5 z-[60] flex h-[min(560px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-indigo-200 bg-card shadow-soft"
         >
           {/* header */}
-          <div className="flex items-center gap-3 border-b border-cream-200 bg-gradient-to-r from-indigo-800 to-indigo-900 px-4 py-3 text-cream-50">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-saffron-400 text-indigo-900">
+          <div className="flex items-center gap-3 border-b border-cream-200 bg-gradient-to-r from-panel to-panel2 px-4 py-3 text-cream-50">
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-saffron-400 text-onaccent">
               <Drum size={18} />
             </span>
             <div className="flex-1">
               <p className="font-display text-base leading-tight">Tabla Guide</p>
               <p className="text-[11px] text-indigo-200">Bols, taals, technique &amp; the school</p>
             </div>
-            <button onClick={() => setOpen(false)} aria-label="Close" className="rounded-lg p-1.5 text-indigo-200 transition hover:bg-white/10 hover:text-cream-50">
+            <button onClick={() => setOpen(false)} aria-label="Close" className="rounded-lg p-1.5 text-indigo-200 transition hover:bg-card/10 hover:text-cream-50">
               <X size={18} />
             </button>
           </div>
@@ -140,8 +140,8 @@ export default function TablaAssistant() {
                 <div
                   className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                     m.from === "user"
-                      ? "rounded-br-md bg-indigo-700 text-cream-50"
-                      : "rounded-bl-md border border-cream-200 bg-white text-indigo-800"
+                      ? "rounded-br-md bg-panel text-cream-50"
+                      : "rounded-bl-md border border-cream-200 bg-card text-indigo-800"
                   }`}
                 >
                   <MessageText text={m.text} />
@@ -171,9 +171,9 @@ export default function TablaAssistant() {
 
             {thinking && (
               <div className="flex justify-start">
-                <div className="flex gap-1 rounded-2xl rounded-bl-md border border-cream-200 bg-white px-4 py-3">
+                <div className="flex gap-1 rounded-2xl rounded-bl-md border border-cream-200 bg-card px-4 py-3">
                   {[0, 1, 2].map((i) => (
-                    <span key={i} className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-300" style={{ animationDelay: `${i * 0.15}s` }} />
+                    <span key={i} className="h-1.5 w-1.5 animate-bounce rounded-full bg-indigo-50" style={{ animationDelay: `${i * 0.15}s` }} />
                   ))}
                 </div>
               </div>
@@ -185,7 +185,7 @@ export default function TablaAssistant() {
                   <button
                     key={s}
                     onClick={() => ask(s)}
-                    className="rounded-full border border-indigo-200 bg-white px-3 py-1.5 text-xs text-indigo-600 transition hover:border-saffron-400 hover:bg-saffron-50"
+                    className="rounded-full border border-indigo-200 bg-card px-3 py-1.5 text-xs text-indigo-600 transition hover:border-saffron-400 hover:bg-saffron-50"
                   >
                     {s}
                   </button>
@@ -195,7 +195,7 @@ export default function TablaAssistant() {
           </div>
 
           {/* input */}
-          <form onSubmit={onSubmit} className="flex items-center gap-2 border-t border-cream-200 bg-white px-3 py-2.5">
+          <form onSubmit={onSubmit} className="flex items-center gap-2 border-t border-cream-200 bg-card px-3 py-2.5">
             <input
               ref={inputRef}
               value={input}
@@ -209,13 +209,13 @@ export default function TablaAssistant() {
               type="submit"
               disabled={!input.trim()}
               aria-label="Send"
-              className="grid h-9 w-9 place-items-center rounded-lg bg-saffron-400 text-indigo-900 transition hover:bg-saffron-300 disabled:opacity-40"
+              className="grid h-9 w-9 place-items-center rounded-lg bg-saffron-400 text-onaccent transition hover:bg-saffron-300 disabled:opacity-40"
             >
               <Send size={16} />
             </button>
           </form>
 
-          <p className="flex items-center justify-center gap-1 bg-white pb-2 text-[10px] text-indigo-300"> Instant answers · runs locally
+          <p className="flex items-center justify-center gap-1 bg-card pb-2 text-[10px] text-indigo-300"> Instant answers · runs locally
           </p>
         </div>
       )}

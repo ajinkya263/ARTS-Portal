@@ -84,7 +84,7 @@ export default async function Home() {
       <HomeHero />
 
       {/* ── Intro: emerges from inside the syahi ───────────────────────── */}
-      <section className="relative bg-indigo-900 px-6 pb-28 pt-24 text-cream-50">
+      <section className="relative bg-panel2 px-6 pb-28 pt-24 text-cream-50">
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-cream"
           aria-hidden
@@ -109,7 +109,7 @@ export default async function Home() {
       <section className="bg-cream px-6 py-24">
         <div className="mx-auto max-w-6xl">
           <Reveal className="mb-14 text-center">
-            <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-700 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cream-50"> Everything in one place
+            <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-panel px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cream-50"> Everything in one place
             </p>
             <h2 className="font-display text-3xl text-indigo-900 md:text-4xl">
               A whole school, in your pocket
@@ -136,7 +136,7 @@ export default async function Home() {
       </section>
 
       {/* ── Stats band ─────────────────────────────────────────────────── */}
-      <section className="bg-indigo-800 px-6 py-16 text-cream-50">
+      <section className="bg-panel px-6 py-16 text-cream-50">
         <div className="mx-auto grid max-w-5xl gap-8 text-center sm:grid-cols-4">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
@@ -194,7 +194,7 @@ export default async function Home() {
       <section className="bg-cream px-6 pb-8 pt-4">
         <div className="mx-auto max-w-2xl">
           <Reveal className="mb-8 text-center">
-            <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-saffron-400 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-900"> Try it now
+            <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-saffron-400 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-onaccent"> Try it now
             </p>
             <h2 className="font-display text-3xl text-indigo-900 md:text-4xl">
               Test your tabla knowledge
@@ -211,7 +211,7 @@ export default async function Home() {
 
       {/* ── CTA ────────────────────────────────────────────────────────── */}
       <section className="bg-cream px-6 pb-24">
-        <Reveal className="mx-auto max-w-4xl overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-800 to-indigo-900 px-8 py-16 text-center text-cream-50 shadow-soft">
+        <Reveal className="mx-auto max-w-4xl overflow-hidden rounded-3xl bg-gradient-to-br from-panel to-panel2 px-8 py-16 text-center text-cream-50 shadow-soft">
           <h2 className="font-display text-3xl md:text-4xl">
             Begin your tabla journey
           </h2>
@@ -222,7 +222,7 @@ export default async function Home() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 rounded-xl bg-saffron-400 px-6 py-3 font-semibold text-indigo-900 transition hover:bg-saffron-300"
+              className="inline-flex items-center gap-2 rounded-xl bg-saffron-400 px-6 py-3 font-semibold text-onaccent transition hover:bg-saffron-300"
             >
               Enter the portal <ArrowRight size={16} />
             </Link>
@@ -230,7 +230,7 @@ export default async function Home() {
               href="https://ajinkyaranade.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-cream-50/30 px-6 py-3 font-semibold text-cream-50 transition hover:bg-cream-50/10"
+              className="inline-flex items-center gap-2 rounded-xl border border-cream-50/30 px-6 py-3 font-semibold text-cream-50 transition hover:bg-card/10"
             >
               Request access
             </a>

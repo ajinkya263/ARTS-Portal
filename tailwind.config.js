@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+// All colors are driven by CSS variables (channels), so the whole UI re-skins
+// per theme (purple / white / dark) via a [data-theme] attribute. See globals.css.
+const ch = (v) => `rgb(var(${v}) / <alpha-value>)`;
+
 module.exports = {
   content: [
     "./src/app/**/*.{js,jsx}",
@@ -7,42 +11,31 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // ── Resonance Studios palette (natural / earthy) ──────────
-        // Token names kept (indigo/saffron/cream) so existing classes
-        // re-skin automatically; the hues are now warm, muted and natural.
+        // Token names kept (indigo/saffron/cream); values come from CSS vars so
+        // they re-theme. `indigo` = text/ink family, `cream` = page bg + light
+        // text, `saffron` = accent. Semantic surfaces: card/panel/panel2.
         indigo: {
-          // deep espresso / warm umber — primary brand + text on cream
-          DEFAULT: "#3b2c1e",
-          50: "#f1ece6",
-          100: "#e2d8cc",
-          200: "#c9b9a6",
-          300: "#a8927a",
-          400: "#86705a",
-          500: "#5f4b39",
-          600: "#4c3a29",
-          700: "#3b2c1e",
-          800: "#2b2016",
-          900: "#1b140d",
+          DEFAULT: ch("--indigo-700"),
+          50: ch("--indigo-50"), 100: ch("--indigo-100"), 200: ch("--indigo-200"),
+          300: ch("--indigo-300"), 400: ch("--indigo-400"), 500: ch("--indigo-500"),
+          600: ch("--indigo-600"), 700: ch("--indigo-700"), 800: ch("--indigo-800"),
+          900: ch("--indigo-900"),
         },
         saffron: {
-          // aged brass / ochre accent (muted, not neon)
-          DEFAULT: "#bd9a4f",
-          50: "#f7f1e3",
-          100: "#efe2c6",
-          200: "#e0c893",
-          300: "#cdae6e",
-          400: "#bd9a4f",
-          500: "#a07f38",
-          600: "#826728",
+          DEFAULT: ch("--saffron-400"),
+          50: ch("--saffron-50"), 100: ch("--saffron-100"), 200: ch("--saffron-200"),
+          300: ch("--saffron-300"), 400: ch("--saffron-400"), 500: ch("--saffron-500"),
+          600: ch("--saffron-600"),
         },
         cream: {
-          // warm parchment backgrounds
-          DEFAULT: "#f4ede0",
-          50: "#faf6ee",
-          100: "#f4ede0",
-          200: "#e9dcc8",
-          300: "#dcc9ad",
+          DEFAULT: ch("--cream"),
+          50: ch("--cream-50"), 100: ch("--cream-100"), 200: ch("--cream-200"),
+          300: ch("--cream-300"),
         },
+        card: ch("--card"),       // elevated surface (was bg-white / bg-cream-50)
+        panel: ch("--panel"),     // dark decorative surface (sidebar, bands, buttons)
+        panel2: ch("--panel2"),   // darker end of panel gradients
+        onaccent: ch("--onaccent"), // text that sits on the accent colour
       },
       fontFamily: {
         // wired up via next/font in layout.js (CSS variables)

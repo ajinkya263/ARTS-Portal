@@ -109,7 +109,7 @@ export default function TaalTrainer({ taal = TEENTAAL }) {
   const hasTaali = theka.some((m) => m.marker && m.marker !== "X" && m.marker !== "0");
 
   return (
-    <div className="rounded-xl bg-gradient-to-br from-indigo-800 to-indigo-900 p-5 text-cream-50 md:p-7">
+    <div className="rounded-xl bg-gradient-to-br from-panel to-panel2 p-5 text-cream-50 md:p-7">
       {/* header */}
       <div className="mb-4 flex items-baseline justify-between">
         <h4 className="font-display text-lg text-cream-50">
@@ -131,10 +131,10 @@ export default function TaalTrainer({ taal = TEENTAAL }) {
               }}
               className={`relative flex aspect-square flex-col items-center justify-center rounded-xl border px-1 text-center transition-all duration-100 ${
                 active
-                  ? "scale-105 border-saffron-400 bg-saffron-400 text-indigo-900 shadow-soft"
+                  ? "scale-105 border-saffron-400 bg-saffron-400 text-onaccent shadow-soft"
                   : isKhali
-                  ? "border-indigo-600 bg-indigo-700/40 text-indigo-200"
-                  : "border-indigo-600 bg-indigo-700/70 text-cream-50 hover:bg-indigo-600"
+                  ? "border-panel bg-panel/40 text-indigo-200"
+                  : "border-panel bg-panel/70 text-cream-50 hover:bg-panel"
               }`}
             >
               {m.marker && (
@@ -181,7 +181,7 @@ export default function TaalTrainer({ taal = TEENTAAL }) {
       </div>
 
       {/* controls */}
-      <div className="mt-5 flex flex-col gap-4 border-t border-indigo-700/60 pt-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-5 flex flex-col gap-4 border-t border-panel/60 pt-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
           <button onClick={toggle} className="btn-primary !px-4">
             {playing ? <Pause size={18} /> : <Play size={18} />}
@@ -189,14 +189,14 @@ export default function TaalTrainer({ taal = TEENTAAL }) {
           </button>
           <button
             onClick={reset}
-            className="inline-flex items-center gap-2 rounded-xl border border-indigo-600 px-4 py-2.5 text-sm text-indigo-100 transition hover:bg-indigo-700"
+            className="inline-flex items-center gap-2 rounded-xl border border-panel px-4 py-2.5 text-sm text-indigo-100 transition hover:bg-panel"
           >
             <RotateCcw size={16} /> Reset
           </button>
           <button
             onClick={() => setMuted((m) => !m)}
             aria-label={muted ? "Unmute" : "Mute"}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-indigo-600 text-indigo-100 transition hover:bg-indigo-700"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-panel text-indigo-100 transition hover:bg-panel"
           >
             {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
@@ -223,8 +223,8 @@ export default function TaalTrainer({ taal = TEENTAAL }) {
                 onClick={() => setBpm(l.bpm)}
                 className={`rounded-full px-3 py-1 text-xs transition ${
                   bpm === l.bpm
-                    ? "bg-saffron-400 text-indigo-900"
-                    : "bg-indigo-700 text-indigo-100 hover:bg-indigo-600"
+                    ? "bg-saffron-400 text-onaccent"
+                    : "bg-panel text-indigo-100 hover:bg-panel"
                 }`}
               >
                 {l.label}

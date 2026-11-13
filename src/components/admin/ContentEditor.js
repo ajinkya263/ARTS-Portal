@@ -27,7 +27,7 @@ const MEDIA_TYPES = ["video", "audio", "pdf", "image", "text"];
 
 /** Shared input styling, cream border, saffron focus ring, indigo text. */
 const inputCls =
-  "w-full rounded-xl border border-cream-200 bg-white px-3 py-2 text-sm text-indigo-800 placeholder:text-indigo-300 transition focus:border-saffron-400 focus:outline-none focus:ring-2 focus:ring-saffron-400/40";
+  "w-full rounded-xl border border-cream-200 bg-card px-3 py-2 text-sm text-indigo-800 placeholder:text-indigo-300 transition focus:border-saffron-400 focus:outline-none focus:ring-2 focus:ring-saffron-400/40";
 
 /**
  * Admin content editor.
@@ -230,7 +230,7 @@ function ModuleCard({ module, lessons }) {
 
           <div className="space-y-4">
             {lessons.length === 0 && (
-              <p className="rounded-xl bg-cream-50 px-4 py-3 text-sm text-indigo-400">
+              <p className="rounded-xl bg-card px-4 py-3 text-sm text-indigo-400">
                 No lessons yet.
               </p>
             )}
@@ -299,7 +299,7 @@ function LessonCard({ lesson }) {
   }
 
   return (
-    <div className="rounded-xl border border-cream-200 bg-cream-50/60 p-4">
+    <div className="rounded-xl border border-cream-200 bg-card/60 p-4">
       <div className="grid gap-4">
         {/* Title + order + type */}
         <div className="grid gap-4 sm:grid-cols-[1fr_7rem_10rem]">
@@ -411,7 +411,7 @@ function DeleteButton({ onClick, disabled }) {
     <button
       onClick={onClick}
       disabled={disabled}
-      className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-4 py-2.5 font-medium text-red-600 transition hover:border-red-400 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-300 disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-card px-4 py-2.5 font-medium text-red-600 transition hover:border-red-400 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-300 disabled:cursor-not-allowed disabled:opacity-60"
     >
       <Trash2 size={16} /> Delete
     </button>

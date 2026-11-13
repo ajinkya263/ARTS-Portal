@@ -90,7 +90,7 @@ export default function HomeHero() {
           ref={textRef}
           className="absolute inset-x-0 top-[9%] z-10 mx-auto max-w-3xl px-6 text-center will-change-transform"
         >
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-saffron-300 bg-cream-50/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600 backdrop-blur">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-saffron-300 bg-card/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600 backdrop-blur">
             <span className="text-saffron-500">ॐ</span> Ajinkya Ranade Tabla School
           </p>
           <h1 className="font-display text-5xl leading-[1.04] text-indigo-900 sm:text-6xl md:text-7xl">
@@ -124,7 +124,7 @@ export default function HomeHero() {
         {/* dark vignette that fades in to meet the intro section below */}
         <div
           ref={vignetteRef}
-          className="pointer-events-none absolute inset-0 z-20 bg-indigo-900"
+          className="pointer-events-none absolute inset-0 z-20 bg-panel2"
           style={{ opacity: 0 }}
           aria-hidden
         />

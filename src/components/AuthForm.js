@@ -209,7 +209,7 @@ export default function AuthForm() {
 
 function Field({ icon, value, onChange, ...props }) {
   return (
-    <label className="flex items-center gap-3 rounded-xl border border-cream-200 bg-white px-4 py-3 focus-within:border-saffron-400 focus-within:ring-2 focus-within:ring-saffron-100">
+    <label className="flex items-center gap-3 rounded-xl border border-cream-200 bg-card px-4 py-3 focus-within:border-saffron-400 focus-within:ring-2 focus-within:ring-saffron-100">
       <span className="text-indigo-300">{icon}</span>
       <input
         {...props}

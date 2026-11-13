@@ -12,12 +12,12 @@ export default function MandalaBackground() {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
       {/* Warm vertical wash so the cream never looks flat */}
-      <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream to-cream-200" />
+      <div className="absolute inset-0 bg-gradient-to-b from-card via-cream to-cream-200" />
 
       {/* Soft drifting colour glows */}
       <div className="absolute -left-32 top-24 h-96 w-96 animate-float rounded-full bg-saffron-300/20 blur-3xl" />
       <div
-        className="absolute -right-24 bottom-10 h-[28rem] w-[28rem] animate-float rounded-full bg-indigo-300/20 blur-3xl"
+        className="absolute -right-24 bottom-10 h-[28rem] w-[28rem] animate-float rounded-full bg-indigo-50/20 blur-3xl"
         style={{ animationDelay: "2s" }}
       />
 

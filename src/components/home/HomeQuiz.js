@@ -22,8 +22,8 @@ export default function HomeQuiz() {
             onClick={() => setQuiz(t.key)}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
               quiz === t.key
-                ? "bg-indigo-700 text-cream-50"
-                : "bg-white text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
+                ? "bg-panel text-cream-50"
+                : "bg-card text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
             }`}
           >
             {t.label}

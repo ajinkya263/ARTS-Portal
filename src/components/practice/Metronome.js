@@ -150,11 +150,11 @@ export default function Metronome() {
       <div className="relative mx-auto mb-6 h-52 w-56">
         {/* metronome body (trapezoid) */}
         <div
-          className="absolute bottom-0 left-1/2 h-24 w-40 -translate-x-1/2 bg-gradient-to-b from-indigo-700 to-indigo-900"
+          className="absolute bottom-0 left-1/2 h-24 w-40 -translate-x-1/2 bg-gradient-to-b from-panel to-panel2"
           style={{ clipPath: "polygon(22% 0, 78% 0, 100% 100%, 0 100%)" }}
         />
         {/* scale line */}
-        <div className="absolute bottom-24 left-1/2 h-28 w-px -translate-x-1/2 bg-indigo-200" />
+        <div className="absolute bottom-24 left-1/2 h-28 w-px -translate-x-1/2 bg-indigo-50" />
         {/* pendulum arm */}
         <div
           className="absolute bottom-3 left-1/2 origin-bottom"
@@ -165,13 +165,13 @@ export default function Metronome() {
               : "transform 0.3s ease-out",
           }}
         >
-          <div className="relative h-44 w-1.5 rounded-full bg-indigo-800">
+          <div className="relative h-44 w-1.5 rounded-full bg-panel">
             {/* sliding weight (bob) */}
             <div className="absolute left-1/2 top-10 h-6 w-9 -translate-x-1/2 rounded-sm bg-saffron-400 shadow-card" />
           </div>
         </div>
         {/* pivot */}
-        <div className="absolute bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-indigo-900 bg-saffron-400" />
+        <div className="absolute bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-panel2 bg-saffron-400" />
       </div>
 
       {/* Beat dots */}
@@ -183,7 +183,7 @@ export default function Metronome() {
               current === i
                 ? i === 0
                   ? "h-4 w-4 bg-saffron-500"
-                  : "h-4 w-4 bg-indigo-600"
+                  : "h-4 w-4 bg-panel"
                 : "h-3 w-3 bg-cream-200"
             }`}
           />
@@ -234,7 +234,7 @@ export default function Metronome() {
           <select
             value={beatsPerBar}
             onChange={(e) => setBeatsPerBar(Number(e.target.value))}
-            className="rounded-lg border border-cream-200 bg-white px-2 py-1.5 text-indigo-800 focus:border-saffron-400 focus:outline-none"
+            className="rounded-lg border border-cream-200 bg-card px-2 py-1.5 text-indigo-800 focus:border-saffron-400 focus:outline-none"
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
               <option key={n} value={n}>

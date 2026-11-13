@@ -51,7 +51,7 @@ export default async function AdminPage() {
     <div className="mx-auto max-w-6xl">
       {/* Header */}
       <div className="mb-8">
-        <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-700 px-3 py-1 text-xs font-semibold text-cream-50">
+        <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-panel px-3 py-1 text-xs font-semibold text-cream-50">
           <ShieldCheck size={13} /> Admin Console
         </p>
         <h1 className="font-display text-3xl text-indigo-900 md:text-4xl">

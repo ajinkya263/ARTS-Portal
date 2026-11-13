@@ -113,7 +113,7 @@ export default function StudentNotes({
         <select
           value={selectedId}
           onChange={(e) => pickStudent(e.target.value)}
-          className="w-full rounded-xl border border-indigo-200 bg-white px-4 py-3 text-indigo-900 outline-none transition focus:border-saffron-400"
+          className="w-full rounded-xl border border-indigo-200 bg-card px-4 py-3 text-indigo-900 outline-none transition focus:border-saffron-400"
         >
           <option value="">Select a student…</option>
           {students.map((s) => (
@@ -181,14 +181,14 @@ export default function StudentNotes({
               onChange={(e) => setBody(e.target.value)}
               rows={4}
               placeholder="What did you cover today? e.g. Reviewed Teentaal theka at Vilambit; started Dha TirkitTakTirkit kaida; assigned Microbeats drill."
-              className="w-full resize-y rounded-xl border border-indigo-200 bg-white px-4 py-3 text-indigo-900 outline-none transition focus:border-saffron-400"
+              className="w-full resize-y rounded-xl border border-indigo-200 bg-card px-4 py-3 text-indigo-900 outline-none transition focus:border-saffron-400"
             />
             <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               {appointments.length > 0 ? (
                 <select
                   value={appointmentId}
                   onChange={(e) => setAppointmentId(e.target.value)}
-                  className="rounded-xl border border-indigo-200 bg-white px-3 py-2 text-sm text-indigo-800 outline-none focus:border-saffron-400"
+                  className="rounded-xl border border-indigo-200 bg-card px-3 py-2 text-sm text-indigo-800 outline-none focus:border-saffron-400"
                 >
                   <option value="">Link to a lesson (optional)…</option>
                   {appointments.map((a) => (
@@ -268,7 +268,7 @@ export default function StudentNotes({
                         value={editBody}
                         onChange={(e) => setEditBody(e.target.value)}
                         rows={4}
-                        className="w-full resize-y rounded-xl border border-indigo-200 bg-white px-4 py-3 text-indigo-900 outline-none focus:border-saffron-400"
+                        className="w-full resize-y rounded-xl border border-indigo-200 bg-card px-4 py-3 text-indigo-900 outline-none focus:border-saffron-400"
                       />
                       <div className="mt-2 flex gap-2">
                         <button

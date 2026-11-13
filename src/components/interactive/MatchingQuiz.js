@@ -117,7 +117,7 @@ export default function MatchingQuiz({ quiz }) {
 
   if (!data) {
     return (
-      <div className="rounded-xl border border-dashed border-indigo-200 bg-cream-50 p-8 text-center text-indigo-400">
+      <div className="rounded-xl border border-dashed border-indigo-200 bg-card p-8 text-center text-indigo-400">
         Unknown quiz: {quiz}
       </div>
     );
@@ -160,12 +160,12 @@ export default function MatchingQuiz({ quiz }) {
   const accuracy = attempts ? Math.round((total / attempts) * 100) : 100;
 
   return (
-    <div className="rounded-2xl border border-cream-200 bg-gradient-to-br from-cream-50 to-cream-100 p-5 md:p-7">
+    <div className="rounded-2xl border border-cream-200 bg-gradient-to-br from-card to-cream-100 p-5 md:p-7">
       {/* Header / progress */}
       <div className="mb-5">
         <div className="mb-2 flex items-center justify-between">
           <p className="text-sm text-indigo-500">{data.intro}</p>
-          <span className="shrink-0 rounded-full bg-indigo-700 px-3 py-1 text-xs font-semibold text-cream-50">
+          <span className="shrink-0 rounded-full bg-panel px-3 py-1 text-xs font-semibold text-cream-50">
             {matched.size}/{total}
           </span>
         </div>
@@ -178,8 +178,8 @@ export default function MatchingQuiz({ quiz }) {
       </div>
 
       {done ? (
-        <div className="animate-pop grid place-items-center gap-3 rounded-xl bg-white/70 py-12 text-center">
-          <span className="grid h-16 w-16 place-items-center rounded-full bg-saffron-400 text-indigo-900">
+        <div className="animate-pop grid place-items-center gap-3 rounded-xl bg-card/70 py-12 text-center">
+          <span className="grid h-16 w-16 place-items-center rounded-full bg-saffron-400 text-onaccent">
             <Trophy size={30} />
           </span>
           <p className="font-display text-2xl text-indigo-900">Shabash!</p>
@@ -230,8 +230,8 @@ function Column({ items, col, matched, selected, wrong, onPick }) {
                 : isWrong
                 ? "border-red-400 bg-red-50 text-red-700 animate-pulse"
                 : isSelected
-                ? "-translate-y-0.5 border-saffron-400 bg-white text-indigo-900 shadow-card"
-                : "border-cream-200 bg-white/70 text-indigo-700 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white"
+                ? "-translate-y-0.5 border-saffron-400 bg-card text-indigo-900 shadow-card"
+                : "border-cream-200 bg-card/70 text-indigo-700 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-card"
             }`}
           >
             {isMatched && <Check size={15} className="shrink-0 text-green-600" />}

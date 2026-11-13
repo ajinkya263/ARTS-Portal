@@ -59,7 +59,7 @@ export default function LessonViewer({ lesson, module, siblings = [], completed 
       {lesson.video_url && (
         <div className="surface mb-6 animate-fade-up p-4 md:p-6">
           <h2 className="mb-3 flex items-center gap-2 font-display text-lg text-indigo-800">
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-saffron-400 text-indigo-900">
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-saffron-400 text-onaccent">
               <Play size={13} className="translate-x-px" fill="currentColor" />
             </span>
             Watch
@@ -170,8 +170,8 @@ function VideoPlayer({ url, title }) {
 function AudioPlayer({ url }) {
   if (!url) return <Empty label="No audio URL set yet." />;
   return (
-    <div className="flex flex-col items-center gap-4 rounded-xl bg-gradient-to-br from-indigo-700 to-indigo-900 p-8 text-cream-50">
-      <span className="grid h-16 w-16 place-items-center rounded-full bg-saffron-400 text-indigo-900">
+    <div className="flex flex-col items-center gap-4 rounded-xl bg-gradient-to-br from-panel to-panel2 p-8 text-cream-50">
+      <span className="grid h-16 w-16 place-items-center rounded-full bg-saffron-400 text-onaccent">
         <Volume2 size={28} />
       </span>
       <p className="text-sm text-indigo-200">Listen &amp; repeat the bol</p>
@@ -196,7 +196,7 @@ function PdfViewer({ url }) {
       <iframe
         src={url}
         title="PDF document"
-        className="h-[70vh] w-full rounded-xl border border-cream-200 bg-white"
+        className="h-[70vh] w-full rounded-xl border border-cream-200 bg-card"
       />
     </div>
   );
@@ -221,7 +221,7 @@ function ImageGallery({ url, title }) {
       <img
         src={images[active]}
         alt={`${title}, ${active + 1}`}
-        className="max-h-[70vh] w-full rounded-xl border border-cream-200 bg-white object-contain"
+        className="max-h-[70vh] w-full rounded-xl border border-cream-200 bg-card object-contain"
       />
 
       {/* Thumbnails (only if more than one) */}
@@ -263,7 +263,7 @@ function RichText({ content }) {
           return (
             <pre
               key={idx}
-              className="overflow-x-auto rounded-lg bg-indigo-900 p-4 font-mono text-[13px] leading-relaxed text-cream-50"
+              className="overflow-x-auto rounded-lg bg-panel2 p-4 font-mono text-[13px] leading-relaxed text-cream-50"
             >
               {seg.replace(/^\n+/, "").replace(/\n+$/, "")}
             </pre>
@@ -287,7 +287,7 @@ function RichText({ content }) {
 /* ── Shared empty state ──────────────────────────────────────────────────── */
 function Empty({ label, icon: Icon }) {
   return (
-    <div className="grid place-items-center gap-3 rounded-xl border border-dashed border-indigo-200 bg-cream-50 py-16 text-indigo-400">
+    <div className="grid place-items-center gap-3 rounded-xl border border-dashed border-indigo-200 bg-card py-16 text-indigo-400">
       {Icon ? <Icon size={28} /> : <MediaTypeIcon type="text" size={28} />}
       <p className="text-sm">{label}</p>
     </div>

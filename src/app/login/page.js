@@ -12,15 +12,15 @@ export default function LoginPage() {
         href={PERSONAL_SITE}
         target="_blank"
         rel="noreferrer"
-        className="absolute right-4 top-4 z-20 inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-white/80 px-3.5 py-1.5 text-sm font-medium text-indigo-700 backdrop-blur transition hover:border-saffron-400 hover:text-indigo-900 sm:right-6 sm:top-6"
+        className="absolute right-4 top-4 z-20 inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-card/80 px-3.5 py-1.5 text-sm font-medium text-indigo-700 backdrop-blur transition hover:border-saffron-400 hover:text-indigo-900 sm:right-6 sm:top-6"
       >
         Visit ajinkyaranade.com <span aria-hidden>↗</span>
       </a>
 
       {/* Left: brand panel (hidden on small screens) */}
-      <section className="relative hidden flex-col justify-between overflow-hidden bg-indigo-800 p-12 text-cream-50 lg:flex">
+      <section className="relative hidden flex-col justify-between overflow-hidden bg-panel p-12 text-cream-50 lg:flex">
         <div className="flex items-center gap-3">
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-saffron-400 font-display text-2xl text-indigo-900">
+          <span className="grid h-12 w-12 place-items-center rounded-full bg-saffron-400 font-display text-2xl text-onaccent">
             ॐ
           </span>
           <span>
@@ -57,7 +57,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md animate-fade-up">
           {/* Mobile brand */}
           <div className="mb-8 flex items-center gap-3 lg:hidden">
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-saffron-400 font-display text-xl text-indigo-900">
+            <span className="grid h-11 w-11 place-items-center rounded-full bg-saffron-400 font-display text-xl text-onaccent">
               ॐ
             </span>
             <span>

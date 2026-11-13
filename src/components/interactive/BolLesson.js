@@ -114,7 +114,7 @@ export default function BolLesson({ slug }) {
 
   if (known.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-indigo-200 bg-cream-50 p-8 text-center text-indigo-400">
+      <div className="rounded-xl border border-dashed border-indigo-200 bg-card p-8 text-center text-indigo-400">
         Unknown bol: {slug}
       </div>
     );
@@ -134,14 +134,14 @@ function BolCard({ bol, index }) {
 
   return (
     <div
-      className="animate-fade-up overflow-hidden rounded-2xl border border-cream-200 bg-gradient-to-br from-cream-50 to-cream-100"
+      className="animate-fade-up overflow-hidden rounded-2xl border border-cream-200 bg-gradient-to-br from-card to-cream-100"
       style={{ animationDelay: `${index * 120}ms` }}
     >
       <div className="grid gap-6 p-6 md:grid-cols-2 md:p-8">
         {/* Left: identity + diagram */}
         <div>
           <div className="flex items-end gap-4">
-            <span className="animate-pop bg-gradient-to-br from-indigo-800 via-indigo-600 to-saffron-500 bg-clip-text font-display text-7xl leading-none text-transparent">
+            <span className="animate-pop bg-gradient-to-br from-panel via-panel to-saffron-500 bg-clip-text font-display text-7xl leading-none text-transparent">
               {bol.name}
             </span>
             <span className="pb-1 font-display text-3xl text-saffron-500">{bol.dev}</span>
@@ -150,7 +150,7 @@ function BolCard({ bol, index }) {
             <p className="mt-1 text-sm text-indigo-400">also called “{bol.alt}”</p>
           )}
 
-          <div className="group relative mt-5 rounded-xl bg-white/70 p-3 shadow-card ring-1 ring-cream-200 transition duration-500 hover:shadow-soft hover:ring-saffron-300/60">
+          <div className="group relative mt-5 rounded-xl bg-card/70 p-3 shadow-card ring-1 ring-cream-200 transition duration-500 hover:shadow-soft hover:ring-saffron-300/60">
             {/* soft animated halo */}
             <div className="pointer-events-none absolute inset-0 animate-glow rounded-xl" />
             <TablaDiagram
@@ -179,7 +179,7 @@ function BolCard({ bol, index }) {
                   className="animate-fade-up flex gap-3 text-sm text-indigo-700"
                   style={delay(5 + i)}
                 >
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-saffron-400 text-xs font-bold text-indigo-900">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-saffron-400 text-xs font-bold text-onaccent">
                     {i + 1}
                   </span>
                   {s}
@@ -196,7 +196,7 @@ function BolCard({ bol, index }) {
               {bol.practice.map((p, i) => (
                 <span
                   key={i}
-                  className="rounded-lg bg-indigo-700 px-4 py-2 font-display text-lg text-cream-50 transition duration-200 hover:-translate-y-0.5 hover:bg-indigo-600"
+                  className="rounded-lg bg-panel px-4 py-2 font-display text-lg text-cream-50 transition duration-200 hover:-translate-y-0.5 hover:bg-panel"
                 >
                   {p}
                 </span>

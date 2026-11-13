@@ -22,9 +22,9 @@ export default function TablaAnatomy() {
       : [];
 
   return (
-    <div className="rounded-2xl border border-cream-200 bg-gradient-to-br from-cream-50 to-cream-100 p-6 md:p-8">
+    <div className="rounded-2xl border border-cream-200 bg-gradient-to-br from-card to-cream-100 p-6 md:p-8">
       <div className="grid gap-6 md:grid-cols-2 md:items-center">
-        <div className="animate-fade-up rounded-xl bg-white/70 p-4">
+        <div className="animate-fade-up rounded-xl bg-card/70 p-4">
           <TablaDiagram highlights={highlights} showLabels className="mx-auto h-64 w-full" />
         </div>
 
@@ -40,8 +40,8 @@ export default function TablaAnatomy() {
                 onClick={() => setActive(p.zone ?? "gajra")}
                 className={`w-full rounded-xl border p-4 text-left transition ${
                   isActive
-                    ? "border-saffron-400 bg-white shadow-card"
-                    : "border-transparent bg-white/50 hover:bg-white"
+                    ? "border-saffron-400 bg-card shadow-card"
+                    : "border-transparent bg-card/50 hover:bg-card"
                 }`}
               >
                 <p className="font-display text-lg text-indigo-800">{p.name}</p>

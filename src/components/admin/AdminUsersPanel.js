@@ -85,7 +85,7 @@ export default function AdminUsersPanel({ users, modules, overrideKeys }) {
             {/* User header */}
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-indigo-100 font-display text-lg text-indigo-700">
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-indigo-50 font-display text-lg text-indigo-700">
                   {(u.full_name || u.email || "?").charAt(0).toUpperCase()}
                 </span>
                 <div>
@@ -188,7 +188,7 @@ function RoleControl({ user }) {
       disabled={pending}
       className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold transition disabled:opacity-60 ${
         role === "admin"
-          ? "bg-indigo-700 text-cream-50 hover:bg-indigo-600"
+          ? "bg-panel text-cream-50 hover:bg-panel"
           : "bg-cream-100 text-indigo-500 hover:bg-indigo-50"
       }`}
       title={role === "admin" ? "Click to demote to student" : "Click to make admin"}

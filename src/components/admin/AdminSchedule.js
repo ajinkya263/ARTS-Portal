@@ -28,7 +28,7 @@ const REPEATS = [
 ];
 
 const inputCls =
-  "w-full rounded-xl border border-cream-200 bg-white px-3 py-2 text-indigo-800 placeholder:text-indigo-300 focus:border-saffron-400 focus:outline-none focus:ring-2 focus:ring-saffron-400";
+  "w-full rounded-xl border border-cream-200 bg-card px-3 py-2 text-indigo-800 placeholder:text-indigo-300 focus:border-saffron-400 focus:outline-none focus:ring-2 focus:ring-saffron-400";
 const labelCls =
   "mb-1.5 block text-xs font-semibold uppercase tracking-wide text-indigo-400";
 
@@ -190,7 +190,7 @@ export default function AdminSchedule({ users, appointments }) {
                 onClick={() => setMode("online")}
                 className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
                   mode === "online"
-                    ? "bg-indigo-700 text-cream-50"
+                    ? "bg-panel text-cream-50"
                     : "bg-cream-100 text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
                 }`}
               >
@@ -201,7 +201,7 @@ export default function AdminSchedule({ users, appointments }) {
                 onClick={() => setMode("in_person")}
                 className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
                   mode === "in_person"
-                    ? "bg-indigo-700 text-cream-50"
+                    ? "bg-panel text-cream-50"
                     : "bg-cream-100 text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
                 }`}
               >
@@ -269,7 +269,7 @@ export default function AdminSchedule({ users, appointments }) {
                     onClick={() => setDurationMin(d)}
                     className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
                       selected
-                        ? "bg-indigo-700 text-cream-50"
+                        ? "bg-panel text-cream-50"
                         : "bg-cream-100 text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
                     }`}
                   >
@@ -293,7 +293,7 @@ export default function AdminSchedule({ users, appointments }) {
                     onClick={() => setWeeks(r.weeks)}
                     className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
                       selected
-                        ? "bg-indigo-700 text-cream-50"
+                        ? "bg-panel text-cream-50"
                         : "bg-cream-100 text-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
                     }`}
                   >
@@ -375,7 +375,7 @@ export default function AdminSchedule({ users, appointments }) {
                   className="surface flex items-center justify-between gap-4 p-4"
                 >
                   <div className="flex min-w-0 items-center gap-3">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-indigo-100 font-display text-indigo-700">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-indigo-50 font-display text-indigo-700">
                       {(name || "?").charAt(0).toUpperCase()}
                     </span>
                     <div className="min-w-0">

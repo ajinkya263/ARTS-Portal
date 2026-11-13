@@ -64,7 +64,7 @@ export default function ResetPasswordPage() {
     <main className="grid min-h-screen place-items-center p-6">
       <div className="surface w-full max-w-md animate-fade-up p-8">
         <div className="mb-6 flex items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-full bg-saffron-400 text-indigo-900">
+          <span className="grid h-11 w-11 place-items-center rounded-full bg-saffron-400 text-onaccent">
             <ShieldCheck size={20} />
           </span>
           <div>
@@ -93,7 +93,7 @@ export default function ResetPasswordPage() {
 
         {status === "ready" && (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <label className="flex items-center gap-3 rounded-xl border border-cream-200 bg-white px-4 py-3 focus-within:border-saffron-400 focus-within:ring-2 focus-within:ring-saffron-100">
+            <label className="flex items-center gap-3 rounded-xl border border-cream-200 bg-card px-4 py-3 focus-within:border-saffron-400 focus-within:ring-2 focus-within:ring-saffron-100">
               <Lock size={16} className="text-indigo-300" />
               <input
                 type="password"
@@ -104,7 +104,7 @@ export default function ResetPasswordPage() {
                 className="w-full bg-transparent text-indigo-800 placeholder:text-indigo-300 focus:outline-none"
               />
             </label>
-            <label className="flex items-center gap-3 rounded-xl border border-cream-200 bg-white px-4 py-3 focus-within:border-saffron-400 focus-within:ring-2 focus-within:ring-saffron-100">
+            <label className="flex items-center gap-3 rounded-xl border border-cream-200 bg-card px-4 py-3 focus-within:border-saffron-400 focus-within:ring-2 focus-within:ring-saffron-100">
               <Lock size={16} className="text-indigo-300" />
               <input
                 type="password"
