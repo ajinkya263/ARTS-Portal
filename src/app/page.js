@@ -82,7 +82,7 @@ export default async function Home() {
 
   return (
     <div className="relative">
-      <div className="fixed right-4 top-4 z-[70]">
+      <div className="fixed bottom-4 left-4 z-[70]">
         <ThemeSwitcher />
       </div>
       <HomeHero />

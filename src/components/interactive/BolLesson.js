@@ -141,7 +141,7 @@ function BolCard({ bol, index }) {
         {/* Left: identity + diagram */}
         <div>
           <div className="flex items-end gap-4">
-            <span className="animate-pop bg-gradient-to-br from-panel via-panel to-saffron-500 bg-clip-text font-display text-7xl leading-none text-transparent">
+            <span className="animate-pop font-display text-7xl leading-none text-saffron-500">
               {bol.name}
             </span>
             <span className="pb-1 font-display text-3xl text-saffron-500">{bol.dev}</span>

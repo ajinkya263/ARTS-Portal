@@ -12,6 +12,7 @@
 
 import { TAALS } from "@/components/interactive/taals";
 import { TEACHER_EMAIL, PERSONAL_SITE, BRAND_FULL, BRAND_SHORT } from "@/lib/config";
+import { EXTRA_FAQS } from "./faqs";
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -239,6 +240,21 @@ const TOPICS = [
   { id: "metronome", tags: ["metronome", "practice page", "practice tool", "where is the metronome", "keep time tool"],
     answer: "The Metronome page gives you a clean click to practise steady laya, which is the core of good riyaz.",
     actions: [{ label: "Open the metronome", href: "/practice" }] },
+  { id: "riyaz-streak", tags: ["riyaz streak", "practice streak", "day streak", "my streak", "streak", "how does the streak work", "what is the day streak", "keep my streak", "daily streak", "riyaaz streak"],
+    answer: "Your practice streak counts the days in a row you have completed something in the portal, shown on your Dashboard as the Day streak. It is a gentle nudge to keep up daily riyaz, which is exactly how tabla progress is built.",
+    actions: [{ label: "Go to Dashboard", href: "/dashboard" }] },
+  { id: "site-features", tags: ["what can this site do", "website features", "what does the portal have", "features of the site", "what is on this website", "what tools are here", "what does arts offer", "what can i do here", "what does this website do"],
+    answer: "This portal offers interactive bol lessons, playable taal cycle trainers, a practice metronome, modules that unlock as you progress, 1 to 1 lesson booking with reminders, a practice streak and progress tracking, plus a free self-paced Learn guide. And of course this tabla assistant for your questions.",
+    actions: [{ label: "Go to Dashboard", href: "/dashboard" }, { label: "Open the free guide", href: "/learn" }] },
+  { id: "interactive-lessons", tags: ["interactive lessons", "bol lessons", "interactive bol", "lesson viewer", "how do lessons work", "what are the lessons like", "interactive modules", "tap to hear", "what is in a lesson"],
+    answer: "The portal's lessons are interactive: bol lessons showing the hand, strike zone and sound of each stroke, playable taal cycle trainers, quizzes and more, one page at a time. They unlock as you move through the curriculum.",
+    actions: [{ label: "Open the lessons", href: "/dashboard" }] },
+  { id: "taal-trainer-feature", tags: ["taal trainer", "cycle trainer", "teentaal trainer", "taal practice tool", "play along taal", "interactive taal", "taal machine on site", "rhythm trainer", "beat trainer"],
+    answer: "The taal trainers let you play a cycle like Teentaal, Dadra or Bhajani with a built-in metronome, watch Sam, Taali and Khali light up as the cycle turns, and tap any beat to hear its bol. They live inside the lesson modules.",
+    actions: [{ label: "Open the taal trainers", href: "/dashboard" }] },
+  { id: "home-quiz", tags: ["quiz on the home page", "try a quiz", "test my knowledge", "home quiz", "practice quiz", "quiz feature", "tabla quiz on site", "is there a quiz"],
+    answer: "Right on the home page there is a free quiz to test your tabla knowledge, no account needed, as a taste of the interactive learning inside the portal.",
+    actions: [{ label: "Try the quiz", href: "/" }] },
   { id: "lessons-where", tags: ["where are the lessons", "find lessons", "my modules", "course", "curriculum", "dashboard"],
     answer: "Your lessons live on the Dashboard, grouped into modules that unlock as you progress: from Foundations and the Basic Bols through Teentaal, Kaidas, and the Light Taals.",
     actions: [{ label: "Go to Dashboard", href: "/dashboard" }] },
@@ -368,6 +384,12 @@ function buildEntries() {
 
   for (const [tagStr, answer] of FAQS) {
     entries.push({ id: `faq-${tagStr.slice(0, 12)}`, tags: tagStr.split("|"), answer });
+  }
+
+  // Bulk FAQ pack (300+ questions) kept in its own file for maintainability.
+  for (let i = 0; i < EXTRA_FAQS.length; i++) {
+    const [tagStr, answer] = EXTRA_FAQS[i];
+    entries.push({ id: `xfaq-${i}`, tags: tagStr.split("|"), answer });
   }
 
   return entries;
