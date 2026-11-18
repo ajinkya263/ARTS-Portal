@@ -367,7 +367,7 @@ function buildEntries() {
   for (const [key, t] of Object.entries(TAAL_THEKAS)) {
     entries.push({
       id: `theka-${key}`,
-      tags: [`${t.name} theka`, `theka of ${t.name}`, `${t.name} bols`, `${t.name} pattern`, `how do i play ${t.name}`, `bols of ${t.name}`, `${t.name} ${t.beats} beats`, `${t.name} ${t.beats} matras`, ...(t.alt || []), ...(t.alt || []).map((a) => `${a} theka`)],
+      tags: [t.name.toLowerCase(), key, `${t.name} theka`, `theka of ${t.name}`, `${t.name} bols`, `${t.name} pattern`, `what is ${t.name}`, `how do i play ${t.name}`, `bols of ${t.name}`, `${t.name} ${t.beats} beats`, `${t.name} ${t.beats} matras`, ...(t.alt || []), ...(t.alt || []).map((a) => `${a} theka`)],
       answer: `${t.name} has ${t.beats} beats${t.vibhag ? ` (${t.vibhag})` : ""}. Its theka is: ${t.theka}.${t.marks ? ` Structure: ${t.marks}.` : ""}`,
       actions: [{ label: "Try the taal trainers", href: "/dashboard" }, { label: "See all thekas in the free guide", href: "/learn" }],
     });

@@ -79,6 +79,67 @@ export function createRecognizer({ onText, onState, onError }) {
   };
 }
 
+/* --------------------------------------------------------- VOICE SELECTION
+   Voices load asynchronously, so we cache them and keep the list fresh. We
+   then score every voice and pick the most natural one the device offers:
+   modern "Natural"/"Neural" online voices (Edge/Chrome), Apple
+   "Premium"/"Enhanced" voices, well-known human-sounding voices (Samantha,
+   Ava, Siri, Aria…), and Google voices rank highest; robotic/compact engines
+   rank lowest. Quality ultimately depends on what the visitor has installed —
+   on Apple devices, downloading a Premium/Enhanced voice gives the best result. */
+let cachedVoices = [];
+
+function refreshVoices() {
+  if (!ttsSupported()) return [];
+  const v = window.speechSynthesis.getVoices?.() || [];
+  if (v.length) cachedVoices = v;
+  return cachedVoices;
+}
+
+if (typeof window !== "undefined" && ttsSupported()) {
+  refreshVoices();
+  try {
+    window.speechSynthesis.onvoiceschanged = refreshVoices;
+  } catch {
+    /* ignore */
+  }
+}
+
+function scoreVoice(v) {
+  const n = (v.name || "").toLowerCase();
+  const lang = (v.lang || "").toLowerCase();
+  let s = 0;
+  if (!/^en/.test(lang)) return -1000; // English only
+  if (/en[-_]us/.test(lang)) s += 25;
+  else if (/en[-_](gb|au|ie)/.test(lang)) s += 14;
+  else if (/en[-_]in/.test(lang)) s += 16; // nice for Indian-English names
+  else s += 6;
+  if (/natural|neural/.test(n)) s += 140; // Edge/Chrome online neural voices
+  if (/premium|enhanced/.test(n)) s += 110; // Apple downloadable HD voices
+  if (/\b(samantha|ava|allison|evan|zoe|nathan|siri|aria|jenny|guy|libby|sonia|emma|michelle|serena|kate|daniel|rishi|neerja|prabhat)\b/.test(n))
+    s += 70;
+  if (/google/.test(n)) s += 55;
+  if (/\b(female|woman)\b/.test(n)) s += 8;
+  if (/compact|eloquence|espeak|robot|novelty|fred|albert|zarvox|bad news|bells|bahh|boing|bubbles|cellos|deranged|hysterical|pipe|trinoids|whisper|wobble|organ|good news/.test(n))
+    s -= 120; // low-quality / novelty engines
+  return s;
+}
+
+function pickVoice() {
+  const voices = refreshVoices();
+  if (!voices.length) return null;
+  let best = null;
+  let bestS = -Infinity;
+  for (const v of voices) {
+    const s = scoreVoice(v);
+    if (s > bestS) {
+      bestS = s;
+      best = v;
+    }
+  }
+  return bestS > -500 ? best : null;
+}
+
 /** Strip the little markdown the assistant uses so speech sounds natural. */
 function plainText(s) {
   return String(s || "")
@@ -97,6 +158,7 @@ let warmedUp = false;
 export function warmUpSpeech() {
   if (!ttsSupported() || warmedUp) return;
   try {
+    refreshVoices();
     const u = new SpeechSynthesisUtterance(" ");
     u.volume = 0;
     window.speechSynthesis.speak(u);
@@ -106,7 +168,8 @@ export function warmUpSpeech() {
   }
 }
 
-/** Speak text aloud. Cancels anything already speaking. Safe no-op if unsupported. */
+/** Speak text aloud with the most natural available voice. Cancels anything
+    already speaking. Safe no-op if unsupported. */
 export function speak(text) {
   if (!ttsSupported()) return;
   const msg = plainText(text);
@@ -114,15 +177,15 @@ export function speak(text) {
   try {
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(msg);
-    u.lang = "en-US";
+    const voice = pickVoice();
+    if (voice) {
+      u.voice = voice;
+      u.lang = voice.lang || "en-US";
+    } else {
+      u.lang = "en-US";
+    }
     u.rate = 1;
     u.pitch = 1;
-    // Prefer a natural English voice if one is available.
-    const voices = window.speechSynthesis.getVoices?.() || [];
-    const pref =
-      voices.find((v) => /en[-_]?(US|GB|IN)/i.test(v.lang) && /female|samantha|google|natural/i.test(v.name)) ||
-      voices.find((v) => /^en/i.test(v.lang));
-    if (pref) u.voice = pref;
     window.speechSynthesis.speak(u);
   } catch {
     /* ignore */
