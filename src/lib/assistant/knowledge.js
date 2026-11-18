@@ -259,7 +259,7 @@ const TOPICS = [
     answer: "The tabla took its modern form in North India in the 18th century, growing out of older drumming traditions like the pakhawaj and the ancient pushkara drums. No single inventor is documented; the stories crediting Amir Khusrau are considered legends. Ustad Siddhar Khan Dhadi of Delhi is regarded as the founder of the first gharana." },
   { id: "famous", tags: ["famous tabla players", "best tabla player", "legends", "greatest tabla", "who is the best"],
     answer: "Modern icons include Ustad Zakir Hussain and his father Ustad Alla Rakha, alongside greats like Ahmed Jan Thirakwa, Kishan Maharaj and Samta Prasad. Ajinkya's own guru, Pandit Yogesh Samsi, is a leading maestro today." },
-  { id: "gharanas-list", tags: ["gharanas", "six gharanas", "styles of tabla", "tabla schools", "list the gharanas", "how many gharanas"],
+  { id: "gharanas-list", tags: ["gharanas", "six gharanas", "styles of tabla", "tabla schools", "list the gharanas", "how many gharanas", "name some gharanas", "some gharanas", "name the gharanas", "what are the gharanas", "name a few gharanas", "list gharanas", "which gharanas are there"],
     answer: "The six tabla gharanas are Delhi, Ajrada, Lucknow, Farukhabad, Benares and Punjab. Each is a lineage with its own technique, repertoire and aesthetic. Through Pandit Yogesh Samsi, Ajinkya's playing connects to the Punjab gharana.",
     actions: [{ label: "Read about the gharanas", href: "/learn" }] },
 ];
@@ -284,16 +284,16 @@ const FAQS = [
   ["what is the tabla made of|materials|what is tabla made from|wood metal tabla", "The dayan is carved hardwood, often sheesham (rosewood); the bayan is copper, brass, steel or clay. Both heads are goatskin with a syahi of iron-powder paste, laced with leather straps and tuned with wooden gatta blocks."],
 
   // ---- bols
-  ["how many bols are there|list of bols|what are the main bols|all the bols", "Core bols include open treble strokes Na/Ta, Tin and Tun; closed strokes TeTe and Ka; the bass Ge; and the combined strokes Dha (Na+Ge) and Dhin (Tin+Ge). Compound phrases like TiRaKiTa, DhaGe, KiTaTaKa and GadiGana are built from these."],
+  ["how many bols are there|list of bols|what are the main bols|all the bols|name some bols|some bols|name a few bols|what are some bols|examples of bols|give me some bols|name the bols|list bols|which bols are there", "Core bols include open treble strokes Na/Ta, Tin and Tun; closed strokes TeTe and Ka; the bass Ge; and the combined strokes Dha (Na+Ge) and Dhin (Tin+Ge). Compound phrases like TiRaKiTa, DhaGe, KiTaTaKa and GadiGana are built from these."],
   ["what are open bols|resonant bols|ringing strokes", "Resonant (open) bols ring and sustain: on the dayan, Na/Ta at the rim and Tin/Tun near the syahi; on the bayan, the open Ge. Dha and Dhin pair a treble ring with the Ge bass."],
   ["what are closed bols|muted bols|non resonant strokes|damped strokes", "Closed (muted) bols are dry and damped: TeTe and Tak on the dayan, and Ka (Kat) on the bayan, where the flat hand mutes the bass. They articulate fast phrases."],
 
   // ---- taals & thekas
-  ["how many taals are there|common taals|which taals should i learn|important taals", "Common classical taals include Teentaal (16), Jhaptaal (10), Ektaal (12), Aada Chautaal (14) and Rupak (7), plus the lighter Keherwa (8) and Dadra (6). Teentaal is the usual first taal."],
+  ["how many taals are there|common taals|which taals should i learn|important taals|name some taals|some taals|name a few taals|what are some taals|examples of taals|give me some taals|tell me some taals|name taals|list taals|name the taals|list of taals|few taals|types of taals|different taals|name a taal|which taals are there|what taals are there", "Some common taals: Teentaal (16 beats), Jhaptaal (10), Ektaal (12), Aada Chautaal (14) and Rupak (7) in classical music, plus the lighter Keherwa (8) and Dadra (6). Teentaal is the usual first one to learn."],
   ["which taal begins on khali|taal that starts on khali|rupak sam khali", "Rupak (7 beats) is the well-known taal whose very first beat is both the sam and a khali, so it begins open and un-clapped."],
 
   // ---- forms
-  ["what forms are there|types of compositions|list of forms|kinds of tabla compositions", "Theme-and-variation forms: peshkar, kayda, rela, gat, gat-kayda, bant and chalan. Fixed cadential forms: tukda, mukhda, mohra, chakradar, paran, uthan, fard, the tihai and its nine-fold cousin the nauhakka. Light forms: laggi and ladi."],
+  ["what forms are there|types of compositions|list of forms|kinds of tabla compositions|name some forms|some forms|name a few forms|what are some forms|examples of forms|give me some forms|name the forms|list forms|compositional forms|which forms are there|types of forms", "Theme-and-variation forms: peshkar, kayda, rela, gat, gat-kayda, bant and chalan. Fixed cadential forms: tukda, mukhda, mohra, chakradar, paran, uthan, fard, the tihai and its nine-fold cousin the nauhakka. Light forms: laggi and ladi."],
   ["difference between tukda and chakradar|tukda vs chakradar", "A tukda is a short fixed piece ending in one tihai on sam. A chakradar wraps a whole tukda (or tihai) and plays it three times, so only the very last Dha lands on sam."],
   ["difference between kayda and peshkar|kayda vs peshkar|peshkar vs kaida", "A peshkar is the slow, improvisatory opening that explores the taal and tone; a kayda is a stricter theme-and-variation form developed only from its own bols. A solo usually opens with peshkar, then moves into kaydas."],
   ["what is a bant|bant form", "A bant is a Benares theme-and-variation form, developed like a kayda and often paired with a laggi section."],
