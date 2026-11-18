@@ -115,6 +115,12 @@ const GLOSSARY = {
   naqqara: { def: "A pair of kettle drums played with sticks, used ceremonially; a likely influence on the bowl shape of the bayan.", aka: ["nagara"] },
   "amir khusrau": { def: "The 13th to 14th century poet-musician often popularly credited with inventing the tabla. Scholars consider this a legend, with no supporting evidence from his time.", aka: ["khusrau"] },
   "siddhar khan": { def: "Ustad Siddhar Khan Dhadi, the 18th century Delhi master regarded as the founder of the first tabla gharana and the recorded tabla lineage.", aka: ["siddhar khan dhadi", "sidhar khan"] },
+
+  // ---- playing style & a few more forms
+  baj: { def: "The playing style, or touch, of the tabla. Dilli baj (the closed, two-finger style played at the rim) is light and refined; purab baj (the open, eastern style played further inside the head) is fuller, bolder and more powerful. The word also names the overall character of a gharana. Most players today study both.", aka: ["playing style", "dilli baj", "purab baj", "khula baj", "band baj", "open style", "closed style"] },
+  bant: { def: "A Benares theme-and-variation form, developed like a kaida and often paired with a laggi section.", aka: [] },
+  fard: { def: "A fixed cadential form of the Benares gharana using pakhawaj-derived phrases and asymmetric phrasing that builds tension to sam: a guarded specialty of the lineage.", aka: ["fard gat"] },
+  nauhakka: { def: "An extended tihai of nine repetitions (nau means nine), usually grouped three-by-three, with the final Dha landing on sam.", aka: ["nauhakka tihai"] },
 };
 
 // ---- the six gharanas as their own entries
@@ -183,13 +189,21 @@ const TOPICS = [
   { id: "care", tags: ["care", "maintenance", "look after", "store the tabla", "humidity", "crack", "take care of"],
     answer: "Keep the tabla out of direct heat, sun and damp. Loosen the tension a little if storing it for a long time or flying, dust the syahi gently, and never leave it in a hot car. The skins and syahi are sensitive to extremes." },
   { id: "notation", tags: ["notation", "how is tabla written", "read bols", "write bols", "sheet music", "bhatkhande"],
-    answer: "Tabla is learned orally through its bols, often written across the beats of a taal with X for sam and 0 for khali. The Bhatkhande system puts this on paper, but reciting the bols stays at the heart of learning." },
+    answer: "Tabla is learned orally through its bols, often written across the beats of a taal with X for sam and 0 for khali. The Bhatkhande system puts this on paper, but reciting the bols stays at the heart of learning.",
+    actions: [{ label: "See it in the free guide", href: "/learn" }] },
   { id: "improvise", tags: ["improvise", "improvisation", "how to improvise", "make my own", "create variations", "develop kaida"],
     answer: "Improvisation grows from the kaida. Take the theme and expand it systematically by rearranging, doubling, displacing and extending its bols through paltas, always resolving back to the theme and to sam. Structure first, freedom later." },
   { id: "count-teentaal", tags: ["how to count teentaal", "count the cycle", "where is sam", "clap pattern", "where to clap", "how to keep taal"],
     answer: "In Teentaal (16 beats) clap on 1 (sam), 5 and 13, and wave on 9 (khali). Recite Dha Dhin Dhin Dha while marking those with your hands until you feel the cycle turn. The interactive cycle trainer in the Teentaal module helps." },
   { id: "solo-structure", tags: ["tabla solo", "solo structure", "how is a solo", "solo order", "what is in a solo", "peshkar qaida rela"],
-    answer: "A tabla solo is played over a repeating lehra melody. A common order is an opening theka or uthan, then peshkar, then kaidas building in complexity, then relas, then fixed pieces (tukdas, gats, parans, chakradars), closing with a grand tihai on sam." },
+    answer: "A tabla solo is played over a repeating lehra melody. A common order is an opening theka or uthan, then peshkar, then kaidas building in complexity, then relas, then fixed pieces (tukdas, gats, parans, chakradars), closing with a grand tihai on sam.",
+    actions: [{ label: "Hear full solos in the free guide", href: "/learn" }] },
+
+  // ---- free self-paced guide (public, text-based reference page)
+  { id: "free-guide", tags: ["free guide", "free resource", "free resources", "self study", "self-study", "self paced", "self-paced", "learn on my own", "learn by myself", "study on my own", "read about tabla", "reference", "learn tabla for free", "free lessons", "is there a guide", "learn page", "the guide", "listen to tabla", "watch tabla", "youtube", "performances to watch", "compositions to listen", "audio examples", "learn for free"],
+    hint: ["free", "guide", "self", "own", "read", "reference", "listen", "watch", "youtube"],
+    answer: "Yes. There is a free, self-paced Learn Tabla guide on this site: the two drums, the bols, taals and thekas, the compositional forms and the six gharanas, with real composition themes to practice and performances to listen to. It is separate from the portal's interactive lessons, so you can read it anytime, no account needed.",
+    actions: [{ label: "Open the free guide", href: "/learn" }] },
 
   // ---- school / portal
   { id: "what-is-arts", tags: ["what is arts", "what is this", "what is resonance", "about the school", "what is this site", "tabla school"],
@@ -224,7 +238,8 @@ const TOPICS = [
   { id: "famous", tags: ["famous tabla players", "best tabla player", "legends", "greatest tabla", "who is the best"],
     answer: "Modern icons include Ustad Zakir Hussain and his father Ustad Alla Rakha, alongside greats like Ahmed Jan Thirakwa, Kishan Maharaj and Samta Prasad. Ajinkya's own guru, Pandit Yogesh Samsi, is a leading maestro today." },
   { id: "gharanas-list", tags: ["gharanas", "six gharanas", "styles of tabla", "tabla schools", "list the gharanas", "how many gharanas"],
-    answer: "The six tabla gharanas are Delhi, Ajrada, Lucknow, Farukhabad, Benares and Punjab. Each is a lineage with its own technique, repertoire and aesthetic. Through Pandit Yogesh Samsi, Ajinkya's playing connects to the Punjab gharana." },
+    answer: "The six tabla gharanas are Delhi, Ajrada, Lucknow, Farukhabad, Benares and Punjab. Each is a lineage with its own technique, repertoire and aesthetic. Through Pandit Yogesh Samsi, Ajinkya's playing connects to the Punjab gharana.",
+    actions: [{ label: "Read about the gharanas", href: "/learn" }] },
 ];
 
 /* ------------------------------------------------ extra FAQ-style entries */
@@ -332,10 +347,10 @@ export const greeting =
 
 export const suggestions = [
   "What is a kaida?",
+  "Is there a free guide?",
   "How do I play Dha?",
   "Quiz me",
   "What are the six gharanas?",
-  "Give me a practice drill",
 ];
 
 const fallback = {

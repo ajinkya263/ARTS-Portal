@@ -213,6 +213,30 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── Free guide banner ──────────────────────────────────────────── */}
+      <section className="bg-cream px-6 pb-16 pt-4">
+        <Reveal className="mx-auto flex max-w-4xl flex-col items-center gap-4 rounded-2xl border border-saffron-300 bg-saffron-50 px-8 py-8 text-center sm:flex-row sm:text-left">
+          <span className="grid h-12 w-12 flex-none place-items-center rounded-xl bg-saffron-400 text-onaccent">
+            <BookOpen size={22} />
+          </span>
+          <div className="flex-1">
+            <h3 className="font-display text-xl text-indigo-900">
+              Prefer to explore on your own? Read the free guide.
+            </h3>
+            <p className="mt-1 text-sm text-indigo-500">
+              A self-paced introduction to the tabla, its bols, taals, compositions and gharanas, with performances to
+              listen to. No account needed.
+            </p>
+          </div>
+          <Link
+            href="/learn"
+            className="inline-flex flex-none items-center gap-2 rounded-xl bg-panel px-5 py-3 font-semibold text-cream-50 transition hover:bg-panel2"
+          >
+            Open the guide <ArrowRight size={16} />
+          </Link>
+        </Reveal>
+      </section>
+
       {/* ── CTA ────────────────────────────────────────────────────────── */}
       <section className="bg-cream px-6 pb-24">
         <Reveal className="mx-auto max-w-4xl overflow-hidden rounded-3xl bg-gradient-to-br from-panel to-panel2 px-8 py-16 text-center text-cream-50 shadow-soft">
