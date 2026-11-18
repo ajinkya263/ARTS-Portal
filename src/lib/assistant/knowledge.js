@@ -11,7 +11,7 @@
    ========================================================================== */
 
 import { TAALS } from "@/components/interactive/taals";
-import { TEACHER_EMAIL, PERSONAL_SITE } from "@/lib/config";
+import { TEACHER_EMAIL, PERSONAL_SITE, BRAND_FULL, BRAND_SHORT } from "@/lib/config";
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -121,6 +121,12 @@ const GLOSSARY = {
   bant: { def: "A Benares theme-and-variation form, developed like a kaida and often paired with a laggi section.", aka: [] },
   fard: { def: "A fixed cadential form of the Benares gharana using pakhawaj-derived phrases and asymmetric phrasing that builds tension to sam: a guarded specialty of the lineage.", aka: ["fard gat"] },
   nauhakka: { def: "An extended tihai of nine repetitions (nau means nine), usually grouped three-by-three, with the final Dha landing on sam.", aka: ["nauhakka tihai"] },
+  "gat kayda": { def: "A hybrid form with a kayda's theme-and-variation structure but a gat's fixed, contrasting phrases, so it allows only limited variation.", aka: ["gat-kayda", "gatkayda"] },
+  kundal: { def: "The rawhide ring at the base of the drum that the lacing is fastened to.", aka: [] },
+  gidri: { def: "The ring-shaped cushion the drums rest on so they sit upright and stable while you play.", aka: ["gidari", "ring cushion"] },
+  "dhere dhere": { def: "A smooth, rolling two-hand phrase (DhereDhere) used to build flowing relas; the bayan plays a big role in shaping it.", aka: ["dheradhera", "dhere"] },
+  kitataka: { def: "A four-stroke compound phrase (Ki-Ta-Ta-Ka), a fast building block in relas and kaydas.", aka: ["kittaka"] },
+  gadigana: { def: "A rolling, bass-led compound phrase (Ga-Di-Ga-Na) common in tukras and parans.", aka: ["gadi gana"] },
 };
 
 // ---- the six gharanas as their own entries
@@ -149,6 +155,10 @@ const PEOPLE = {
   "surinder mann": "Ustad Surinder Mann is the teacher with whom Ajinkya began the tabla at age 6, in Sunnyvale, California.",
   "yashwant vaishnav": "Shri Yashwant Vaishnav is a tabla guru with whom Ajinkya undertook a month of intensive, gurukul-style study in Mumbai.",
   "ajinkya ranade": "Ajinkya Ranade is a versatile tabla artist and the founder of this school. He began the tabla at age 6 under Ustad Surinder Mann and trained under Pandit Yogesh Samsi and Shri Yashwant Vaishnav, with over 13 years in music.",
+  "suresh talwalkar": "Pandit Suresh Talwalkar is a celebrated tabla soloist and accompanist known for his deep command of laya and his distinctive, powerful style, and a revered teacher of many fine players.",
+  "subhankar banerjee": "Pandit Subhankar Banerjee (1966 to 2024) was a leading Farukhabad-influenced tabla soloist and accompanist, admired for his clarity, power and musicality on the concert stage.",
+  "sandeep das": "Sandeep Das is a Grammy-winning tabla artist of the Benares gharana, a member of the Silk Road Ensemble, known for bringing the tabla to global audiences and for his clear teaching of the taals.",
+  "pandurang pawar": "Pandurang Pawar is an accomplished Indian classical tabla player admired for his technical command and expressive, emotive playing in solo and jugalbandi.",
 };
 
 /* ------------------------------------------------------------- BOL DATA */
@@ -162,6 +172,18 @@ const BOLS = {
   dha: { name: "Dha", hand: "both", sound: "a powerful combined tone", tip: "Na (treble) and Ge (bass) struck together as one: the most important bol, and it marks sam in most thekas." },
   dhin: { name: "Dhin", hand: "both", sound: "a full, resonant tone", tip: "Tin (treble) joined with Ge (bass)." },
   tirakita: { name: "Tirakita", hand: "both", sound: "a quick four-stroke roll", tip: "ti ra ki ta: a rolling filler that drives speed. Practise it slowly and evenly." },
+};
+
+/* --------------------------------------------------------- TAAL THEKAS
+   The signature bol pattern of each taal, with beats and clap/wave structure. */
+const TAAL_THEKAS = {
+  teentaal: { name: "Teentaal", beats: 16, vibhag: "4+4+4+4", marks: "sam on 1, claps on 5 and 13, khali (wave) on 9", theka: "Dha Dhin Dhin Dha, Dha Dhin Dhin Dha, Dha Tin Tin Ta, Ta Dhin Dhin Dha", alt: ["teental", "tintal", "trital", "teen taal"] },
+  rupak: { name: "Rupak", beats: 7, vibhag: "3+2+2", marks: "it begins on the khali, so the first beat is an open, un-clapped sam", theka: "Tin Tin Na, Dhin Na, Dhin Na", alt: ["roopak", "rupak taal"] },
+  jhaptaal: { name: "Jhaptaal", beats: 10, vibhag: "2+3+2+3", marks: "sam on 1, khali on 6", theka: "Dhin Na, Dhin Dhin Na, Tin Na, Dhin Dhin Na", alt: ["jhaptal", "jhap taal", "japtal"] },
+  ektaal: { name: "Ektaal", beats: 12, vibhag: "2+2+2+2+2+2", marks: "sam on 1, used widely for slow khyal", theka: "Dhin Dhin, Dhage Tirakita, Tu Na, Kat Ta, Dhage Tirakita, Dhin Na", alt: ["ektal", "ek taal", "ektaal"] },
+  "aada chautaal": { name: "Aada Chautaal", beats: 14, vibhag: "", marks: "a 14-beat cycle (also called Arachartal)", theka: "Dhin, Tirakita Dhi Na, Tu Na Kat Ta, Tirakita Dhi Na Dhi, Dhi Na", alt: ["arachartal", "aadha chautal", "ada chautal", "aada chautal"] },
+  keherwa: { name: "Keherwa", beats: 8, vibhag: "4+4", marks: "sam on 1, khali on 5; no single 'standard' version exists", theka: "Dha Ge Na Ti, Na Ka Dhin Na", alt: ["kaharwa", "kehrwa", "kaherwa"] },
+  dadra: { name: "Dadra", beats: 6, vibhag: "3+3", marks: "sam on 1, khali on 4", theka: "Dha Dhin Na, Dha Tin Na", alt: ["dadraa", "daadra"] },
 };
 
 /* ----------------------------------------------------------- TOPIC ENTRIES */
@@ -256,6 +278,34 @@ const FAQS = [
   ["difference between qaida and rela|qaida vs rela", "Both are developed through variations, but a rela is built on fast rolling bol groups and prizes continuous flow and speed, while a qaida emphasises structure and clarity at a moderate to fast tempo."],
   ["what is a lehra|what is nagma|melody for tabla solo", "A lehra, also called nagma, is a short repeating melody spanning one cycle of the taal, played on sarangi or harmonium during a tabla solo so the cycle and the sam stay audible."],
   ["which taals for thumri|thumri taal|light classical taal", "Thumri and light classical forms use taals like Deepchandi, Jat, Addha, Keherwa, Dadra and Chanchar, often ending with a fast laggi section."],
+
+  // ---- anatomy & construction
+  ["what are the parts of the tabla|parts of the drum|anatomy of tabla|components of tabla|parts of a tabla", "The dayan (small wooden treble drum) and bayan (large bass drum), each with a goatskin head (pudi) carrying the black syahi, surrounded by the open maidan and the outer rim (kinar). A braided gajra binds the head, leather lacing (baddhi) sets the tension over wooden gatta blocks, and a small hammer (hathodi) tunes it."],
+  ["what is the tabla made of|materials|what is tabla made from|wood metal tabla", "The dayan is carved hardwood, often sheesham (rosewood); the bayan is copper, brass, steel or clay. Both heads are goatskin with a syahi of iron-powder paste, laced with leather straps and tuned with wooden gatta blocks."],
+
+  // ---- bols
+  ["how many bols are there|list of bols|what are the main bols|all the bols", "Core bols include open treble strokes Na/Ta, Tin and Tun; closed strokes TeTe and Ka; the bass Ge; and the combined strokes Dha (Na+Ge) and Dhin (Tin+Ge). Compound phrases like TiRaKiTa, DhaGe, KiTaTaKa and GadiGana are built from these."],
+  ["what are open bols|resonant bols|ringing strokes", "Resonant (open) bols ring and sustain: on the dayan, Na/Ta at the rim and Tin/Tun near the syahi; on the bayan, the open Ge. Dha and Dhin pair a treble ring with the Ge bass."],
+  ["what are closed bols|muted bols|non resonant strokes|damped strokes", "Closed (muted) bols are dry and damped: TeTe and Tak on the dayan, and Ka (Kat) on the bayan, where the flat hand mutes the bass. They articulate fast phrases."],
+
+  // ---- taals & thekas
+  ["how many taals are there|common taals|which taals should i learn|important taals", "Common classical taals include Teentaal (16), Jhaptaal (10), Ektaal (12), Aada Chautaal (14) and Rupak (7), plus the lighter Keherwa (8) and Dadra (6). Teentaal is the usual first taal."],
+  ["which taal begins on khali|taal that starts on khali|rupak sam khali", "Rupak (7 beats) is the well-known taal whose very first beat is both the sam and a khali, so it begins open and un-clapped."],
+
+  // ---- forms
+  ["what forms are there|types of compositions|list of forms|kinds of tabla compositions", "Theme-and-variation forms: peshkar, kayda, rela, gat, gat-kayda, bant and chalan. Fixed cadential forms: tukda, mukhda, mohra, chakradar, paran, uthan, fard, the tihai and its nine-fold cousin the nauhakka. Light forms: laggi and ladi."],
+  ["difference between tukda and chakradar|tukda vs chakradar", "A tukda is a short fixed piece ending in one tihai on sam. A chakradar wraps a whole tukda (or tihai) and plays it three times, so only the very last Dha lands on sam."],
+  ["difference between kayda and peshkar|kayda vs peshkar|peshkar vs kaida", "A peshkar is the slow, improvisatory opening that explores the taal and tone; a kayda is a stricter theme-and-variation form developed only from its own bols. A solo usually opens with peshkar, then moves into kaydas."],
+  ["what is a bant|bant form", "A bant is a Benares theme-and-variation form, developed like a kayda and often paired with a laggi section."],
+
+  // ---- baj & notation
+  ["what is purab baj|what is dilli baj|open vs closed baj|baj styles|band baj khula baj", "Dilli (kinar) baj is the closed, two-finger style played at the rim — light and refined. Purab (khula) baj is the open eastern style played inside the head with fingers together — fuller, bolder and more powerful. Most players study both."],
+  ["what do the notation symbols mean|what does X mean|what does 0 mean in tabla|sam symbol|khali symbol", "In tabla notation, X marks the sam (first beat), the numerals 2, 3, 4 mark the clapped sections (taali), and 0 marks the khali (the waved, empty section). A dash (–) marks a silence or a held sound."],
+
+  // ---- technique & learning
+  ["what is the role of the bayan|why is the bayan important|importance of left hand", "The bayan is the expressive heart of the sound: its open Ge rings, and the heel of the palm presses and slides to bend the pitch (the 'talking bass'). It drives relas and shapes nearly every phrase."],
+  ["how do i get a clear sound|why does my tabla sound dull|clarity of sound|clean strokes", "Clarity (nikaas) comes from relaxed hands, correct strike zones and letting the open strokes ring. Practise slowly so every bol speaks cleanly before adding speed — clean and slow beats fast and muddy."],
+  ["do i need a teacher|can i learn tabla alone|self taught tabla|learn without a guru", "You can start on your own with resources like our free guide, but tabla is an oral tradition: a teacher corrects your sound, hands and timing in ways videos cannot. The best path blends steady self-practice with real guidance."],
 ];
 
 /* ---------------------------------------------- build the full entry list */
@@ -296,10 +346,21 @@ function buildEntries() {
     });
   }
 
+  // Theka patterns first, so a "<taal> theka" query returns the actual bols
+  // (rather than the trainer blurb) when the two tie on score.
+  for (const [key, t] of Object.entries(TAAL_THEKAS)) {
+    entries.push({
+      id: `theka-${key}`,
+      tags: [`${t.name} theka`, `theka of ${t.name}`, `${t.name} bols`, `${t.name} pattern`, `how do i play ${t.name}`, `bols of ${t.name}`, `${t.name} ${t.beats} beats`, `${t.name} ${t.beats} matras`, ...(t.alt || []), ...(t.alt || []).map((a) => `${a} theka`)],
+      answer: `${t.name} has ${t.beats} beats${t.vibhag ? ` (${t.vibhag})` : ""}. Its theka is: ${t.theka}.${t.marks ? ` Structure: ${t.marks}.` : ""}`,
+      actions: [{ label: "Try the taal trainers", href: "/dashboard" }, { label: "See all thekas in the free guide", href: "/learn" }],
+    });
+  }
+
   for (const [key, t] of Object.entries(TAALS)) {
     entries.push({
       id: `taal-${key}`,
-      tags: [key, t.name.toLowerCase(), `${t.name} theka`, `play ${t.name}`, `${t.name} trainer`, `how many beats in ${t.name}`, `${t.name} cycle`],
+      tags: [key, t.name.toLowerCase(), `play ${t.name}`, `${t.name} trainer`, `how many beats in ${t.name}`, `${t.name} cycle`],
       answer: `${t.name} has ${t.beats} matras. You can play it with the interactive trainer in the lessons: a metronome, laya presets, and tap-to-hear on every matra.`,
       actions: [{ label: "Open the taal trainers", href: "/dashboard" }],
     });
@@ -341,6 +402,22 @@ const DRILLS = [
 
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+/* ------------------------------------------------- ON-DEVICE AI GROUNDING
+   Compact system prompt used ONLY when the visitor's browser has a local
+   on-device model (Chrome's Prompt API / Gemini Nano). It grounds that model
+   in the school's facts so open-ended answers stay accurate — at zero API /
+   token cost, since the model runs entirely on the visitor's machine. The
+   keyword engine above is always the fallback. */
+export const ASSISTANT_SYSTEM_PROMPT = `You are the warm, knowledgeable tabla guide for ${BRAND_FULL} (${BRAND_SHORT}), the online tabla school of Ajinkya Ranade (ajinkyaranademusic.com).
+
+You help visitors with two things: the tabla (the North Indian / Hindustani classical pair of hand drums) and this school.
+
+About the school: it offers interactive lessons, taal (rhythm-cycle) trainers, a practice metronome, 1:1 lesson booking and progress tracking. New students request access through ${PERSONAL_SITE}; general contact is ${TEACHER_EMAIL}. There is a free, self-paced guide at /learn. Pricing and schedules are arranged directly with Ajinkya.
+
+Reliable facts: the tabla is a pair of drums — the small wooden treble dayan (right hand) and the large metal bass bayan (left hand), whose pitch bends under the heel of the palm; the black circle on each head is the syahi, which gives the tuned tone. Rhythm is organised in cycles (taal) measured in beats (matra); the first, most important beat is the sam. Bols are spoken syllables (Dha, Dhin, Na, Tin, TiRaKiTa) that name strokes. Core forms include peshkar, kayda, rela, tukda, chakradar, paran and the tihai. The six gharanas are Delhi, Ajrada, Lucknow, Farrukhabad, Benares and Punjab. Teentaal has 16 beats. Ajinkya began tabla at age 6 and trained under Ustad Surinder Mann, Pandit Yogesh Samsi and Shri Yashwant Vaishnav.
+
+Style: reply in 2-4 clear, warm sentences. Be accurate about tabla, music and rhythm. If asked for private school specifics you don't know (exact prices, schedules, a student's data), say so and suggest contacting Ajinkya. You may help with general questions, but gently keep the focus on tabla and learning. Never invent facts about real, named individuals.`;
+
 /* ----------------------------------------------------------------- GREETING */
 export const greeting =
   "Namaste. I am your tabla guide. Ask me about any bol, taal, term, gharana, artist or technique, or say 'quiz me' or 'give me a practice drill'.";
@@ -360,6 +437,11 @@ const fallback = {
 
 /* ================================================================== MATCHER */
 const STOP = new Set(["the","a","an","is","are","do","does","did","i","to","of","for","in","on","and","or","can","could","would","how","what","where","when","with","about","please","tell","it","be","at","as","that","this","there","get","got","any","some","will","was","me","my","you","your"]);
+
+// Common, correctly-spelled English words that must NEVER be "typo-corrected"
+// into a tabla term (e.g. "there"->"dhere", "want"->..., "form"->...). The
+// fuzzy corrector only fires on words outside STOP ∪ COMMON ∪ VOCAB.
+const COMMON = new Set(["forms","form","want","wants","need","needs","know","learn","learning","play","playing","good","best","time","long","hard","easy","start","help","make","made","take","year","years","show","cost","price","free","name","read","list","type","types","part","parts","more","most","very","much","many","well","like","their","they","them","then","than","here","what","want","over","into","from","have","has","had","not","but","out","who","why","our","all","one","two","they","your","yours","should","really","kind","kinds","thing","things","different","people","online","near","first","last","next","week","days","area","call","email","site","page","book","music","song","songs","sound","world"]);
 
 const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
 const stemWord = (w) => (w.length <= 3 ? w : w.replace(/ing$/, "").replace(/ed$/, "").replace(/ies$/, "y").replace(/es$/, "").replace(/s$/, ""));
@@ -401,9 +483,11 @@ function levenshtein(a, b) {
   return row[n];
 }
 
-/** Snap an unknown word to the closest vocabulary word, if close enough. */
+/** Snap an unknown word to the closest vocabulary word, if close enough.
+    Never touch stopwords / common English words — otherwise "what" snaps to
+    "chat", "there" to "dhere", etc., corrupting the query. */
 function fuzzyCorrect(word) {
-  if (word.length < 4 || VOCAB.has(word)) return word;
+  if (word.length < 4 || VOCAB.has(word) || STOP.has(word) || COMMON.has(word)) return word;
   const maxDist = word.length >= 7 ? 2 : 1;
   let best = word, bestD = maxDist + 1;
   for (const v of VOCAB) {

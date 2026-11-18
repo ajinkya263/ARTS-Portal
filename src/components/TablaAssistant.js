@@ -9,6 +9,7 @@ import {
   rememberHelpful,
   recordUnanswered,
 } from "@/lib/assistant/knowledge";
+import { probeLocalAI, localAIReady, askLocalAI } from "@/lib/assistant/localAI";
 
 let seq = 0;
 const nextId = () => ++seq;
@@ -64,9 +65,22 @@ export default function TablaAssistant() {
   const [messages, setMessages] = useState([{ id: nextId(), from: "bot", text: greeting }]);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
+  const [aiReady, setAiReady] = useState(false);
 
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
+
+  // Probe (once) for an on-device model. If present, we can answer open-ended
+  // questions the keyword engine misses — locally, at zero token cost.
+  useEffect(() => {
+    let alive = true;
+    probeLocalAI().then(() => {
+      if (alive) setAiReady(localAIReady());
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -93,9 +107,9 @@ export default function TablaAssistant() {
     setInput("");
     setMessages((m) => [...m, { id: nextId(), from: "user", text }]);
     setThinking(true);
-    window.setTimeout(() => {
-      const res = findAnswer(text);
-      setThinking(false);
+
+    const res = findAnswer(text);
+    const pushKeyword = () =>
       setMessages((m) => [
         ...m,
         {
@@ -109,6 +123,34 @@ export default function TablaAssistant() {
           rated: null,
         },
       ]);
+
+    // When the keyword engine isn't confident AND an on-device model is ready,
+    // escalate to it for an open-ended answer (local, no tokens). Otherwise the
+    // keyword answer stands.
+    const weak = res.confidence === "low" || res.confidence === "none";
+    if (weak && localAIReady()) {
+      askLocalAI(text)
+        .then((aiText) => {
+          setThinking(false);
+          if (aiText) {
+            setMessages((m) => [
+              ...m,
+              { id: nextId(), from: "bot", text: aiText, forQuery: text, rated: null, viaAI: true },
+            ]);
+          } else {
+            pushKeyword();
+          }
+        })
+        .catch(() => {
+          setThinking(false);
+          pushKeyword();
+        });
+      return;
+    }
+
+    window.setTimeout(() => {
+      setThinking(false);
+      pushKeyword();
     }, 360);
   }, []);
 
@@ -172,6 +214,11 @@ export default function TablaAssistant() {
                   }`}
                 >
                   <MessageText text={m.text} />
+                  {m.viaAI && (
+                    <p className="mt-1.5 text-[10px] italic text-indigo-300">
+                      Answered on your device
+                    </p>
+                  )}
                   {m.actions?.length > 0 && (
                     <div className="mt-2.5 flex flex-col gap-1.5">
                       {m.actions.map((a) => {
@@ -286,7 +333,8 @@ export default function TablaAssistant() {
             </button>
           </form>
 
-          <p className="flex items-center justify-center gap-1 bg-card pb-2 text-[10px] text-indigo-300"> Instant answers · runs locally
+          <p className="flex items-center justify-center gap-1 bg-card pb-2 text-[10px] text-indigo-300">
+            {aiReady ? "On-device AI · runs locally, no account" : "Instant answers · runs locally"}
           </p>
         </div>
       )}
