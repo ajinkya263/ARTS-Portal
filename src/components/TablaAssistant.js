@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Drum, X, Send, ArrowUpRight, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Drum, X, Send, ArrowUpRight, ThumbsUp, ThumbsDown, Mic, Square, Volume2, VolumeX } from "lucide-react";
 import {
   findAnswer,
   greeting,
@@ -10,6 +10,14 @@ import {
   recordUnanswered,
 } from "@/lib/assistant/knowledge";
 import { probeLocalAI, localAIReady, askLocalAI } from "@/lib/assistant/localAI";
+import {
+  sttSupported,
+  ttsSupported,
+  createRecognizer,
+  speak,
+  cancelSpeech,
+  warmUpSpeech,
+} from "@/lib/assistant/voice";
 
 let seq = 0;
 const nextId = () => ++seq;
@@ -66,9 +74,16 @@ export default function TablaAssistant() {
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [aiReady, setAiReady] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [voiceOn, setVoiceOn] = useState(false);
+  const [voiceErr, setVoiceErr] = useState("");
+  const [sttOk, setSttOk] = useState(false);
+  const [ttsOk, setTtsOk] = useState(false);
 
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
+  const recognizerRef = useRef(null);
+  const lastSpokenRef = useRef(0);
 
   // Probe (once) for an on-device model. If present, we can answer open-ended
   // questions the keyword engine misses — locally, at zero token cost.
@@ -81,6 +96,30 @@ export default function TablaAssistant() {
       alive = false;
     };
   }, []);
+
+  // Detect voice capabilities once (feature detection only — nothing requested).
+  useEffect(() => {
+    setSttOk(sttSupported());
+    setTtsOk(ttsSupported());
+  }, []);
+
+  // Speak the newest bot message aloud when voice output is enabled.
+  useEffect(() => {
+    if (!voiceOn) return;
+    const last = messages[messages.length - 1];
+    if (last && last.from === "bot" && last.id > lastSpokenRef.current) {
+      lastSpokenRef.current = last.id;
+      speak(last.text);
+    }
+  }, [messages, voiceOn]);
+
+  // Stop any speech / listening when the panel closes.
+  useEffect(() => {
+    if (!open) {
+      cancelSpeech();
+      recognizerRef.current?.stop();
+    }
+  }, [open]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -168,6 +207,52 @@ export default function TablaAssistant() {
     ask(input);
   };
 
+  // Voice input: open the mic on an explicit click; the browser handles
+  // permission and transcription locally. Falls back to typing on any error.
+  const toggleListening = useCallback(() => {
+    setVoiceErr("");
+    if (!recognizerRef.current) {
+      recognizerRef.current = createRecognizer({
+        onText: (t) => ask(t),
+        onState: (on) => setListening(on),
+        onError: (kind) => {
+          setListening(false);
+          setVoiceErr(
+            kind === "denied"
+              ? "Microphone blocked — you can still type."
+              : kind === "no-speech"
+              ? "Didn't catch that — try again."
+              : "Voice input isn't available here — type instead."
+          );
+        },
+      });
+    }
+    const rec = recognizerRef.current;
+    if (!rec) {
+      setSttOk(false);
+      return;
+    }
+    if (listening) rec.stop();
+    else {
+      cancelSpeech();
+      rec.start();
+    }
+  }, [listening, ask]);
+
+  // Voice output: read the assistant's answers aloud.
+  const toggleVoice = useCallback(() => {
+    setVoiceOn((v) => {
+      const next = !v;
+      if (next) {
+        warmUpSpeech(); // unlock speech within this user gesture (iOS etc.)
+        lastSpokenRef.current = messages[messages.length - 1]?.id || 0;
+      } else {
+        cancelSpeech();
+      }
+      return next;
+    });
+  }, [messages]);
+
   return (
     <>
       {/* launcher */}
@@ -197,6 +282,19 @@ export default function TablaAssistant() {
               <p className="font-display text-base leading-tight">Tabla Guide</p>
               <p className="text-[11px] text-indigo-200">Bols, taals, technique &amp; the school</p>
             </div>
+            {ttsOk && (
+              <button
+                type="button"
+                onClick={toggleVoice}
+                aria-label={voiceOn ? "Turn off spoken answers" : "Read answers aloud"}
+                title={voiceOn ? "Voice answers: on" : "Voice answers: off"}
+                className={`rounded-lg p-1.5 transition ${
+                  voiceOn ? "text-saffron-300" : "text-indigo-200 hover:bg-card/10 hover:text-cream-50"
+                }`}
+              >
+                {voiceOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
+              </button>
+            )}
             <button onClick={() => setOpen(false)} aria-label="Close" className="rounded-lg p-1.5 text-indigo-200 transition hover:bg-card/10 hover:text-cream-50">
               <X size={18} />
             </button>
@@ -323,6 +421,20 @@ export default function TablaAssistant() {
               autoComplete="off"
               className="flex-1 bg-transparent text-sm text-indigo-900 outline-none placeholder:text-indigo-300"
             />
+            {sttOk && (
+              <button
+                type="button"
+                onClick={toggleListening}
+                aria-label={listening ? "Stop listening" : "Speak your question"}
+                className={`grid h-9 w-9 place-items-center rounded-lg border transition ${
+                  listening
+                    ? "animate-pulse border-saffron-400 bg-saffron-100 text-saffron-600"
+                    : "border-indigo-200 text-indigo-500 hover:border-saffron-400 hover:text-saffron-500"
+                }`}
+              >
+                {listening ? <Square size={14} /> : <Mic size={16} />}
+              </button>
+            )}
             <button
               type="submit"
               disabled={!input.trim()}
@@ -333,8 +445,16 @@ export default function TablaAssistant() {
             </button>
           </form>
 
-          <p className="flex items-center justify-center gap-1 bg-card pb-2 text-[10px] text-indigo-300">
-            {aiReady ? "On-device AI · runs locally, no account" : "Instant answers · runs locally"}
+          <p className="flex items-center justify-center gap-1 bg-card pb-2 text-center text-[10px] text-indigo-300">
+            {voiceErr
+              ? voiceErr
+              : listening
+              ? "Listening… speak now"
+              : aiReady
+              ? "On-device AI · voice & text · runs locally"
+              : sttOk || ttsOk
+              ? "Voice & text · runs locally, no account"
+              : "Instant answers · runs locally"}
           </p>
         </div>
       )}

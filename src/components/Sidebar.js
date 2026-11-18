@@ -15,6 +15,7 @@ import {
   CalendarPlus,
   CalendarClock,
   NotebookPen,
+  GraduationCap,
 } from "lucide-react";
 import SignOutButton from "@/components/SignOutButton";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
@@ -80,6 +81,13 @@ export default function Sidebar({ modules = [], profile, isAdmin = false }) {
             icon={<CalendarClock size={18} />}
             label="My Lessons"
             active={pathname === "/book"}
+            onClick={() => setOpen(false)}
+          />
+          <NavItem
+            href="/masterclass"
+            icon={<GraduationCap size={18} />}
+            label="Learn from a Master"
+            active={pathname === "/masterclass"}
             onClick={() => setOpen(false)}
           />
 

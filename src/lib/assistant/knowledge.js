@@ -587,6 +587,38 @@ const asResult = (entry, related) => ({
 
 const GENERAL_RELATED = ["What is a kaida?", "What are the six gharanas?", "How do I play Dha?"];
 
+/* ------------------------------------------------- CONVERSATIONAL BASICS
+   Greetings, thanks, farewells, small talk. These only fire when no confident
+   tabla answer matched, so real questions always win. Zero cost, all local. */
+const ACK = new Set([
+  "ok", "okay", "k", "kk", "okey", "okie", "alright", "aight", "cool", "sure",
+  "fine", "right", "yep", "yup", "yeah", "ya", "yes", "no", "nope", "nah",
+  "hmm", "hm", "hmmm", "lol", "haha", "idk", "meh", "mm", "mhm",
+]);
+
+const CHITCHAT = [
+  [/\b(thanks|thank you|thank u|thankyou|thanx|thx|ty|appreciate|much appreciated|cheers|grateful)\b/,
+    () => ({ answer: pick(["You're welcome! Ask me anything else about the tabla whenever you like.", "Happy to help! What else would you like to know?", "Anytime! Is there another tabla question I can answer?"]) })],
+  [/\b(bye|goodbye|good bye|see you|see ya|cya|catch you later|later|good night|goodnight|take care|farewell|thats all|that is all|nothing else|i am done|im done)\b/,
+    () => ({ answer: pick(["Take care, and happy practising!", "Goodbye! Keep up your riyaz.", "See you — come back anytime with more tabla questions."]) })],
+  [/(^|\b)(hi+|hey+|hello+|heya|hiya|yo|sup|wassup|whats up|what up|namaste|namaskar|namaskaar|hola|greetings|good (morning|afternoon|evening|day))\b/,
+    () => ({ answer: `${pick(["Namaste!", "Hello!", "Hi there!", "Hey!"])} I'm your tabla guide. Ask me about any bol, taal, kaida, gharana, artist or technique — or how the school and classes work. What would you like to know?`, related: GENERAL_RELATED })],
+  [/how are you|how are u|how r u|hows it going|how is it going|how are things|how do you do|you doing ok|you doing well/,
+    () => ({ answer: "I'm doing great, thank you — always happy to talk tabla! What can I help you with: bols, taals, compositions, gharanas, or the classes?", related: GENERAL_RELATED })],
+  [/who are you|who r u|what are you|your name|do you have a name|are you a bot|are you a robot|are you ai|are you an ai|are you human|are you real|are you a person|are u a bot/,
+    () => ({ answer: "I'm the tabla guide for the Ajinkya Ranade Tabla School — a friendly assistant that runs right here in your browser to answer your questions about the tabla and the school. Ask me anything!", related: GENERAL_RELATED })],
+  [/what can you do|what do you do|how can you help|what can i ask|what should i ask|how does this work|how does this chat work|can you help|what do you know|^help$|what can you tell me|what are you for|give me ideas|what now|i need help/,
+    () => ({ answer: "I can explain bols, taals and thekas, compositional forms like kaida and tihai, the gharanas, famous artists, technique and practice tips, and how the school's lessons, classes and tools work. Try one of these, or just type your own question:", related: ["What is a kaida?", "Name some taals", "How do I play Dha?", "What are the six gharanas?"] })],
+  [/i love this|i like this|i love it|i love tabla|i like tabla|this is great|this is awesome|this is cool|this is helpful|this is amazing|this is useful|good bot|nice bot|you are smart|you are great|you are helpful|you are awesome|youre smart|youre great|youre helpful|well done|impressive|amazing|wow/,
+    () => ({ answer: "That's kind of you — thank you! I'm glad this helps. Ask me anything else about the tabla or your learning." })],
+];
+
+function chitchat(norm) {
+  if (ACK.has(norm)) return { answer: "Got it! Whenever you have a tabla question — a bol, a taal, a composition, or how the classes work — just ask and I'll help.", related: GENERAL_RELATED };
+  for (const [re, make] of CHITCHAT) if (re.test(norm)) return make();
+  return null;
+}
+
 export function findAnswer(rawInput) {
   const norm = normalize(rawInput);
   if (!norm) return fallback;
@@ -643,6 +675,11 @@ export function findAnswer(rawInput) {
     }
     return asResult(top.entry, relatedTo(top.entry));
   }
+
+  // 3.5) Conversational basics (hi, thanks, who are you, ...). Only reached when
+  //      no confident tabla answer matched, so real questions always win.
+  const chit = chitchat(norm);
+  if (chit) return chit;
 
   // 4) Weak match, but it still recognised known tabla concepts: synthesise an
   //    answer from them instead of giving up.
