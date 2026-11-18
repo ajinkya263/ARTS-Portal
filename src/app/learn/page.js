@@ -7,8 +7,8 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 import VideoEmbed from "@/components/learn/VideoEmbed";
 import { PERSONAL_SITE } from "@/lib/config";
 import {
-  parts, bolFamilies, taals, gharanas, forms, moreForms,
-  compositions, solos, TOC, ytWatch, ytSearch,
+  parts, bolFamilies, taals, gharanas, forms, moreForms, formsNote,
+  solos, samsiIntro, samsiSeries, TOC, ytWatch, ytSearch,
 } from "@/lib/learn/guide";
 
 export const metadata = {
@@ -274,7 +274,7 @@ export default function LearnPage() {
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 {forms.map((f) => (
                   <div key={f.name} className="surface flex flex-col overflow-hidden">
-                    <VideoEmbed video={f.video} title={`${f.name} — tabla`} />
+                    <VideoEmbed video={f.video} title={`${f.name}${f.artist ? ` — ${f.artist}` : " — tabla"}`} />
                     <div className="flex flex-1 flex-col gap-2 p-4">
                       <div className="flex items-baseline justify-between gap-2">
                         <p className="font-display text-lg text-indigo-900">{f.name}</p>
@@ -282,6 +282,9 @@ export default function LearnPage() {
                           {f.tagline}
                         </span>
                       </div>
+                      {f.artist && (
+                        <p className="-mt-1 text-xs font-medium text-saffron-600">{f.artist}</p>
+                      )}
                       <p className="text-sm leading-relaxed text-indigo-500">{f.desc}</p>
                       <a
                         href={f.video.id ? ytWatch(f.video.id) : ytSearch(f.video.search)}
@@ -296,6 +299,7 @@ export default function LearnPage() {
                 ))}
               </div>
               <p className="mt-6 text-indigo-500">{moreForms}</p>
+              <p className="mt-3 text-sm italic text-indigo-400">{formsNote}</p>
             </Reveal>
 
             {/* 7 — gharanas */}
@@ -360,35 +364,29 @@ export default function LearnPage() {
             <Reveal as="section" id="practice" className="scroll-mt-24 border-t border-cream-200 py-8">
               <SectionHead n="10" title="Practice on Your Own" />
               <p className="mt-5 text-indigo-600">
-                Here are real composition themes (the <em>mukh</em>, or opening phrase) to recite and play. Start slowly and
-                cleanly — speak the bols aloud first, then play them, and only then build speed. Each of these develops into
-                many further variations; these are the doorways in.
+                You don’t need much to begin — just the drums, a few quiet minutes, and patience. Here’s a simple way to
+                work with everything on this page.
               </p>
-              <div className="mt-5 space-y-5">
-                {compositions.map((group) => (
-                  <div key={group.taal}>
-                    <p className="mb-2 text-sm font-semibold text-indigo-800">{group.taal}</p>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {group.items.map((c) => (
-                        <div key={c.name} className="surface p-4">
-                          <div className="flex items-baseline justify-between gap-2">
-                            <p className="font-display text-base text-indigo-900">{c.name}</p>
-                            <span className="rounded-full border border-saffron-300 px-2 py-0.5 text-[10px] uppercase tracking-wide text-saffron-600">
-                              {c.form}
-                            </span>
-                          </div>
-                          <p className="mt-2 rounded-lg bg-cream-100 px-3 py-2 font-display text-sm leading-relaxed text-indigo-800">
-                            {c.bols}
-                          </p>
-                        </div>
-                      ))}
+              <ol className="mt-6 space-y-4">
+                {[
+                  { t: "Speak before you play", d: "Pick a theka from the tables above and recite its bols out loud, clapping the tali and waving the khali. Learn to say it smoothly before your hands touch the drums." },
+                  { t: "Play it slowly and cleanly", d: "Produce one clear, resonant sound for each bol at a slow, steady pulse. Clarity comes first — speed takes care of itself later." },
+                  { t: "Loop the cycle", d: "Repeat the theka around and around until you feel the sam (beat 1) come back on its own. That internal sense of the cycle is the real goal." },
+                  { t: "Then listen", d: "Put on one of the solos below and follow how a master opens slowly, builds, and keeps resolving onto the sam. Your ear learns as much as your hands." },
+                ].map((step, i) => (
+                  <li key={step.t} className="surface flex gap-4 p-4">
+                    <span className="font-display text-2xl leading-none text-saffron-500">{i + 1}</span>
+                    <div>
+                      <p className="font-display text-lg text-indigo-900">{step.t}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-indigo-500">{step.d}</p>
                     </div>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ol>
               <p className="mt-6 rounded-r-xl border-l-2 border-saffron-400 bg-saffron-50 px-4 py-3 text-sm leading-relaxed text-indigo-700">
-                A note on practice: even <strong className="text-saffron-600">20–30 focused minutes a day</strong>, done
-                consistently, will take you further than occasional long sessions. Slow and clean first; speed takes care of itself.
+                Even <strong className="text-saffron-600">20–30 focused minutes a day</strong>, done consistently, will take
+                you further than occasional long sessions. Inside the portal, the practice metronome and interactive taal
+                trainers make this routine easier to keep.
               </p>
             </Reveal>
 
@@ -414,6 +412,40 @@ export default function LearnPage() {
                       >
                         <Youtube size={15} /> Watch on YouTube
                       </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* 12 — learn from a master */}
+            <Reveal as="section" id="masterclass" className="scroll-mt-24 border-t border-cream-200 py-8">
+              <SectionHead n="12" title="Learn from a Master" />
+              <p className="mt-5 text-indigo-600">{samsiIntro}</p>
+              <div className="mt-6 space-y-8">
+                {samsiSeries.map((group) => (
+                  <div key={group.theme}>
+                    <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-saffron-600">
+                      {group.theme}
+                    </p>
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      {group.items.map((v) => (
+                        <div key={v.id} className="surface flex flex-col overflow-hidden">
+                          <VideoEmbed video={{ id: v.id }} title={v.title} />
+                          <div className="flex flex-1 flex-col gap-2 p-4">
+                            <p className="font-display text-base text-indigo-900">{v.title}</p>
+                            <p className="text-sm leading-relaxed text-indigo-500">{v.note}</p>
+                            <a
+                              href={ytWatch(v.id)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-auto inline-flex items-center gap-1.5 pt-1 text-sm font-medium text-saffron-600 hover:underline"
+                            >
+                              <Youtube size={15} /> Watch on YouTube
+                            </a>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}

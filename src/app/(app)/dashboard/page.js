@@ -5,7 +5,7 @@ import ModuleCard from "@/components/ModuleCard";
 import Reveal from "@/components/Reveal";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import TablaArt from "@/components/TablaArt";
-import { Music4, PlayCircle } from "lucide-react";
+import { Music4, PlayCircle, BookOpen, ArrowRight } from "lucide-react";
 
 export const metadata = { title: "Dashboard, ARTS" };
 
@@ -86,6 +86,31 @@ export default async function DashboardPage() {
         {/* decorative tabla graphic */}
         <TablaArt className="absolute -bottom-6 -right-4 hidden h-40 w-56 animate-float text-saffron-500/20 md:block" />
       </section>
+
+      {/* ── Free self-paced guide banner ─────────────────────────────── */}
+      <Reveal>
+        <Link
+          href="/learn"
+          className="group surface mb-10 flex items-center gap-4 p-5 transition hover:border-saffron-300"
+        >
+          <span className="grid h-11 w-11 flex-none place-items-center rounded-xl bg-saffron-100 text-saffron-600">
+            <BookOpen size={20} />
+          </span>
+          <div className="flex-1">
+            <p className="font-display text-lg text-indigo-900">
+              The free Learn Tabla guide
+            </p>
+            <p className="text-sm text-indigo-500">
+              A self-paced reference, bols, taals, compositional forms, the gharanas,
+              and master performances to study. Open any time, alongside your modules.
+            </p>
+          </div>
+          <ArrowRight
+            size={18}
+            className="flex-none text-saffron-500 transition group-hover:translate-x-1"
+          />
+        </Link>
+      </Reveal>
 
       {/* ── Module grid ──────────────────────────────────────────────── */}
       <div className="mb-4 flex items-end justify-between">

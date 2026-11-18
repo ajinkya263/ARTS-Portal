@@ -62,14 +62,14 @@ export const bolFamilies = [
    Each beat: { b: bol, m?: vibhag marker (X=sam, 2/3/4=tali, 0=khali) }      */
 export const taals = [
   { id: "tintal", name: "Tintāl (Trital)", matras: 16, structure: "4 + 4 + 4 + 4",
-    note: "The most common cycle in Hindustani music and the usual first taal. Three claps and one wave (khali on beat 9).",
+    note: "The most common cycle in Hindustani music and the usual first taal. Three claps and one wave (khali on beat 9). Below, hear it in a Teentāl solo by Ustad Zakir Hussain.",
     beats: [
       { b: "Dhā", m: "X" }, { b: "Dhin" }, { b: "Dhin" }, { b: "Dhā" },
       { b: "Dhā", m: "2" }, { b: "Dhin" }, { b: "Dhin" }, { b: "Dhā" },
       { b: "Dhā", m: "0" }, { b: "Tin" }, { b: "Tin" }, { b: "Tā" },
       { b: "Tā", m: "3" }, { b: "Dhin" }, { b: "Dhin" }, { b: "Dhā" },
     ],
-    video: { id: "8_BVZdJN78E" } },
+    video: { id: "9lfMz6Y1-5M" } },
   { id: "rupak", name: "Rupak", matras: 7, structure: "3 + 2 + 2",
     note: "Unusual in that the cycle begins on a khali (an open, un-clapped sam) rather than a strong clap.",
     beats: [
@@ -77,9 +77,9 @@ export const taals = [
       { b: "Dhin", m: "2" }, { b: "Nā" },
       { b: "Dhin", m: "3" }, { b: "Nā" },
     ],
-    video: { id: "w9Xc5IFfHq0" } },
+    video: { search: "rupak taal 7 beat tabla theka" } },
   { id: "jhaptal", name: "Jhaptāl", matras: 10, structure: "2 + 3 + 2 + 3",
-    note: "A graceful ten-beat cycle with its khali falling on beat 6.",
+    note: "A graceful ten-beat cycle with its khali falling on beat 6. Below, a Jhaptāl solo by Pandit Anindo Chatterjee.",
     beats: [
       { b: "Dhin", m: "X" }, { b: "Nā" },
       { b: "Dhin", m: "2" }, { b: "Dhin" }, { b: "Nā" },
@@ -97,7 +97,7 @@ export const taals = [
       { b: "Dhāge", m: "3" }, { b: "Tirakiṭa" },
       { b: "Dhin", m: "4" }, { b: "Nā" },
     ],
-    video: { id: "6ayy4BhKkX8" } },
+    video: { search: "ektal 12 beat tabla theka demonstration" } },
   { id: "kaharwa", name: "Kaharwā", matras: 8, structure: "4 + 4",
     note: "A light-classical / folk cycle of eight beats. (There is no single “standard” Kaharwa theka — many variants exist.)",
     beats: [
@@ -124,59 +124,73 @@ export const gharanas = [
   { name: "Punjab", when: "c. 1810", note: "Adapted to the Tabla from the Lahore pakhawaj tradition; a “mathematical” approach with gats, relas and unusual phrase divisions." },
 ];
 
-/* -------------------------------------------------------- COMPOSITION FORMS */
+/* -------------------------------------------------------- COMPOSITION FORMS
+   Videos are performances by named maestros. The two Yogesh Samsi "Tabla
+   Series" solos (2gwswbOb8qA, ifhEMnUsul0) name each section in their titles,
+   so they double as clear references for the forms they contain.             */
 export const forms = [
-  { name: "Peshkar", tagline: "the opening", desc: "The slow, improvisatory “presentation” that opens a solo — a core theme gradually expanded with phrases and incomplete tihais before the kayda begins.", video: { id: "Gn8m0aVTz1E" } },
-  { name: "Kayda", tagline: "rule / system", desc: "The central theme-and-variation form. A fixed theme (mukh) is developed through systematic variations (paltas) built only from its own bols, resolving with a tihai.", video: { id: "hisMUu2FHgM" } },
-  { name: "Rela", tagline: "a torrent", desc: "Like a kayda but built for speed — smooth, flowing, interwoven fast phrases such as tirakiṭa and dheradhera.", video: { id: "xwjalB8LgeU" } },
-  { name: "Gat", tagline: "a fixed piece", desc: "A fixed, often cyclic composition at medium-to-fast tempo, strongest in the eastern gharanas.", video: { id: "bdEM2trJ_tQ" } },
-  { name: "Tukra", tagline: "a fragment", desc: "A short fixed cadence: an opening (mukhra) that builds asymmetrically to sam and resolves with a tihai.", video: { id: "TEQe4jk3yXo" } },
-  { name: "Chakradar", tagline: "a spiral", desc: "A tukra or tihai played three times in succession; the ending “spirals” through the cycle and lands on sam only on the third pass.", video: { id: "7lgUkZzKQKg" } },
-  { name: "Paran", tagline: "from the pakhawaj", desc: "A powerful composition drawn from the pakhawaj tradition — strong, loud, open strokes and a less-inflected bass.", video: { id: "2gwswbOb8qA" } },
-  { name: "Uthan", tagline: "to rise", desc: "An introductory piece that opens a solo or the Tabla’s entry in accompaniment, ending on a tihai at sam.", video: { id: "MxKZyg9aZnE" } },
-  { name: "Tihai", tagline: "three times", desc: "Any phrase repeated three times so the final stroke lands on sam. “Damdar” tihais leave rests between repetitions; “bedam” tihais have none.", video: { search: "tabla tihai explained teental landing on sam" } },
-  { name: "Laggi", tagline: "linked & fast", desc: "Short, fast, repetitive patterns used in light-classical genres (thumri, bhajan, ghazal), usually in Kaharwa or Dadra.", video: { search: "tabla laggi kaharwa dadra thumri demonstration" } },
+  { name: "Peshkar", tagline: "the opening", desc: "The slow, improvisatory “presentation” that opens a solo — a core theme gradually expanded with phrases and incomplete tihais before the kayda begins.", artist: "Pandit Yogesh Samsi", video: { id: "2gwswbOb8qA" } },
+  { name: "Kayda", tagline: "rule / system", desc: "The central theme-and-variation form. A fixed theme (mukh) is developed through systematic variations (paltas) built only from its own bols, resolving with a tihai.", artist: "Ustad Zakir Hussain", video: { id: "FnRQmM-v3HQ" } },
+  { name: "Rela", tagline: "a torrent", desc: "Like a kayda but built for speed — smooth, flowing, interwoven fast phrases such as tirakiṭa and dheradhera.", artist: "Pt. Yogesh Samsi & Pt. Subhankar Banerjee", video: { id: "xwjalB8LgeU" } },
+  { name: "Gat", tagline: "a fixed piece", desc: "A fixed, often cyclic composition at medium-to-fast tempo, strongest in the eastern gharanas.", artist: "Pandit Yogesh Samsi", video: { id: "2gwswbOb8qA" } },
+  { name: "Tukra", tagline: "a fragment", desc: "A short fixed cadence: an opening (mukhra) that builds asymmetrically to sam and resolves with a tihai.", artist: "Pandit Yogesh Samsi", video: { id: "ifhEMnUsul0" } },
+  { name: "Chakradar", tagline: "a spiral", desc: "A tukra or tihai played three times in succession; the ending “spirals” through the cycle and lands on sam only on the third pass.", artist: "Pandit Yogesh Samsi", video: { id: "2gwswbOb8qA" } },
+  { name: "Paran", tagline: "from the pakhawaj", desc: "A powerful composition drawn from the pakhawaj tradition — strong, loud, open strokes and a less-inflected bass.", artist: "Pandit Yogesh Samsi", video: { id: "2gwswbOb8qA" } },
+  { name: "Uthan", tagline: "to rise", desc: "An introductory piece that opens a solo or the Tabla’s entry in accompaniment, ending on a tihai at sam.", artist: "Pandit Yogesh Samsi", video: { id: "ifhEMnUsul0" } },
+  { name: "Tihai", tagline: "three times", desc: "Any phrase repeated three times so the final stroke lands on sam. “Damdar” tihais leave rests between repetitions; “bedam” tihais have none.", artist: "", video: { search: "tabla tihai explained teental Zakir Hussain" } },
+  { name: "Laggi", tagline: "linked & fast", desc: "Short, fast, repetitive patterns used in light-classical genres (thumri, bhajan, ghazal), usually in Kaharwa or Dadra.", artist: "", video: { search: "tabla laggi Anindo Chatterjee thumri" } },
 ];
 
 export const moreForms =
   "Other forms you’ll meet include the bant and chalan (developmental), the gat-kayda hybrid, the mukhra/mohra (a short fill to sam), the fard (a guarded Benares cadence), and the nauhakka — an extended tihai of nine repetitions.";
 
-/* ---------------------------------------------- PRACTICE: COMPOSITIONS */
-export const compositions = [
-  { taal: "Tintāl", items: [
-    { name: "Dilli Kayda", form: "Kayda", bols: "Dhāte ṭedhā teṭe dhādhā · teṭe dhādhā tināki ná" },
-    { name: "Ajrara Kayda", form: "Kayda", bols: "Dhā — — ghetaka dhinādhin nagina" },
-    { name: "Benares Kayda", form: "Kayda", bols: "Dhādhā teṭe dhādhā tūnā" },
-    { name: "Benares Rela", form: "Rela", bols: "Dhā — tira kiṭataka tū — nā — kiṭataka" },
-    { name: "Benares Tukra", form: "Tukra", bols: "Dhādhā dindin nāná teṭe teṭe" },
-    { name: "Benares Chakradar", form: "Chakradar", bols: "Dhāgeteṭe tāgeteṭe kradhā — kra dhā —  (×3 → sam)" },
-    { name: "Peshkar (Dilli)", form: "Peshkar", bols: "Dhā — — kra dhā — tira kiṭadhā — tiṭdhā" },
-  ]},
-  { taal: "Rupak (7)", items: [
-    { name: "Rupak Kayda", form: "Kayda", bols: "Dhāge teṭe teṭe" },
-    { name: "Rupak Tukra", form: "Tukra", bols: "Dhāgeteṭe kateṭedhe teṭedhāge" },
-  ]},
-  { taal: "Jhaptāl (10)", items: [
-    { name: "Jhaptal Kayda", form: "Kayda", bols: "Dhāge tirakiṭa dhāge nādhā tirakiṭa" },
-    { name: "Jhaptal Tukra", form: "Tukra", bols: "Kateṭedhe teṭedhāge teṭe teṭe" },
-  ]},
-  { taal: "Ektāl (12)", items: [
-    { name: "Ektal Kayda", form: "Kayda", bols: "Dhāte ṭedhā gina dhāge tinnā kina" },
-    { name: "Ektal Paran", form: "Paran", bols: "Dheṭedheṭe dhāgeteṭe kradheṭete dhāgeteṭe" },
-  ]},
-  { taal: "Ara Chautāl (14)", items: [
-    { name: "Arachartal Kayda", form: "Kayda", bols: "Dhāgetraka dhinagina dhāgenage dhinagina" },
-  ]},
-  { taal: "Kaharwā / Dādrā (light-classical)", items: [
-    { name: "Benares Laggi", form: "Laggi", bols: "Dhāge nādhā getin nara · gina dhādhi geti nara" },
-  ]},
+/* A couple of the form references are drawn from the two labelled Yogesh Samsi
+   solos; this note makes that explicit under the grid. */
+export const formsNote =
+  "Several examples above are drawn from two complete solos by Pandit Yogesh Samsi — their video titles list each section in order, so you can jump straight to the form you want to hear.";
+
+/* ----------------------------------------------- FULL SOLO LISTENING REFS
+   Complete solos by named maestros, to study the whole arc of a performance. */
+export const solos = [
+  { id: "2gwswbOb8qA", title: "Pandit Yogesh Samsi — Teentāl Solo", note: "A complete solo whose titled sections move through peshkar, kayda, rela, gat, tukra, paran, laggi and chakradar — the whole arc in one sitting." },
+  { id: "BWVolb7wQgw", title: "Ustad Zakir Hussain — Teentāl Solo", note: "The modern era’s most celebrated tabla virtuoso, in a full 16-beat solo." },
+  { id: "D-V5h-LtXms", title: "Pandit Anindo Chatterjee — Tintāl Solo", note: "A Farrukhabad-gharana master; crystalline clarity across a complete solo." },
+  { id: "C8ni93nnfIc", title: "Pandit Suresh Talwalkar — Tabla Solo", note: "A towering soloist, live at the Saptak Festival, with his son Satyajit." },
+  { id: "qrBQhgOkaB8", title: "Pandit Subhankar Banerjee — Tabla Solo", note: "A powerful, deeply musical soloist in full flight." },
 ];
 
-/* ----------------------------------------------- FULL SOLO LISTENING REFS */
-export const solos = [
-  { id: "2gwswbOb8qA", title: "Full Tabla Solo in Tintāl", note: "A complete solo that moves through peshkar, kayda, rela, gat, tukra, paran, laggi and chakradar — hear the whole arc in one sitting." },
-  { id: "5Sia8V9-VRo", title: "Benares Gharana Solo", note: "A traditional solo in the bold eastern (purab) style." },
-  { id: "bGnlvPP_lLQ", title: "A Legendary Tabla Solo", note: "One of the tradition’s great masters in full flight." },
+/* ------------------------------------------- LEARN FROM A MASTER (Y. Samsi)
+   Pandit Yogesh Samsi's own instructional videos — one of Ajinkya's gurus —
+   grouped from "start here" through technique to mastery. All embeddable.    */
+export const samsiIntro =
+  "Pandit Yogesh Samsi — one of the foremost tabla maestros of his generation, and one of Ajinkya's own gurus — shares a wealth of teaching on his YouTube channel. Here is a curated path through it, from first steps to the finer points of technique and musicianship.";
+
+export const samsiSeries = [
+  {
+    theme: "Start here",
+    items: [
+      { id: "bTBBT7L9xS4", title: "Basic Syllables of the Tabla", note: "The fundamental bols, taught from scratch for absolute beginners." },
+      { id: "0NHgNFOHecs", title: "No Time to Practice? A Word of Advice", note: "How to keep growing on the tabla when life is busy — on making practice count." },
+    ],
+  },
+  {
+    theme: "Technique & tone",
+    items: [
+      { id: "ltKch2qxiRs", title: "Improving Your Bayan Sound — “GheGhe”", note: "An exercise to build finger attack and a strong, consistent bass tone." },
+      { id: "0QzfqL_I1jI", title: "Balancing the Tabla & Bayan Hands", note: "Building coordination and equilibrium between the right and left hands." },
+      { id: "s-u9Df-OKeQ", title: "The “DhereDhere” Technique", note: "An easy, effective rela and a fresh way to play DhereDhere cleanly." },
+      { id: "Ulse_l2AFmQ", title: "The Bayan’s Role in TeReKeTe Relas", note: "How the bass drum shapes and drives fast rolling phrases." },
+      { id: "rDLgPwQIQZY", title: "Advanced Bayan Technique — Delhi Gharana", note: "Refined bayan technique applied to a kaida from the Habibuddin Khan legacy." },
+    ],
+  },
+  {
+    theme: "Compositions & mastery",
+    items: [
+      { id: "NyMcA14Iw3w", title: "Exploring an Ajrada Gharana Qaida", note: "A full breakdown of a qaida and how its theme is developed." },
+      { id: "CvbCGiuIOkw", title: "The Art of Tabla — Masterclass", note: "From his masterclass: part teaching, part demonstration of the instrument’s depth." },
+      { id: "88D81jLyETo", title: "How to Accompany on Tabla", note: "Pandit Yogesh Samsi with Pandit Suresh Talwalkar on the art of accompaniment (sangat)." },
+    ],
+  },
 ];
 
 /* Table of contents — ids must match each section id on the page. */
@@ -192,4 +206,5 @@ export const TOC = [
   { id: "notation", label: "Reading the Rhythm" },
   { id: "practice", label: "Practice on Your Own" },
   { id: "listen", label: "Solos to Study" },
+  { id: "masterclass", label: "Learn from a Master" },
 ];
