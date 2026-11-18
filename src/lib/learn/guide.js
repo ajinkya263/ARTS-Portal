@@ -62,14 +62,14 @@ export const bolFamilies = [
    Each beat: { b: bol, m?: vibhag marker (X=sam, 2/3/4=tali, 0=khali) }      */
 export const taals = [
   { id: "tintal", name: "Tintāl (Trital)", matras: 16, structure: "4 + 4 + 4 + 4",
-    note: "The most common cycle in Hindustani music and the usual first taal. Three claps and one wave (khali on beat 9). Below, hear it in a Teentāl solo by Ustad Zakir Hussain.",
+    note: "The most common cycle in Hindustani music and the usual first taal. Three claps and one wave (khali on beat 9). Below, a clear theka lesson by Sandeep Das.",
     beats: [
       { b: "Dhā", m: "X" }, { b: "Dhin" }, { b: "Dhin" }, { b: "Dhā" },
       { b: "Dhā", m: "2" }, { b: "Dhin" }, { b: "Dhin" }, { b: "Dhā" },
       { b: "Dhā", m: "0" }, { b: "Tin" }, { b: "Tin" }, { b: "Tā" },
       { b: "Tā", m: "3" }, { b: "Dhin" }, { b: "Dhin" }, { b: "Dhā" },
     ],
-    video: { id: "9lfMz6Y1-5M" } },
+    video: { id: "8_BVZdJN78E" } },
   { id: "rupak", name: "Rupak", matras: 7, structure: "3 + 2 + 2",
     note: "Unusual in that the cycle begins on a khali (an open, un-clapped sam) rather than a strong clap.",
     beats: [
@@ -77,7 +77,7 @@ export const taals = [
       { b: "Dhin", m: "2" }, { b: "Nā" },
       { b: "Dhin", m: "3" }, { b: "Nā" },
     ],
-    video: { search: "rupak taal 7 beat tabla theka" } },
+    video: { id: "w9Xc5IFfHq0" } },
   { id: "jhaptal", name: "Jhaptāl", matras: 10, structure: "2 + 3 + 2 + 3",
     note: "A graceful ten-beat cycle with its khali falling on beat 6. Below, a Jhaptāl solo by Pandit Anindo Chatterjee.",
     beats: [
@@ -97,21 +97,21 @@ export const taals = [
       { b: "Dhāge", m: "3" }, { b: "Tirakiṭa" },
       { b: "Dhin", m: "4" }, { b: "Nā" },
     ],
-    video: { search: "ektal 12 beat tabla theka demonstration" } },
+    video: { id: "6ayy4BhKkX8" } },
   { id: "kaharwa", name: "Kaharwā", matras: 8, structure: "4 + 4",
     note: "A light-classical / folk cycle of eight beats. (There is no single “standard” Kaharwa theka — many variants exist.)",
     beats: [
       { b: "Dhā", m: "X" }, { b: "Ge" }, { b: "Nā" }, { b: "Tin" },
       { b: "Nā", m: "0" }, { b: "Ke" }, { b: "Dhin" }, { b: "Nā" },
     ],
-    video: { search: "kaharwa taal 8 beat theka tabla demonstration" } },
+    video: { id: "s3Xf_qvZKpM" } },
   { id: "dadra", name: "Dādrā", matras: 6, structure: "3 + 3",
     note: "A six-beat light-classical cycle, common under thumri and bhajan.",
     beats: [
       { b: "Dhā", m: "X" }, { b: "Dhin" }, { b: "Nā" },
       { b: "Dhā", m: "0" }, { b: "Tin" }, { b: "Nā" },
     ],
-    video: { search: "dadra taal 6 beat theka tabla demonstration" } },
+    video: { id: "ZvlnPh1Zz3Y" } },
 ];
 
 /* --------------------------------------------------------------- GHARANAS */
@@ -137,8 +137,8 @@ export const forms = [
   { name: "Chakradar", tagline: "a spiral", desc: "A tukra or tihai played three times in succession; the ending “spirals” through the cycle and lands on sam only on the third pass.", artist: "Pandit Yogesh Samsi", video: { id: "2gwswbOb8qA" } },
   { name: "Paran", tagline: "from the pakhawaj", desc: "A powerful composition drawn from the pakhawaj tradition — strong, loud, open strokes and a less-inflected bass.", artist: "Pandit Yogesh Samsi", video: { id: "2gwswbOb8qA" } },
   { name: "Uthan", tagline: "to rise", desc: "An introductory piece that opens a solo or the Tabla’s entry in accompaniment, ending on a tihai at sam.", artist: "Pandit Yogesh Samsi", video: { id: "ifhEMnUsul0" } },
-  { name: "Tihai", tagline: "three times", desc: "Any phrase repeated three times so the final stroke lands on sam. “Damdar” tihais leave rests between repetitions; “bedam” tihais have none.", artist: "", video: { search: "tabla tihai explained teental Zakir Hussain" } },
-  { name: "Laggi", tagline: "linked & fast", desc: "Short, fast, repetitive patterns used in light-classical genres (thumri, bhajan, ghazal), usually in Kaharwa or Dadra.", artist: "", video: { search: "tabla laggi Anindo Chatterjee thumri" } },
+  { name: "Tihai", tagline: "three times", desc: "Any phrase repeated three times so the final stroke lands on sam. “Damdar” tihais leave rests between repetitions; “bedam” tihais have none.", artist: "Shubhendu Sarkar", video: { id: "M5iZzAaNOZU" } },
+  { name: "Laggi", tagline: "linked & fast", desc: "Short, fast, repetitive patterns used in light-classical genres (thumri, bhajan, ghazal), usually in Kaharwa or Dadra.", artist: "Pandurang Pawar", video: { id: "tZRHYqfoFIU" } },
 ];
 
 export const moreForms =
