@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import AuthForm from "@/components/AuthForm";
 import TablaArt from "@/components/TablaArt";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
@@ -25,7 +27,11 @@ export default function LoginPage() {
 
       {/* Left: brand panel (hidden on small screens) */}
       <section className="relative hidden flex-col justify-between overflow-hidden bg-panel p-12 text-cream-50 lg:flex">
-        <div className="flex items-center gap-3">
+        <Link
+          href="/"
+          title="Back to home"
+          className="flex items-center gap-3 transition hover:opacity-80"
+        >
           <span className="grid h-12 w-12 place-items-center rounded-full bg-saffron-400 font-display text-2xl text-onaccent">
             ॐ
           </span>
@@ -35,7 +41,7 @@ export default function LoginPage() {
               Ajinkya Ranade Tabla School
             </span>
           </span>
-        </div>
+        </Link>
 
         <div className="max-w-md">
           <h1 className="font-display text-4xl leading-tight">
@@ -61,8 +67,8 @@ export default function LoginPage() {
       {/* Right: auth form */}
       <section className="flex items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-md animate-fade-up">
-          {/* Mobile brand */}
-          <div className="mb-8 flex items-center gap-3 lg:hidden">
+          {/* Mobile brand (links home) */}
+          <Link href="/" className="mb-6 flex items-center gap-3 lg:hidden">
             <span className="grid h-11 w-11 place-items-center rounded-full bg-saffron-400 font-display text-xl text-onaccent">
               ॐ
             </span>
@@ -74,7 +80,14 @@ export default function LoginPage() {
                 Ajinkya Ranade Tabla School
               </span>
             </span>
-          </div>
+          </Link>
+
+          <Link
+            href="/"
+            className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-indigo-500 transition hover:text-saffron-600"
+          >
+            <ArrowLeft size={15} /> Back to home
+          </Link>
 
           <h2 className="font-display text-3xl text-indigo-900">Welcome back</h2>
           <p className="mb-8 mt-1 text-indigo-500">
