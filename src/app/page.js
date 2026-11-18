@@ -28,32 +28,32 @@ const FEATURES = [
   {
     icon: Drum,
     title: "Interactive bol lessons",
-    body: "Every bol, Dha, Dhin, Na, Tin and beyond, with its hand, sound, strike zone and technique, one page at a time.",
+    body: "Every bol with its hand, sound and strike zone, one page at a time.",
   },
   {
     icon: Repeat,
     title: "Taal cycle trainers",
-    body: "Play Teentaal, Dadra and Bhajani with a built-in metronome. Watch Sam, Taali and Khali light up as the cycle turns.",
+    body: "Play Teentaal, Dadra and Bhajani with a metronome, and watch Sam, Taali and Khali light up.",
   },
   {
     icon: Timer,
     title: "Practice metronome",
-    body: "A clean, focused metronome to build steady laya and real riyaz, the heartbeat of every practice session.",
+    body: "A clean metronome to build steady laya, the heart of good riyaz.",
   },
   {
     icon: CalendarClock,
     title: "1:1 lessons, scheduled",
-    body: "Book private lessons online or in person, with calendar invites and reminders, now with easy weekly recurring slots.",
+    body: "Private lessons online or in person, with invites, reminders and recurring slots.",
   },
   {
     icon: TrendingUp,
     title: "Progress that unlocks",
-    body: "Modules open as you grow, your completed lessons are tracked, and your teacher keeps a running log of your journey.",
+    body: "Modules open as you grow, your lessons are tracked, and your teacher follows along.",
   },
   {
     icon: BookOpen,
     title: "A real curriculum",
-    body: "From your first resonant Dha to full kaidas and light taals, structured, traditional, and built to actually stick.",
+    body: "From your first Dha to full kaidas, structured and built to stick.",
   },
 ];
 
@@ -106,6 +106,30 @@ export default async function Home() {
             lessons, taal trainers and personal 1:1 guidance. You learn to
             recite, to feel the cycle, and to play with clarity.
           </p>
+        </Reveal>
+      </section>
+
+      {/* ── Free guide, highlighted near the top ───────────────────────── */}
+      <section className="bg-cream px-6 pb-2 pt-16">
+        <Reveal className="mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-3xl bg-gradient-to-br from-saffron-400 to-saffron-500 px-8 py-8 text-center text-onaccent shadow-soft sm:flex-row sm:text-left">
+          <span className="grid h-14 w-14 flex-none place-items-center rounded-2xl bg-onaccent/15">
+            <BookOpen size={26} />
+          </span>
+          <div className="flex-1">
+            <p className="text-[11px] font-bold uppercase tracking-wider opacity-80">
+              Free, no account
+            </p>
+            <h3 className="font-display text-2xl">Read the free Tabla guide</h3>
+            <p className="mt-1 text-sm opacity-90">
+              Bols, taals, compositions, the gharanas and master performances, all in one place.
+            </p>
+          </div>
+          <Link
+            href="/learn"
+            className="inline-flex flex-none items-center gap-2 rounded-xl bg-panel px-6 py-3 font-semibold text-cream-50 transition hover:bg-panel2"
+          >
+            Open the guide <ArrowRight size={16} />
+          </Link>
         </Reveal>
       </section>
 
@@ -211,30 +235,6 @@ export default async function Home() {
             <HomeQuiz />
           </Reveal>
         </div>
-      </section>
-
-      {/* ── Free guide banner ──────────────────────────────────────────── */}
-      <section className="bg-cream px-6 pb-16 pt-4">
-        <Reveal className="mx-auto flex max-w-4xl flex-col items-center gap-4 rounded-2xl border border-saffron-300 bg-saffron-50 px-8 py-8 text-center sm:flex-row sm:text-left">
-          <span className="grid h-12 w-12 flex-none place-items-center rounded-xl bg-saffron-400 text-onaccent">
-            <BookOpen size={22} />
-          </span>
-          <div className="flex-1">
-            <h3 className="font-display text-xl text-indigo-900">
-              Prefer to explore on your own? Read the free guide.
-            </h3>
-            <p className="mt-1 text-sm text-indigo-500">
-              A self-paced introduction to the tabla, its bols, taals, compositions and gharanas, with performances to
-              listen to. No account needed.
-            </p>
-          </div>
-          <Link
-            href="/learn"
-            className="inline-flex flex-none items-center gap-2 rounded-xl bg-panel px-5 py-3 font-semibold text-cream-50 transition hover:bg-panel2"
-          >
-            Open the guide <ArrowRight size={16} />
-          </Link>
-        </Reveal>
       </section>
 
       {/* ── CTA ────────────────────────────────────────────────────────── */}

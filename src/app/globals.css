@@ -140,6 +140,21 @@ body { transition: background-color 0.3s ease, color 0.3s ease; }
   background: rgb(var(--saffron-400));
 }
 
+/* The assistant's one-time auto-peek closes with a left-to-right wipe. */
+@keyframes peekWipeOut {
+  from {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  to {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0;
+  }
+}
+.peek-wipe-out {
+  animation: peekWipeOut 0.6s ease forwards !important;
+}
+
 /* Respect users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
   *,

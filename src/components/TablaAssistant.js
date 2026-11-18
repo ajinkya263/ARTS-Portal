@@ -79,14 +79,58 @@ export default function TablaAssistant() {
   const [voiceErr, setVoiceErr] = useState("");
   const [sttOk, setSttOk] = useState(false);
   const [ttsOk, setTtsOk] = useState(false);
+  const [peekClosing, setPeekClosing] = useState(false);
 
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
   const recognizerRef = useRef(null);
   const lastSpokenRef = useRef(0);
+  const peekingRef = useRef(false);
+
+  const cancelPeek = useCallback(() => {
+    peekingRef.current = false;
+    setPeekClosing(false);
+  }, []);
+
+  // One gentle auto-peek per browser session, 5s after load, so visitors notice
+  // the assistant: it opens briefly, then wipes closed left-to-right. Cancelled
+  // if the visitor opens or uses it first.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      if (sessionStorage.getItem("tabla_peeked")) return;
+    } catch {}
+    const timers = [];
+    timers.push(
+      setTimeout(() => {
+        try {
+          sessionStorage.setItem("tabla_peeked", "1");
+        } catch {}
+        setOpen((cur) => {
+          if (cur) return cur; // already open / engaged → no peek
+          peekingRef.current = true;
+          timers.push(
+            setTimeout(() => {
+              if (!peekingRef.current) return;
+              setPeekClosing(true);
+              timers.push(
+                setTimeout(() => {
+                  peekingRef.current = false;
+                  setPeekClosing(false);
+                  setOpen(false);
+                }, 650)
+              );
+            }, 3000)
+          );
+          return true;
+        });
+      }, 5000)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, []);
 
   // Probe (once) for an on-device model. If present, we can answer open-ended
-  // questions the keyword engine misses — locally, at zero token cost.
+  // questions the keyword engine misses, locally, at zero token cost.
   useEffect(() => {
     let alive = true;
     probeLocalAI().then(() => {
@@ -97,7 +141,7 @@ export default function TablaAssistant() {
     };
   }, []);
 
-  // Detect voice capabilities once (feature detection only — nothing requested).
+  // Detect voice capabilities once (feature detection only, nothing requested).
   useEffect(() => {
     setSttOk(sttSupported());
     setTtsOk(ttsSupported());
@@ -135,7 +179,12 @@ export default function TablaAssistant() {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        cancelPeek();
+        setOpen(false);
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
@@ -143,6 +192,7 @@ export default function TablaAssistant() {
   const ask = useCallback((raw) => {
     const text = raw.trim();
     if (!text) return;
+    cancelPeek();
     setInput("");
     setMessages((m) => [...m, { id: nextId(), from: "user", text }]);
     setThinking(true);
@@ -219,10 +269,10 @@ export default function TablaAssistant() {
           setListening(false);
           setVoiceErr(
             kind === "denied"
-              ? "Microphone blocked — you can still type."
+              ? "Microphone blocked, you can still type."
               : kind === "no-speech"
-              ? "Didn't catch that — try again."
-              : "Voice input isn't available here — type instead."
+              ? "Didn't catch that, try again."
+              : "Voice input isn't available here, type instead."
           );
         },
       });
@@ -258,7 +308,10 @@ export default function TablaAssistant() {
       {/* launcher */}
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          cancelPeek();
+          setOpen((v) => !v);
+        }}
         aria-label={open ? "Close tabla guide" : "Open tabla guide"}
         aria-expanded={open}
         className="animate-glow fixed bottom-5 right-5 z-[60] grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-saffron-300 to-saffron-500 text-onaccent shadow-soft transition hover:scale-105 active:scale-95"
@@ -271,7 +324,9 @@ export default function TablaAssistant() {
         <div
           role="dialog"
           aria-label="Tabla guide"
-          className="animate-fade-up fixed bottom-24 right-5 z-[60] flex h-[min(560px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-indigo-200 bg-card shadow-soft"
+          className={`animate-fade-up fixed bottom-24 right-5 z-[60] flex h-[min(560px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-indigo-200 bg-card shadow-soft ${
+            peekClosing ? "peek-wipe-out" : ""
+          }`}
         >
           {/* header */}
           <div className="flex items-center gap-3 border-b border-cream-200 bg-gradient-to-r from-panel to-panel2 px-4 py-3 text-cream-50">
@@ -295,7 +350,7 @@ export default function TablaAssistant() {
                 {voiceOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
               </button>
             )}
-            <button onClick={() => setOpen(false)} aria-label="Close" className="rounded-lg p-1.5 text-indigo-200 transition hover:bg-card/10 hover:text-cream-50">
+            <button onClick={() => { cancelPeek(); setOpen(false); }} aria-label="Close" className="rounded-lg p-1.5 text-indigo-200 transition hover:bg-card/10 hover:text-cream-50">
               <X size={18} />
             </button>
           </div>

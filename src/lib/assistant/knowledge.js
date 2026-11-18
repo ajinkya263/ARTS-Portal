@@ -315,12 +315,12 @@ const FAQS = [
   ["what is a bant|bant form", "A bant is a Benares theme-and-variation form, developed like a kayda and often paired with a laggi section."],
 
   // ---- baj & notation
-  ["what is purab baj|what is dilli baj|open vs closed baj|baj styles|band baj khula baj", "Dilli (kinar) baj is the closed, two-finger style played at the rim — light and refined. Purab (khula) baj is the open eastern style played inside the head with fingers together — fuller, bolder and more powerful. Most players study both."],
+  ["what is purab baj|what is dilli baj|open vs closed baj|baj styles|band baj khula baj", "Dilli (kinar) baj is the closed, two-finger style played at the rim, light and refined. Purab (khula) baj is the open eastern style played inside the head with fingers together, fuller, bolder and more powerful. Most players study both."],
   ["what do the notation symbols mean|what does X mean|what does 0 mean in tabla|sam symbol|khali symbol", "In tabla notation, X marks the sam (first beat), the numerals 2, 3, 4 mark the clapped sections (taali), and 0 marks the khali (the waved, empty section). A dash (–) marks a silence or a held sound."],
 
   // ---- technique & learning
   ["what is the role of the bayan|why is the bayan important|importance of left hand", "The bayan is the expressive heart of the sound: its open Ge rings, and the heel of the palm presses and slides to bend the pitch (the 'talking bass'). It drives relas and shapes nearly every phrase."],
-  ["how do i get a clear sound|why does my tabla sound dull|clarity of sound|clean strokes", "Clarity (nikaas) comes from relaxed hands, correct strike zones and letting the open strokes ring. Practise slowly so every bol speaks cleanly before adding speed — clean and slow beats fast and muddy."],
+  ["how do i get a clear sound|why does my tabla sound dull|clarity of sound|clean strokes", "Clarity (nikaas) comes from relaxed hands, correct strike zones and letting the open strokes ring. Practise slowly so every bol speaks cleanly before adding speed, clean and slow beats fast and muddy."],
   ["do i need a teacher|can i learn tabla alone|self taught tabla|learn without a guru", "You can start on your own with resources like our free guide, but tabla is an oral tradition: a teacher corrects your sound, hands and timing in ways videos cannot. The best path blends steady self-practice with real guidance."],
 ];
 
@@ -427,7 +427,7 @@ const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 /* ------------------------------------------------- ON-DEVICE AI GROUNDING
    Compact system prompt used ONLY when the visitor's browser has a local
    on-device model (Chrome's Prompt API / Gemini Nano). It grounds that model
-   in the school's facts so open-ended answers stay accurate — at zero API /
+   in the school's facts so open-ended answers stay accurate, at zero API /
    token cost, since the model runs entirely on the visitor's machine. The
    keyword engine above is always the fallback. */
 export const ASSISTANT_SYSTEM_PROMPT = `You are the warm, knowledgeable tabla guide for ${BRAND_FULL} (${BRAND_SHORT}), the online tabla school of Ajinkya Ranade (ajinkyaranademusic.com).
@@ -436,7 +436,7 @@ You help visitors with two things: the tabla (the North Indian / Hindustani clas
 
 About the school: it offers interactive lessons, taal (rhythm-cycle) trainers, a practice metronome, 1:1 lesson booking and progress tracking. New students request access through ${PERSONAL_SITE}; general contact is ${TEACHER_EMAIL}. There is a free, self-paced guide at /learn. Pricing and schedules are arranged directly with Ajinkya.
 
-Reliable facts: the tabla is a pair of drums — the small wooden treble dayan (right hand) and the large metal bass bayan (left hand), whose pitch bends under the heel of the palm; the black circle on each head is the syahi, which gives the tuned tone. Rhythm is organised in cycles (taal) measured in beats (matra); the first, most important beat is the sam. Bols are spoken syllables (Dha, Dhin, Na, Tin, TiRaKiTa) that name strokes. Core forms include peshkar, kayda, rela, tukda, chakradar, paran and the tihai. The six gharanas are Delhi, Ajrada, Lucknow, Farrukhabad, Benares and Punjab. Teentaal has 16 beats. Ajinkya began tabla at age 6 and trained under Ustad Surinder Mann, Pandit Yogesh Samsi and Shri Yashwant Vaishnav.
+Reliable facts: the tabla is a pair of drums, the small wooden treble dayan (right hand) and the large metal bass bayan (left hand), whose pitch bends under the heel of the palm; the black circle on each head is the syahi, which gives the tuned tone. Rhythm is organised in cycles (taal) measured in beats (matra); the first, most important beat is the sam. Bols are spoken syllables (Dha, Dhin, Na, Tin, TiRaKiTa) that name strokes. Core forms include peshkar, kayda, rela, tukda, chakradar, paran and the tihai. The six gharanas are Delhi, Ajrada, Lucknow, Farrukhabad, Benares and Punjab. Teentaal has 16 beats. Ajinkya began tabla at age 6 and trained under Ustad Surinder Mann, Pandit Yogesh Samsi and Shri Yashwant Vaishnav.
 
 Style: reply in 2-4 clear, warm sentences. Be accurate about tabla, music and rhythm. If asked for private school specifics you don't know (exact prices, schedules, a student's data), say so and suggest contacting Ajinkya. You may help with general questions, but gently keep the focus on tabla and learning. Never invent facts about real, named individuals.`;
 
@@ -506,7 +506,7 @@ function levenshtein(a, b) {
 }
 
 /** Snap an unknown word to the closest vocabulary word, if close enough.
-    Never touch stopwords / common English words — otherwise "what" snaps to
+    Never touch stopwords / common English words, otherwise "what" snaps to
     "chat", "there" to "dhere", etc., corrupting the query. */
 function fuzzyCorrect(word) {
   if (word.length < 4 || VOCAB.has(word) || STOP.has(word) || COMMON.has(word)) return word;
@@ -600,21 +600,21 @@ const CHITCHAT = [
   [/\b(thanks|thank you|thank u|thankyou|thanx|thx|ty|appreciate|much appreciated|cheers|grateful)\b/,
     () => ({ answer: pick(["You're welcome! Ask me anything else about the tabla whenever you like.", "Happy to help! What else would you like to know?", "Anytime! Is there another tabla question I can answer?"]) })],
   [/\b(bye|goodbye|good bye|see you|see ya|cya|catch you later|later|good night|goodnight|take care|farewell|thats all|that is all|nothing else|i am done|im done)\b/,
-    () => ({ answer: pick(["Take care, and happy practising!", "Goodbye! Keep up your riyaz.", "See you — come back anytime with more tabla questions."]) })],
+    () => ({ answer: pick(["Take care, and happy practising!", "Goodbye! Keep up your riyaz.", "See you, come back anytime with more tabla questions."]) })],
   [/(^|\b)(hi+|hey+|hello+|heya|hiya|yo|sup|wassup|whats up|what up|namaste|namaskar|namaskaar|hola|greetings|good (morning|afternoon|evening|day))\b/,
-    () => ({ answer: `${pick(["Namaste!", "Hello!", "Hi there!", "Hey!"])} I'm your tabla guide. Ask me about any bol, taal, kaida, gharana, artist or technique — or how the school and classes work. What would you like to know?`, related: GENERAL_RELATED })],
+    () => ({ answer: `${pick(["Namaste!", "Hello!", "Hi there!", "Hey!"])} I'm your tabla guide. Ask me about any bol, taal, kaida, gharana, artist or technique, or how the school and classes work. What would you like to know?`, related: GENERAL_RELATED })],
   [/how are you|how are u|how r u|hows it going|how is it going|how are things|how do you do|you doing ok|you doing well/,
-    () => ({ answer: "I'm doing great, thank you — always happy to talk tabla! What can I help you with: bols, taals, compositions, gharanas, or the classes?", related: GENERAL_RELATED })],
+    () => ({ answer: "I'm doing great, thank you, always happy to talk tabla! What can I help you with: bols, taals, compositions, gharanas, or the classes?", related: GENERAL_RELATED })],
   [/who are you|who r u|what are you|your name|do you have a name|are you a bot|are you a robot|are you ai|are you an ai|are you human|are you real|are you a person|are u a bot/,
-    () => ({ answer: "I'm the tabla guide for the Ajinkya Ranade Tabla School — a friendly assistant that runs right here in your browser to answer your questions about the tabla and the school. Ask me anything!", related: GENERAL_RELATED })],
+    () => ({ answer: "I'm the tabla guide for the Ajinkya Ranade Tabla School, a friendly assistant that runs right here in your browser to answer your questions about the tabla and the school. Ask me anything!", related: GENERAL_RELATED })],
   [/what can you do|what do you do|how can you help|what can i ask|what should i ask|how does this work|how does this chat work|can you help|what do you know|^help$|what can you tell me|what are you for|give me ideas|what now|i need help/,
     () => ({ answer: "I can explain bols, taals and thekas, compositional forms like kaida and tihai, the gharanas, famous artists, technique and practice tips, and how the school's lessons, classes and tools work. Try one of these, or just type your own question:", related: ["What is a kaida?", "Name some taals", "How do I play Dha?", "What are the six gharanas?"] })],
   [/i love this|i like this|i love it|i love tabla|i like tabla|this is great|this is awesome|this is cool|this is helpful|this is amazing|this is useful|good bot|nice bot|you are smart|you are great|you are helpful|you are awesome|youre smart|youre great|youre helpful|well done|impressive|amazing|wow/,
-    () => ({ answer: "That's kind of you — thank you! I'm glad this helps. Ask me anything else about the tabla or your learning." })],
+    () => ({ answer: "That's kind of you, thank you! I'm glad this helps. Ask me anything else about the tabla or your learning." })],
 ];
 
 function chitchat(norm) {
-  if (ACK.has(norm)) return { answer: "Got it! Whenever you have a tabla question — a bol, a taal, a composition, or how the classes work — just ask and I'll help.", related: GENERAL_RELATED };
+  if (ACK.has(norm)) return { answer: "Got it! Whenever you have a tabla question, a bol, a taal, a composition, or how the classes work, just ask and I'll help.", related: GENERAL_RELATED };
   for (const [re, make] of CHITCHAT) if (re.test(norm)) return make();
   return null;
 }

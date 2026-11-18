@@ -85,8 +85,7 @@ export function createRecognizer({ onText, onState, onError }) {
    modern "Natural"/"Neural" online voices (Edge/Chrome), Apple
    "Premium"/"Enhanced" voices, well-known human-sounding voices (Samantha,
    Ava, Siri, Aria…), and Google voices rank highest; robotic/compact engines
-   rank lowest. Quality ultimately depends on what the visitor has installed —
-   on Apple devices, downloading a Premium/Enhanced voice gives the best result. */
+   rank lowest. Quality ultimately depends on what the visitor has installed,    on Apple devices, downloading a Premium/Enhanced voice gives the best result. */
 let cachedVoices = [];
 
 function refreshVoices() {

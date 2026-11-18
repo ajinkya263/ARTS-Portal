@@ -1,9 +1,9 @@
 /* =============================================================================
-   ON-DEVICE AI  ·  Chrome Prompt API (Gemini Nano) — 100% local, 0 tokens
+   ON-DEVICE AI  ·  Chrome Prompt API (Gemini Nano), 100% local, 0 tokens
    -----------------------------------------------------------------------------
    Progressive enhancement for the tabla guide. When a visitor's browser ships
    an on-device language model (Chrome's built-in Prompt API), we use it to
-   answer open-ended questions the keyword engine can't — grounded in the
+   answer open-ended questions the keyword engine can't, grounded in the
    school's facts. It runs ENTIRELY on the visitor's machine: no network, no
    API key, no tokens, no cost.
 

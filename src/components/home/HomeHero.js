@@ -110,15 +110,25 @@ export default function HomeHero() {
               Meet Ajinkya
             </a>
           </div>
+          <div className="mt-4">
+            <Link
+              href="/learn"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-saffron-600 transition hover:text-saffron-500 hover:underline"
+            >
+              Or explore the free Tabla guide <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
 
         {/* scroll hint */}
         <div
           ref={hintRef}
-          className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1 text-indigo-400"
+          className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1.5 text-saffron-500"
         >
-          <span className="text-[11px] uppercase tracking-[0.3em]">Scroll in</span>
-          <ChevronDown size={18} className="animate-float" />
+          <span className="text-[11px] font-semibold uppercase tracking-[0.3em]">
+            Scroll to explore
+          </span>
+          <ChevronDown size={20} className="animate-bounce" />
         </div>
 
         {/* dark vignette that fades in to meet the intro section below */}

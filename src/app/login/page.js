@@ -8,8 +8,9 @@ export const metadata = { title: "Sign in, ARTS" };
 export default function LoginPage() {
   return (
     <main className="relative grid min-h-screen lg:grid-cols-2">
-      {/* Theme toggle, top-left */}
-      <div className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6">
+      {/* Theme toggle, bottom-left (clear of the logo, the Visit link, and the
+          site-wide chat button in the bottom-right) */}
+      <div className="absolute bottom-4 left-4 z-20 sm:bottom-6 sm:left-6">
         <ThemeSwitcher />
       </div>
       {/* Personal site link, top of the page, before sign-in */}
